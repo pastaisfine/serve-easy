@@ -1,0 +1,61 @@
+# ==========================================
+# Operating System Files
+# ==========================================
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ==========================================
+# IDE and Editor Settings
+# ==========================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*.suo
+*.user
+*.iml
+
+# ==========================================
+# Dependencies and Package Managers
+# ==========================================
+node_modules/
+vendor/
+venv/
+.venv/
+env/
+__pycache__/
+*.py[cod]
+
+# ==========================================
+# Build Outputs and Logs
+# ==========================================
+build/
+dist/
+out/
+target/
+coverage/
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# ==========================================
+# Environment Variables and Secrets
+# ==========================================
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# ==========================================
+# Agent Instructions and Skills
+# ==========================================
+AGENTS.md
+PRD.md
+SKILLS.md
+.agents/
+skills-lock.json
