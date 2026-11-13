@@ -4,6 +4,7 @@
  * Only call this from Server Components: `SERVE_API_URL` has no NEXT_PUBLIC_
  * prefix, so it is not available in the browser.
  */
+import type { SearchCriteria } from "@/lib/search"
 import type {
   ItemCategory,
   Listing,
@@ -153,15 +154,35 @@ function newestFirst(a: Listing, b: Listing) {
 
 // ------------------------------------------------------------------ queries
 
-/** Newest items and services, merged. Fine for a short rail; not for paging. */
-export async function getFreshListings(limit = 8): Promise<Listing[]> {
+/**
+ * Items and services matching the criteria, merged newest first.
+ *
+ * Each endpoint returns up to `limit` rows, then the merge keeps the first
+ * `limit`. That is correct for one page; it can't page further.
+ */
+export async function searchCatalog(
+  criteria: SearchCriteria,
+  limit = 20
+): Promise<Listing[]> {
+  const params = new URLSearchParams({ limit: String(limit) })
+  if (criteria.category) params.set("category", criteria.category)
+  if (criteria.q) params.set("q", criteria.q)
+  const query = params.toString()
+
   const [listings, services] = await Promise.all([
-    getList<ApiListing>(`/listings?limit=${limit}`),
-    getList<ApiService>(`/services?limit=${limit}`),
+    criteria.type === "service"
+      ? []
+      : getList<ApiListing>(`/listings?${query}`),
+    criteria.type === "item" ? [] : getList<ApiService>(`/services?${query}`),
   ])
   return [...listings.map(fromApiListing), ...services.map(fromApiService)]
     .sort(newestFirst)
     .slice(0, limit)
+}
+
+/** Newest items and services, merged. Fine for a short rail; not for paging. */
+export function getFreshListings(limit = 8): Promise<Listing[]> {
+  return searchCatalog({}, limit)
 }
 
 export function getCafeterias() {

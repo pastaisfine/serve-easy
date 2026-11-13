@@ -93,6 +93,20 @@ def test_services(client):
     assert all(s["spot"] for s in everything)
 
 
+def test_services_search_by_title(client):
+    found = client.get("/services?q=printing").json()
+    assert {s["title"] for s in found} == {"Black & White Printing", "Colour Printing & Poster A3"}
+    combined = client.get("/services?q=printing&category=repair").json()
+    assert combined == []
+    assert client.get("/services?q=zzz-no-such-service").json() == []
+
+
+def test_services_search_treats_wildcards_literally(client):
+    assert client.get("/services?q=%25").json() == []
+    assert client.get("/services?q=_").json() == []
+    assert client.get("/services?q=").status_code == 422
+
+
 def test_new_service_categories_and_fields(client):
     grooming = client.get("/services?category=grooming").json()
     assert [s["title"] for s in grooming] == ["Haircut at your kolej"]
