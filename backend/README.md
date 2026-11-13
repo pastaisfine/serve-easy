@@ -98,6 +98,43 @@ Responses only expose a seller's `id`, `name`, `image` and `faculty`; email, pho
 
 Item categories: `books`, `electronics`, `furniture`, `clothing`, `kitchen`, `stationery`, `sports`, `other`.
 
+## Telegram bot
+
+The bot answers marketplace questions straight from Telegram. It reads the same Neon database as
+the API and never writes: it runs on its own engine where every transaction is opened with
+`SET TRANSACTION READ ONLY`, so Postgres itself refuses any write from the bot.
+
+Set the token in `.env` and the bot starts with the API:
+
+```bash
+TELEGRAM_BOT_TOKEN=123456:ABC...
+uv run uvicorn app.main:app --reload
+```
+
+Without a token nothing happens; the API starts as before.
+
+| Command | What it does |
+| --- | --- |
+| `/listings [text]` | items for sale, newest first; buttons filter by category and price |
+| `/services [text]` | services, newest first; same filters |
+| `/search <text>` | items and services at once |
+| `/cafeterias` | the food sellers |
+| `/menu <name>` | a cafeteria's lunch and dinner menu with prices |
+| `/shops` | the student enterprises |
+| `/shop <name>` | a shop with the items and services it offers |
+
+Typing plain text searches items and services. Every reply shows five results per page with
+buttons for the next page, the categories and the price.
+
+The bot reuses the API's response schemas, so it shows the same fields as the API and never
+leaks an email, phone number or student id.
+
+Notes:
+
+- Run the API with a single worker. Two polling loops on one token make Telegram return 409.
+- `--reload` is fine; the bot restarts with the app.
+- A Telegram outage at startup is logged and the API still comes up.
+
 ## Authentication (not implemented yet)
 
 There is no login and no write endpoints. The `users` table has no password column and uses string
@@ -111,7 +148,8 @@ Better Auth in the frontend. Writes (creating listings, orders, bookings, chat) 
 app/
   config.py      settings and URL helpers
   db.py          engine and session dependency
-  main.py        FastAPI app
+  main.py        FastAPI app (starts the Telegram bot)
+  bot/           telegram_bot.py (handlers), queries.py (read-only database access)
   models/        SQLAlchemy models
   routers/       listings, cafeterias, services
   schemas.py     Pydantic response models

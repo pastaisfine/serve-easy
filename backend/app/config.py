@@ -25,6 +25,10 @@ class Settings(BaseSettings):
     aws_region: str | None = None
     storage_bucket: str = "uploads"
 
+    # Telegram bot. Set => the bot starts with the API and answers with
+    # read-only queries against the same database. Unset => no bot.
+    telegram_bot_token: str | None = None
+
     @property
     def migration_url(self) -> str:
         return self.database_url_unpooled or self.database_url
