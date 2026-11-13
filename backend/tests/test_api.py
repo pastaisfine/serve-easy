@@ -30,7 +30,8 @@ def test_listings_returns_only_active_with_public_seller_fields(client):
     body = res.json()
     assert len(body) == 24  # 25 seeded, 1 sold
     assert {l["status"] for l in body} == {"active"}
-    assert set(body[0]["seller"]) == {"id", "name", "image"}  # no email/phone leaked
+    assert set(body[0]["seller"]) == {"id", "name", "image", "faculty"}  # no email/phone leaked
+    assert all(l["spot"] for l in body)
 
 
 def test_listings_filters(client):
@@ -85,7 +86,46 @@ def test_menu_404_for_unknown_or_non_cafeteria(client):
 
 def test_services(client):
     everything = client.get("/services").json()
-    assert len(everything) == 7
+    assert len(everything) == 9
     repairs = client.get("/services?category=repair").json()
     assert len(repairs) == 3 and {s["category"] for s in repairs} == {"repair"}
-    assert set(everything[0]["provider"]) == {"id", "name", "image"}
+    assert set(everything[0]["provider"]) == {"id", "name", "image", "faculty"}
+    assert all(s["spot"] for s in everything)
+
+
+def test_new_service_categories_and_fields(client):
+    grooming = client.get("/services?category=grooming").json()
+    assert [s["title"] for s in grooming] == ["Haircut at your kolej"]
+    assert grooming[0]["unit"] == "session" and grooming[0]["spot"]
+    assert client.get("/services?category=tutoring").json()
+    created = [s["created_at"] for s in client.get("/services").json()]
+    assert created == sorted(created, reverse=True)  # newest first
+
+
+def test_shops_list_and_the_cube(client):
+    shops = client.get("/shops").json()
+    assert [s["name"] for s in shops] == ["Amir Print Corner", "Nadia's Stitches", "The Cube"]
+    cube = next(s for s in shops if s["name"] == "The Cube")
+    assert cube["hours"] == "7:00 PM - 11:30 PM, daily"
+    assert set(cube["owner"]) == {"id", "name", "image", "faculty"}
+
+
+def test_shop_detail_includes_its_services_and_links_back_from_them(client):
+    shops = client.get("/shops").json()
+    amir = next(s for s in shops if s["name"] == "Amir Print Corner")
+    detail = client.get(f"/shops/{amir['id']}").json()
+    assert {s["title"] for s in detail["services"]} == {
+        "Black & White Printing",
+        "Colour Printing & Poster A3",
+    }
+    assert detail["listings"] == []
+    # reachable from a listing/service: the shop ref carries the id to link to
+    printing = client.get("/services?category=printing").json()
+    assert all(s["shop"]["id"] == amir["id"] for s in printing)
+
+    cube = next(s for s in shops if s["name"] == "The Cube")
+    assert client.get(f"/shops/{cube['id']}").json()["services"] == []
+
+
+def test_shop_404(client):
+    assert client.get("/shops/does-not-exist").status_code == 404

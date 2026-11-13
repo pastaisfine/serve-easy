@@ -3,12 +3,13 @@ from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 from app.db import get_db
-from app.routers import cafeterias, listings, services
+from app.routers import cafeterias, listings, services, shops
 
 app = FastAPI(title="ServeEasy API")
 app.include_router(listings.router)
 app.include_router(cafeterias.router)
 app.include_router(services.router)
+app.include_router(shops.router)
 
 
 @app.get("/health")

@@ -27,7 +27,7 @@ def list_listings(
     """Active listings, newest first."""
     stmt = (
         select(ProductListing)
-        .options(joinedload(ProductListing.seller))
+        .options(joinedload(ProductListing.seller), joinedload(ProductListing.shop))
         .where(ProductListing.status == ListingStatus.ACTIVE)
     )
     if category:

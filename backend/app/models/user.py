@@ -24,6 +24,7 @@ class User(Base):
     student_id: Mapped[str | None] = mapped_column(String(32), unique=True)
     role: Mapped[UserRole] = mapped_column(pg_enum(UserRole, "user_role"), default=UserRole.STUDENT)
     phone: Mapped[str | None] = mapped_column(String(32))
+    faculty: Mapped[str | None] = mapped_column(String(120))
     created_at: Mapped[created_ts]
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), onupdate=func.now()

@@ -12,7 +12,7 @@ export function CategoryCard({
 }) {
   return (
     <Link
-      href={`/search?category=${category.slug}`}
+      href={category.href}
       className="group flex w-40 shrink-0 snap-start flex-col overflow-hidden rounded-2xl bg-card ring-1 ring-foreground/5 transition focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none md:w-auto"
     >
       <div className="relative aspect-[4/3] overflow-hidden bg-muted">

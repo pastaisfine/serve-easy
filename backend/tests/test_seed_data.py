@@ -46,6 +46,9 @@ def test_foreign_keys_resolve():
         lookup = dict(data.TABLES)
         for row in rows:
             for column, (target_table, target_col) in targets.items():
+                if row[column] is None:
+                    assert table.columns[column].nullable, f"{name}.{column} is required"
+                    continue
                 valid = {r[target_col] for r in lookup[target_table]}
                 assert row[column] in valid, f"{name}.{column} -> {target_table} is dangling"
 
@@ -101,8 +104,45 @@ def test_no_message_is_sent_to_self_and_prices_are_positive():
 
 def test_demo_set_is_the_agreed_size():
     counts = data.summary()
-    assert 10 <= counts["users"] <= 15
+    assert 10 <= counts["users"] <= 20
     assert 20 <= counts["product_listings"] <= 30
-    assert 5 <= counts["services"] <= 8
+    assert 5 <= counts["services"] <= 10
     sellers = {i["seller_id"] for i in data.FOOD_ITEMS}
     assert 3 <= len(sellers) <= 4
+
+
+def test_every_listing_and_service_has_a_meetup_spot():
+    for row in data.LISTINGS + data.SERVICES:
+        assert row["spot"].strip(), row
+
+
+def test_the_cube_shop_has_the_details_supplied_by_the_owner():
+    cube = next(s for s in data.SHOPS if s["name"] == "The Cube")
+    assert cube["location"].startswith("Lot 6, Student Mall")
+    assert cube["hours"] == "7:00 PM - 11:30 PM, daily"
+    assert "shaved ice" in cube["description"]
+    assert "tea eggs" in cube["description"]
+    assert "shao xian cao" in cube["description"]
+
+
+def test_each_student_owns_at_most_one_shop_and_owners_are_not_cafeterias():
+    owners = [s["owner_id"] for s in data.SHOPS]
+    assert len(owners) == len(set(owners))
+    role = {u["id"]: u["role"] for u in data.USERS}
+    assert all(role[o] != UserRole.FOOD_SELLER for o in owners)
+
+
+def test_services_cover_grooming_and_tutoring():
+    categories = {s["category"].value for s in data.SERVICES}
+    assert {"grooming", "tutoring", "printing", "tailoring", "repair"} <= categories
+
+
+def test_student_like_users_have_a_faculty():
+    for user in data.USERS:
+        if user["role"] != UserRole.FOOD_SELLER:
+            assert user["faculty"], user["name"]
+
+
+def test_listings_and_services_use_frontend_allowed_image_hosts():
+    for row in data.LISTINGS + data.SERVICES:
+        assert row["image"].startswith("https://images.unsplash.com/"), row["image"]

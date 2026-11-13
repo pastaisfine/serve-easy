@@ -12,6 +12,7 @@ from app.models.base import (
     pg_enum,
     str_pk,
 )
+from app.models.shop import Shop
 from app.models.user import User
 
 
@@ -24,8 +25,16 @@ class Service(Base):
     description: Mapped[str] = mapped_column(Text, default="")
     price: Mapped[money]
     category: Mapped[ServiceCategory] = mapped_column(pg_enum(ServiceCategory, "service_category"))
+    unit: Mapped[str | None] = mapped_column(String(30))  # e.g. "hour", "page"
+    image: Mapped[str | None] = mapped_column(String(500))
+    spot: Mapped[str] = mapped_column(String(200))  # free text: where the service happens
+    shop_id: Mapped[str | None] = mapped_column(
+        ForeignKey("shops.id", ondelete="SET NULL"), index=True
+    )
+    created_at: Mapped[created_ts]
 
     provider: Mapped[User] = relationship()
+    shop: Mapped[Shop | None] = relationship()
 
 
 class ServiceBooking(Base):

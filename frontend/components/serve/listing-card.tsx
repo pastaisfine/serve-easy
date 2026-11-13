@@ -1,18 +1,19 @@
 import Image from "next/image"
 import Link from "next/link"
-import { MapPinIcon } from "lucide-react"
+import { MapPinIcon, StoreIcon } from "lucide-react"
 
-import { MeetupCount, StudentAvatar } from "@/components/serve/student"
+import { StudentAvatar } from "@/components/serve/student"
 import { Badge } from "@/components/ui/badge"
 import { formatPrice } from "@/lib/format"
 import type { Listing } from "@/lib/types"
 
+/**
+ * The whole card is clickable through a stretched link on the title. The shop
+ * link sits above it (z-10) so it stays a separate, valid link.
+ */
 export function ListingCard({ listing }: { listing: Listing }) {
   return (
-    <Link
-      href={`/listings/${listing.id}`}
-      className="group flex flex-col overflow-hidden rounded-2xl bg-card ring-1 ring-foreground/5 transition hover:ring-foreground/15 focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none"
-    >
+    <article className="group relative flex flex-col overflow-hidden rounded-2xl bg-card ring-1 ring-foreground/5 transition focus-within:ring-[3px] focus-within:ring-ring/50 hover:ring-foreground/15">
       <div className="relative aspect-square overflow-hidden bg-muted">
         <Image
           src={listing.image}
@@ -32,25 +33,33 @@ export function ListingCard({ listing }: { listing: Listing }) {
             {listing.seller.name}
           </span>
         </div>
-        <p className="line-clamp-2 text-sm leading-snug text-foreground/80">
-          {listing.title}
-        </p>
-        <p className="mt-auto flex flex-wrap items-baseline gap-x-1.5 pt-1">
-          <span className="text-base font-semibold whitespace-nowrap">
-            {formatPrice(listing.price, listing.unit)}
-          </span>
-          {listing.negotiable && (
-            <span className="text-xs text-muted-foreground">Negotiable</span>
-          )}
+        <h3 className="line-clamp-2 text-sm leading-snug font-normal text-foreground/80">
+          <Link
+            href={listing.href}
+            className="after:absolute after:inset-0 focus-visible:outline-none"
+          >
+            {listing.title}
+          </Link>
+        </h3>
+        <p className="mt-auto pt-1 text-base font-semibold whitespace-nowrap">
+          {formatPrice(listing.price, listing.unit)}
         </p>
         <div className="flex flex-col gap-0.5 text-xs">
           <span className="flex items-center gap-1 text-muted-foreground">
             <MapPinIcon aria-hidden className="size-3.5 shrink-0" />
             <span className="truncate">{listing.spot}</span>
           </span>
-          <MeetupCount count={listing.seller.meetups} />
+          {listing.shop && (
+            <Link
+              href={`/shops/${listing.shop.id}`}
+              className="relative z-10 flex items-center gap-1 font-medium underline-offset-2 hover:underline focus-visible:underline focus-visible:outline-none"
+            >
+              <StoreIcon aria-hidden className="size-3.5 shrink-0" />
+              <span className="truncate">{listing.shop.name}</span>
+            </Link>
+          )}
         </div>
       </div>
-    </Link>
+    </article>
   )
 }

@@ -19,8 +19,8 @@ def list_services(
     limit: Annotated[int, Query(ge=1, le=100)] = 20,
     offset: Annotated[int, Query(ge=0)] = 0,
 ):
-    stmt = select(Service).options(joinedload(Service.provider))
+    stmt = select(Service).options(joinedload(Service.provider), joinedload(Service.shop))
     if category:
         stmt = stmt.where(Service.category == category)
-    stmt = stmt.order_by(Service.category, Service.title).limit(limit).offset(offset)
+    stmt = stmt.order_by(Service.created_at.desc(), Service.id).limit(limit).offset(offset)
     return db.scalars(stmt).all()

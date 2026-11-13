@@ -11,6 +11,7 @@ from app.models.base import (
     pg_enum,
     str_pk,
 )
+from app.models.shop import Shop
 from app.models.user import User
 
 
@@ -28,9 +29,14 @@ class ProductListing(Base):
     condition: Mapped[ListingCondition] = mapped_column(pg_enum(ListingCondition, "listing_condition"))
     category: Mapped[ListingCategory] = mapped_column(pg_enum(ListingCategory, "listing_category"))
     image: Mapped[str | None] = mapped_column(String(500))
+    spot: Mapped[str] = mapped_column(String(200))  # free-text campus meetup place
     status: Mapped[ListingStatus] = mapped_column(
         pg_enum(ListingStatus, "listing_status"), default=ListingStatus.ACTIVE
+    )
+    shop_id: Mapped[str | None] = mapped_column(
+        ForeignKey("shops.id", ondelete="SET NULL"), index=True
     )
     created_at: Mapped[created_ts]
 
     seller: Mapped[User] = relationship()
+    shop: Mapped[Shop | None] = relationship()

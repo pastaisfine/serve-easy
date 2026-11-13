@@ -4,13 +4,16 @@ import { BellIcon } from "lucide-react"
 import { CategoryCard } from "@/components/serve/category-card"
 import { ListingCard } from "@/components/serve/listing-card"
 import { Logo } from "@/components/serve/logo"
-import { OfferCard } from "@/components/serve/offer-card"
 import { OrderCard } from "@/components/serve/order-card"
 import { SearchBar } from "@/components/serve/search-bar"
 import { Rail, Section } from "@/components/serve/section"
-import { categories, freshListings, offers, orders } from "@/lib/data"
+import { getFreshListings } from "@/lib/api"
+import { homeCategories } from "@/lib/categories"
+import { orders } from "@/lib/data"
 
-export default function HomePage() {
+export default async function HomePage() {
+  const freshListings = await getFreshListings(8)
+
   return (
     <>
       <div className="bg-surface pb-6 md:pt-10 md:pb-10">
@@ -36,9 +39,9 @@ export default function HomePage() {
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 pt-6 md:gap-14 md:px-8 md:pt-10">
         <Section id="categories" title="Categories" seeAllHref="/search">
           <Rail className="lg:mx-0 lg:grid lg:grid-cols-6 lg:overflow-visible lg:px-0">
-            {categories.map((category, index) => (
+            {homeCategories.map((category, index) => (
               <CategoryCard
-                key={category.slug}
+                key={category.key}
                 category={category}
                 eager={index < 3}
               />
@@ -46,14 +49,9 @@ export default function HomePage() {
           </Rail>
         </Section>
 
-        <Section id="offers" title="Offers for you" seeAllHref="/inbox">
-          <Rail className="md:mx-0 md:grid md:grid-cols-2 md:overflow-visible md:px-0 lg:grid-cols-3">
-            {offers.map((offer) => (
-              <OfferCard key={offer.id} offer={offer} />
-            ))}
-          </Rail>
-        </Section>
+        {/* "Offers for you" is hidden: offers are not part of the PRD. */}
 
+        {/* Still mock data: real orders need a signed-in user. */}
         <Section id="orders" title="My active orders" seeAllHref="/orders">
           <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
             {orders.map((order) => (
@@ -63,11 +61,17 @@ export default function HomePage() {
         </Section>
 
         <Section id="fresh" title="Fresh on campus" seeAllHref="/search">
-          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
-            {freshListings.map((listing) => (
-              <ListingCard key={listing.id} listing={listing} />
-            ))}
-          </div>
+          {freshListings.length > 0 ? (
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
+              {freshListings.map((listing) => (
+                <ListingCard key={listing.id} listing={listing} />
+              ))}
+            </div>
+          ) : (
+            <p className="rounded-2xl bg-card px-6 py-10 text-center text-base text-muted-foreground ring-1 ring-foreground/5">
+              Nothing listed yet. Check back soon.
+            </p>
+          )}
         </Section>
       </div>
     </>

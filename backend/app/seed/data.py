@@ -4,8 +4,13 @@ Pure data: nothing here touches the database. Every row has a stable id derived
 from a slug (uuid5), so the same slug always yields the same id. That is what
 lets the seed runner upsert idempotently.
 
-Names of colleges and landmarks are real UTM places. Every person, cafeteria
-business, email address, phone number and payment reference is fictional.
+What is real and what is made up:
+- Real: UTM place names, and the details of The Cube (supplied by the project owner:
+  a student-run dessert and shaved ice shop, location, hours and menu highlights).
+- Fictional: every person (including The Cube's owner account), the other shops,
+  cafeteria businesses, emails, phone numbers and payment references.
+- Photos are Unsplash images that the frontend already uses (allowed in its
+  next.config.ts). They are matched to categories by hand and not all are exact fits.
 """
 
 import uuid
@@ -38,7 +43,45 @@ def uid(kind: str, slug: str) -> str:
 
 
 def _img(label: str) -> str:
-    return f"https://placehold.co/600x400?text={quote_plus(label)}"
+    """Text placeholder, used where no suitable photo exists (avatars, menu items, shop logos).
+
+    PNG, not placehold.co's default SVG, because next/image refuses SVG by default.
+    """
+    return f"https://placehold.co/600x400/png?text={quote_plus(label)}"
+
+
+def _photo(photo_id: str, width: int = 600) -> str:
+    return f"https://images.unsplash.com/photo-{photo_id}?w={width}&q=75&auto=format&fit=crop"
+
+
+_ITEM_PHOTOS: dict[Cat, list[str]] = {
+    Cat.BOOKS: ["1512820790803-83ca734da794", "1495446815901-a7297e633e8d", "1544947950-fa07a98d237f"],
+    Cat.ELECTRONICS: ["1588508065123-287b28e013da", "1517336714731-489689fd1ca8", "1505740420928-5e560c06d30e"],
+    Cat.FURNITURE: ["1555041469-a586c61ea9bc"],
+    Cat.CLOTHING: ["1523381210434-271e8be1f52b"],
+    Cat.KITCHEN: ["1509042239860-f550ce710b93"],
+    Cat.STATIONERY: ["1434030216411-0b793f4b4173"],
+    Cat.SPORTS: ["1542291026-7eec264c27ff", "1606107557195-0e29a4b5b4aa"],
+    Cat.OTHER: ["1485955900006-10f4d324d411"],
+}
+_SERVICE_PHOTOS: dict[ServiceCategory, list[str]] = {
+    ServiceCategory.PRINTING: ["1544947950-fa07a98d237f"],
+    ServiceCategory.TAILORING: ["1523381210434-271e8be1f52b"],
+    ServiceCategory.REPAIR: ["1517336714731-489689fd1ca8"],
+    ServiceCategory.GROOMING: ["1599351431202-1e0f0137899a", "1585747860715-2ba37e788b70", "1621605815971-fbc98d665033"],
+    ServiceCategory.TUTORING: ["1522202176988-66273c2fd55f"],
+    ServiceCategory.OTHER: ["1485955900006-10f4d324d411"],
+}
+_FOOD_PHOTO = "1567620905732-2d1ec7ab7445"
+_photo_counter: dict[Any, int] = {}
+
+
+def _pick_photo(pool: dict, category) -> str:
+    """Round-robin through a category's photos so repeated categories vary."""
+    n = _photo_counter.get(category, 0)
+    _photo_counter[category] = n + 1
+    photos = pool[category]
+    return _photo(photos[n % len(photos)])
 
 
 def _at(hours: float) -> datetime:
@@ -49,7 +92,7 @@ def _at(hours: float) -> datetime:
 USERS: list[Row] = []
 
 
-def _user(slug, name, role, *, student_id=None, email=None, phone, hours=0.0) -> str:
+def _user(slug, name, role, *, student_id=None, faculty=None, email=None, phone, image=None, hours=0.0) -> str:
     user_id = uid("user", slug)
     USERS.append(
         {
@@ -57,10 +100,11 @@ def _user(slug, name, role, *, student_id=None, email=None, phone, hours=0.0) ->
             "name": name,
             "email": email or f"{slug}@graduate.utm.my",
             "email_verified": True,
-            "image": _img(name.split()[0]),
+            "image": image or _img(name.split()[0]),
             "student_id": student_id,
             "role": role,
             "phone": phone,
+            "faculty": faculty,
             "created_at": _at(hours),
             "updated_at": _at(hours),
         }
@@ -70,33 +114,95 @@ def _user(slug, name, role, *, student_id=None, email=None, phone, hours=0.0) ->
 
 S, F, P = UserRole.STUDENT, UserRole.FOOD_SELLER, UserRole.SERVICE_PROVIDER
 
+COMPUTING = "Faculty of Computing"
+ELECTRICAL = "Faculty of Electrical Engineering"
+MECHANICAL = "Faculty of Mechanical Engineering"
+CIVIL = "Faculty of Civil Engineering"
+BUILT_ENV = "Faculty of Built Environment and Surveying"
+SCIENCE = "Faculty of Science"
+
 # Students (KTR = Kolej Tun Razak, KTDI = Kolej Tun Dr. Ismail, KDSE = Kolej Datin Seri Endon,
 # KTF = Kolej Tun Fatimah, KTHO = Kolej Tun Hussein Onn, KDOJ = Kolej Dato' Onn Jaafar)
-aisyah = _user("aisyah.rahman", "Aisyah Rahman", S, student_id="A23CS0114", phone="+60 11-0000 0101")
-haziq = _user("haziq.zulkifli", "Haziq Zulkifli", S, student_id="A22EE0231", phone="+60 11-0000 0102")
-nurul = _user("nurul.izzati", "Nurul Izzati", S, student_id="A24BE0087", phone="+60 11-0000 0103")
-farhan = _user("farhan.hakim", "Farhan Hakim", S, student_id="A23ME0345", phone="+60 11-0000 0104")
-weijie = _user("tan.weijie", "Tan Wei Jie", S, student_id="A22CS0412", phone="+60 11-0000 0105")
-priya = _user("priya.nair", "Priya Nair", S, student_id="A24SC0156", phone="+60 11-0000 0106")
-daniel = _user("daniel.lim", "Daniel Lim", S, student_id="A21CE0278", phone="+60 11-0000 0107")
-siti = _user("siti.aminah", "Siti Aminah", S, student_id="A23AR0063", phone="+60 11-0000 0108")
+aisyah = _user("aisyah.rahman", "Aisyah Rahman", S, student_id="A23CS0114", faculty=COMPUTING, phone="+60 11-0000 0101")
+haziq = _user("haziq.zulkifli", "Haziq Zulkifli", S, student_id="A22EE0231", faculty=ELECTRICAL, phone="+60 11-0000 0102")
+nurul = _user("nurul.izzati", "Nurul Izzati", S, student_id="A24BE0087", faculty=BUILT_ENV, phone="+60 11-0000 0103")
+farhan = _user("farhan.hakim", "Farhan Hakim", S, student_id="A23ME0345", faculty=MECHANICAL, phone="+60 11-0000 0104")
+weijie = _user("tan.weijie", "Tan Wei Jie", S, student_id="A22CS0412", faculty=COMPUTING, phone="+60 11-0000 0105")
+priya = _user("priya.nair", "Priya Nair", S, student_id="A24SC0156", faculty=SCIENCE, phone="+60 11-0000 0106")
+daniel = _user("daniel.lim", "Daniel Lim", S, student_id="A21CE0278", faculty=CIVIL, phone="+60 11-0000 0107")
+siti = _user("siti.aminah", "Siti Aminah", S, student_id="A23AR0063", faculty=BUILT_ENV, phone="+60 11-0000 0108")
 
-# Food sellers (external cafeterias, so no student id)
-kakmin = _user("kakmin.kitchen", "Kak Min", F, email="kakmin.kitchen@serveeasy.example", phone="+60 11-0000 0201", hours=1)
-paklah = _user("paklah.warung", "Pak Lah", F, email="paklah.warung@serveeasy.example", phone="+60 11-0000 0202", hours=1)
-maksiti = _user("maksiti.dapur", "Mak Siti", F, email="maksiti.dapur@serveeasy.example", phone="+60 11-0000 0203", hours=1)
-westerncorner = _user("western.corner", "Western Corner KTR", F, email="western.corner@serveeasy.example", phone="+60 11-0000 0204", hours=1)
+# Food sellers (external cafeterias, so no student id or faculty)
+kakmin = _user("kakmin.kitchen", "Kak Min", F, email="kakmin.kitchen@serveeasy.example", phone="+60 11-0000 0201", image=_photo(_FOOD_PHOTO), hours=1)
+paklah = _user("paklah.warung", "Pak Lah", F, email="paklah.warung@serveeasy.example", phone="+60 11-0000 0202", image=_photo(_FOOD_PHOTO), hours=1)
+maksiti = _user("maksiti.dapur", "Mak Siti", F, email="maksiti.dapur@serveeasy.example", phone="+60 11-0000 0203", image=_photo(_FOOD_PHOTO), hours=1)
+westerncorner = _user("western.corner", "Western Corner KTR", F, email="western.corner@serveeasy.example", phone="+60 11-0000 0204", image=_photo(_FOOD_PHOTO), hours=1)
 
 # Service providers (students offering services, as per the PRD)
-amir = _user("amir.syafiq", "Amir Syafiq", P, student_id="A22FC0190", phone="+60 11-0000 0301")
-nadia = _user("nadia.kamal", "Nadia Kamal", P, student_id="A23FS0222", phone="+60 11-0000 0302")
-jason = _user("jason.ong", "Jason Ong", P, student_id="A21EE0309", phone="+60 11-0000 0303")
+amir = _user("amir.syafiq", "Amir Syafiq", P, student_id="A22FC0190", faculty=COMPUTING, phone="+60 11-0000 0301")
+nadia = _user("nadia.kamal", "Nadia Kamal", P, student_id="A23FS0222", faculty=SCIENCE, phone="+60 11-0000 0302")
+jason = _user("jason.ong", "Jason Ong", P, student_id="A21EE0309", faculty=ELECTRICAL, phone="+60 11-0000 0303")
+hafiz = _user("hafiz.roslan", "Hafiz Roslan", P, student_id="A23ME0271", faculty=MECHANICAL, phone="+60 11-0000 0304")
+kavitha = _user("kavitha.raj", "Kavitha Raj", P, student_id="A24SC0099", faculty=SCIENCE, phone="+60 11-0000 0305")
+
+# Owner account for The Cube's shop profile. The person is fictional: replace with the real owner.
+zaid = _user("zaid.rahim", "Zaid Rahim", S, student_id="A22EE0118", faculty=ELECTRICAL, phone="+60 11-0000 0401")
+
+# ------------------------------------------------------------------------- shops
+SHOPS: list[Row] = []
+
+
+def _shop(slug, owner, name, description, location, hours) -> str:
+    shop_id = uid("shop", slug)
+    SHOPS.append(
+        {
+            "id": shop_id,
+            "owner_id": owner,
+            "name": name,
+            "description": description,
+            "logo": _img(name),  # no real logos yet
+            "location": location,
+            "hours": hours,
+            "created_at": _at(2),
+        }
+    )
+    return shop_id
+
+
+# Real details supplied by the project owner. Instagram handle not provided, so not stored.
+the_cube = _shop(
+    "the-cube",
+    zaid,
+    "The Cube",
+    "Student-run dessert and shaved ice shop, run by UTM engineering students. "
+    "Menu highlights: shaved ice (snow ice) in various flavours, tea eggs, and "
+    "shao xian cao (herbal jelly).",
+    "Lot 6, Student Mall, UTM Johor Bahru (Skudai) Campus, Johor",
+    "7:00 PM - 11:30 PM, daily",
+)
+# Fictional demo shops whose services appear on their shop pages.
+amir_print = _shop(
+    "amir-print-corner",
+    amir,
+    "Amir Print Corner",
+    "Quick, cheap printing for assignments, posters and project boards. Run by a Computing student.",
+    "Fakulti Komputeran lobby, UTM Skudai",
+    "Mon-Fri, 10:00 AM - 6:00 PM",
+)
+nadia_stitches = _shop(
+    "nadia-stitches",
+    nadia,
+    "Nadia's Stitches",
+    "Alterations and made-to-measure baju kurung by a student tailor.",
+    "Kolej Datin Seri Endon, UTM Skudai",
+    "Weekdays after 4:00 PM, weekends by appointment",
+)
 
 # --------------------------------------------------------------- product listings
 LISTINGS: list[Row] = []
 
 
-def _listing(slug, seller, title, price, cond, cat, desc, *, status=ListingStatus.ACTIVE, hours=24.0):
+def _listing(slug, seller, title, price, cond, cat, desc, spot, *, status=ListingStatus.ACTIVE, hours=24.0):
     LISTINGS.append(
         {
             "id": uid("listing", slug),
@@ -106,63 +212,66 @@ def _listing(slug, seller, title, price, cond, cat, desc, *, status=ListingStatu
             "price": Decimal(price),
             "condition": cond,
             "category": cat,
-            "image": _img(title),
+            "image": _pick_photo(_ITEM_PHOTOS, cat),
+            "spot": spot,
             "status": status,
+            "shop_id": None,
             "created_at": _at(hours),
         }
     )
 
 
 _listing("calc-fx570", aisyah, "Casio FX-570EX Scientific Calculator", "45.00", Cond.GOOD, Cat.ELECTRONICS,
-         "Used for two semesters, all keys work. Cover included. Pickup at KTR lobby.", hours=24)
+         "Used for two semesters, all keys work. Cover included.", "Kolej Tun Razak lobby", hours=24)
 _listing("engmath-text", haziq, "Advanced Engineering Mathematics (Kreyszig)", "55.00", Cond.GOOD, Cat.BOOKS,
-         "Some highlighting in chapters 1-6. Good for SEEE courses. Can meet at Perpustakaan Sultanah Zanariah.", hours=25)
+         "Some highlighting in chapters 1-6. Good for SEEE courses.", "PSZ Library, main entrance", hours=25)
 _listing("c-prog-book", weijie, "C Programming: A Modern Approach", "38.00", Cond.LIKE_NEW, Cat.BOOKS,
-         "Barely opened. Selling because I finished the course.", hours=26)
+         "Barely opened. Selling because I finished the course.", "Fakulti Komputeran lobby", hours=26)
 _listing("db-systems-book", aisyah, "Database System Concepts (7th ed.)", "60.00", Cond.GOOD, Cat.BOOKS,
-         "Clean copy, no missing pages. Useful for SECD2523.", hours=27)
+         "Clean copy, no missing pages. Useful for SECD2523.", "Kolej Tun Razak lobby", hours=27)
 _listing("thermo-text", farhan, "Fundamentals of Thermodynamics", "50.00", Cond.FAIR, Cat.BOOKS,
-         "Cover worn but all pages intact. Mechanical engineering students welcome.", hours=28)
+         "Cover worn but all pages intact. Mechanical engineering students welcome.", "PSZ Library, main entrance", hours=28)
 _listing("study-lamp", nurul, "LED Study Lamp (USB)", "18.00", Cond.LIKE_NEW, Cat.ELECTRONICS,
-         "Three brightness levels, clip-on. Works great on a hostel desk.", hours=29)
+         "Three brightness levels, clip-on. Works great on a hostel desk.", "Kolej Datin Seri Endon guardhouse", hours=29)
 _listing("mini-fan", priya, "Rechargeable Mini Desk Fan", "22.00", Cond.GOOD, Cat.ELECTRONICS,
-         "Battery lasts about 5 hours. Saved me through the KTDI heat.", hours=30)
+         "Battery lasts about 5 hours. Saved me through the KTDI heat.", "Kolej Tun Fatimah lobby", hours=30)
 _listing("laptop-stand", weijie, "Aluminium Laptop Stand", "30.00", Cond.LIKE_NEW, Cat.ELECTRONICS,
-         "Foldable, fits up to 15.6 inch laptops.", hours=31)
+         "Foldable, fits up to 15.6 inch laptops.", "Arked Meranti", hours=31)
 _listing("monitor-24", daniel, "24-inch Dell Monitor (1080p)", "260.00", Cond.GOOD, Cat.ELECTRONICS,
-         "HDMI and VGA. No dead pixels. Pickup at KTHO.", hours=32)
+         "HDMI and VGA. No dead pixels.", "Kolej Tun Hussein Onn lobby", hours=32)
 _listing("keyboard-mech", haziq, "Mechanical Keyboard (Blue Switch)", "85.00", Cond.GOOD, Cat.ELECTRONICS,
-         "TKL layout, USB-C. A few shiny keycaps.", hours=33)
+         "TKL layout, USB-C. A few shiny keycaps.", "Kolej Tun Dr. Ismail cafe", hours=33)
 _listing("headphones", siti, "Wireless Headphones", "70.00", Cond.FAIR, Cat.ELECTRONICS,
-         "Battery has slight degradation. Still gives about 10 hours.", status=ListingStatus.SOLD, hours=34)
+         "Battery has slight degradation. Still gives about 10 hours.", "Arked Cengal",
+         status=ListingStatus.SOLD, hours=34)
 _listing("study-desk", daniel, "Foldable Study Desk", "40.00", Cond.GOOD, Cat.FURNITURE,
-         "Light and easy to move between colleges. Selling because I am moving to off-campus housing.", hours=35)
+         "Light and easy to move between colleges. Selling because I am moving off campus.", "Kolej Tun Hussein Onn lobby", hours=35)
 _listing("bookshelf", nurul, "Small 3-Tier Bookshelf", "35.00", Cond.GOOD, Cat.FURNITURE,
-         "Fits in a KTR double room. Must collect yourself.", hours=36)
+         "Fits in a double room. Must collect yourself.", "Kolej Datin Seri Endon guardhouse", hours=36)
 _listing("bean-bag", priya, "Bean Bag Chair", "55.00", Cond.FAIR, Cat.FURNITURE,
-         "Cover washed, filling a bit flat.", hours=37)
+         "Cover washed, filling a bit flat.", "Kolej Tun Fatimah lobby", hours=37)
 _listing("baju-melayu", farhan, "Baju Melayu Set (Size L, Navy)", "60.00", Cond.LIKE_NEW, Cat.CLOTHING,
-         "Worn once for a faculty event. Includes samping.", hours=38)
+         "Worn once for a faculty event. Includes samping.", "Arked Lestari", hours=38)
 _listing("blazer", siti, "Black Blazer (Size M)", "45.00", Cond.GOOD, Cat.CLOTHING,
-         "Good for presentations and interviews.", hours=39)
+         "Good for presentations and interviews.", "Arked Cengal", hours=39)
 _listing("lab-coat", aisyah, "White Lab Coat (Size S)", "15.00", Cond.GOOD, Cat.CLOTHING,
-         "Washed, no stains. Fits small to medium.", hours=40)
+         "Washed, no stains. Fits small to medium.", "Kolej Tun Razak lobby", hours=40)
 _listing("rice-cooker", nurul, "Mini Rice Cooker (0.6L)", "25.00", Cond.GOOD, Cat.KITCHEN,
-         "Perfect for one person. Includes spatula.", hours=41)
+         "Perfect for one person. Includes spatula.", "Kolej Datin Seri Endon guardhouse", hours=41)
 _listing("kettle", haziq, "Electric Kettle 1L", "20.00", Cond.GOOD, Cat.KITCHEN,
-         "Works well, new plug recently.", hours=42)
+         "Works well, new plug recently.", "Kolej Tun Dr. Ismail cafe", hours=42)
 _listing("blender", priya, "Portable Blender", "28.00", Cond.LIKE_NEW, Cat.KITCHEN,
-         "USB rechargeable. Great for smoothies in the hostel.", hours=43)
+         "USB rechargeable. Great for smoothies in the hostel.", "Kolej Tun Fatimah lobby", hours=43)
 _listing("drawing-set", siti, "Architecture Drawing Set", "75.00", Cond.GOOD, Cat.STATIONERY,
-         "T-square, set squares, scale ruler and technical pens. For architecture students.", hours=44)
+         "T-square, set squares, scale ruler and technical pens. For architecture students.", "Fakulti Alam Bina lobby", hours=44)
 _listing("a3-board", siti, "A3 Drawing Board", "40.00", Cond.GOOD, Cat.STATIONERY,
-         "Slightly scratched but flat and usable.", hours=45)
+         "Slightly scratched but flat and usable.", "Fakulti Alam Bina lobby", hours=45)
 _listing("badminton-racket", farhan, "Yonex Badminton Racket", "65.00", Cond.GOOD, Cat.SPORTS,
-         "Restrung last month. Comes with a cover.", hours=46)
+         "Restrung last month. Comes with a cover.", "Arked Lestari", hours=46)
 _listing("futsal-shoes", daniel, "Futsal Shoes (Size 42)", "48.00", Cond.FAIR, Cat.SPORTS,
-         "Used for one semester of inter-college matches.", hours=47)
+         "Used for one semester of inter-college matches.", "Kolej Tun Hussein Onn lobby", hours=47)
 _listing("bicycle", weijie, "City Bicycle", "180.00", Cond.GOOD, Cat.OTHER,
-         "Great for getting around campus. Basket and lock included.", hours=48)
+         "Great for getting around campus. Basket and lock included.", "Arked Meranti", hours=48)
 
 # ------------------------------------------------------------ food items (menus)
 FOOD_ITEMS: list[Row] = []
@@ -268,7 +377,7 @@ _order("o6", daniel, westerncorner, [("wc-chicken-chop", 1)], _PS.CANCELLED,
 SERVICES: list[Row] = []
 
 
-def _service(slug, provider, title, price, cat, desc) -> None:
+def _service(slug, provider, title, price, cat, desc, spot, *, unit=None, shop=None, hours=20.0) -> None:
     SERVICES.append(
         {
             "id": uid("service", slug),
@@ -277,25 +386,43 @@ def _service(slug, provider, title, price, cat, desc) -> None:
             "description": desc,
             "price": Decimal(price),
             "category": cat,
+            "unit": unit,
+            "image": _pick_photo(_SERVICE_PHOTOS, cat),
+            "spot": spot,
+            "shop_id": shop,
+            "created_at": _at(hours),
         }
     )
 
 
 SC = ServiceCategory
-_service("print-bw", amir, "Black & White Printing (per page)", "0.10", SC.PRINTING,
-         "A4 B&W printing from PDF. Pickup at Fakulti Komputeran. Minimum 10 pages.")
+_service("print-bw", amir, "Black & White Printing", "0.10", SC.PRINTING,
+         "A4 B&W printing from PDF. Minimum 10 pages.", "Fakulti Komputeran lobby",
+         unit="page", shop=amir_print, hours=49)
 _service("print-colour", amir, "Colour Printing & Poster A3", "2.00", SC.PRINTING,
-         "Colour A3 posters and project boards. Price is per sheet, ready in 1 day.")
+         "Colour A3 posters and project boards, ready in 1 day.", "Fakulti Komputeran lobby",
+         unit="sheet", shop=amir_print, hours=41.5)
 _service("tailor-alter", nadia, "Clothing Alteration", "12.00", SC.TAILORING,
-         "Hemming, taking in and letting out. Baju kurung, shirts, trousers.")
+         "Hemming, taking in and letting out. Baju kurung, shirts, trousers.", "Kolej Datin Seri Endon lobby",
+         unit="item", shop=nadia_stitches, hours=38.5)
 _service("tailor-baju", nadia, "Custom Baju Kurung", "85.00", SC.TAILORING,
-         "Made to measure. Bring your own fabric. Takes about 2 weeks.")
+         "Made to measure. Bring your own fabric. Takes about 2 weeks.", "Kolej Datin Seri Endon lobby",
+         unit="piece", shop=nadia_stitches, hours=33.5)
 _service("repair-laptop", jason, "Laptop Cleaning & Thermal Paste", "35.00", SC.REPAIR,
-         "Fan cleaning and new thermal paste. Fixes overheating. Takes about 2 hours.")
+         "Fan cleaning and new thermal paste. Fixes overheating. Takes about 2 hours.", "Kolej Tun Dr. Ismail cafe",
+         hours=35.5)
 _service("repair-phone", jason, "Phone Screen Replacement", "120.00", SC.REPAIR,
-         "Screen swaps for popular models. Part cost included. Please confirm your model first.")
+         "Screen swaps for popular models. Part cost included. Please confirm your model first.", "Arked Meranti",
+         hours=30.5)
 _service("repair-bike", jason, "Bicycle Tune-Up", "15.00", SC.REPAIR,
-         "Brake adjustment, chain oiling and tyre check.")
+         "Brake adjustment, chain oiling and tyre check.", "Kolej Tun Dr. Ismail",
+         hours=27.5)
+_service("groom-haircut", hafiz, "Haircut at your kolej", "15.00", SC.GROOMING,
+         "Skin fade, taper and classic cuts. I bring the clippers and cape.", "Kolej Rahman Putra common room",
+         unit="session", hours=47.5)
+_service("tutor-calculus", kavitha, "Calculus & Statistics Tutoring", "25.00", SC.TUTORING,
+         "One-to-one help for first and second year calculus and stats. Bring your tutorial questions.", "PSZ discussion rooms",
+         unit="hour", hours=45.5)
 
 # -------------------------------------------------------------- service bookings
 SERVICE_BOOKINGS: list[Row] = []
@@ -382,6 +509,7 @@ _thread(
 # Parents first, so the seed runner can insert in this order without violating FKs.
 TABLES: list[tuple[str, list[Row]]] = [
     ("users", USERS),
+    ("shops", SHOPS),
     ("product_listings", LISTINGS),
     ("food_items", FOOD_ITEMS),
     ("services", SERVICES),

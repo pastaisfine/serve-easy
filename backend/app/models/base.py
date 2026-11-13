@@ -76,6 +76,8 @@ class ServiceCategory(enum.StrEnum):
     PRINTING = "printing"
     TAILORING = "tailoring"
     REPAIR = "repair"
+    GROOMING = "grooming"
+    TUTORING = "tutoring"
     OTHER = "other"
 
 

@@ -22,6 +22,15 @@ class UserSummary(ORM):
     id: str
     name: str
     image: str | None
+    faculty: str | None
+
+
+class ShopRef(ORM):
+    """Just enough to link from a listing to its shop page."""
+
+    id: str
+    name: str
+    logo: str | None
 
 
 class ListingOut(ORM):
@@ -32,9 +41,11 @@ class ListingOut(ORM):
     condition: ListingCondition
     category: ListingCategory
     image: str | None
+    spot: str
     status: ListingStatus
     created_at: datetime
     seller: UserSummary
+    shop: ShopRef | None
 
 
 class CafeteriaOut(ORM):
@@ -62,6 +73,25 @@ class ServiceOut(ORM):
     title: str
     description: str
     price: Decimal
+    unit: str | None
     category: ServiceCategory
+    image: str | None
+    spot: str
+    created_at: datetime
     provider: UserSummary
+    shop: ShopRef | None
 
+
+class ShopOut(ORM):
+    id: str
+    name: str
+    description: str
+    logo: str | None
+    location: str
+    hours: str | None
+    owner: UserSummary
+
+
+class ShopDetailOut(ShopOut):
+    listings: list[ListingOut]
+    services: list[ServiceOut]
