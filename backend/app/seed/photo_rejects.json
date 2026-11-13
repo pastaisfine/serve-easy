@@ -1,0 +1,22 @@
+{
+ "usb_drive": [4],
+ "stationery": [2, 3, 4],
+ "powerbank": [2, 5],
+ "phone_tripod": [4],
+ "desk_lamp": [0],
+ "hard_drive": [0, 1, 2, 4],
+ "tshirt": [5],
+ "hoodie": [3],
+ "backpack": [4, 5],
+ "accessories": [2, 3, 4],
+ "malay_clothing": [4, 5],
+ "lab_coat": [2, 3, 5],
+ "camera": [1, 2, 3, 5],
+ "collectibles": [0, 5],
+ "coffee": [5],
+ "lunchbox": [1, 5],
+ "water_bottle": [4],
+ "toiletries": [2],
+ "print_poster": [2],
+ "sewing": [4]
+}

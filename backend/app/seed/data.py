@@ -19,8 +19,10 @@ from decimal import Decimal
 from typing import Any
 from urllib.parse import quote_plus
 
+from app.seed import photos
 from app.seed.catalog_listings import LISTING_ROWS
 from app.seed.catalog_services import SERVICE_ROWS
+from app.seed.photo_groups import listing_group, service_group
 from app.models.base import (
     BookingStatus,
     ListingCategory as Cat,
@@ -303,7 +305,7 @@ for _i, (_slug, _title, _price, _cond, _cat, _desc, _ph) in enumerate(LISTING_RO
             "price": Decimal(_price),
             "condition": Cond(_cond),
             "category": Cat(_cat),
-            "image": _photo(PH[_ph]),
+            "image": photos.pick(listing_group(_slug, _cat)) or _photo(PH[_ph]),
             "spot": _spots[(_i // 3) % len(_spots)],
             "status": ListingStatus.SOLD if _slug in _SOLD else ListingStatus.ACTIVE,
             "shop_id": None,
@@ -472,7 +474,7 @@ for _i, (_slug, _title, _price, _cat, _desc, _unit, _ph) in enumerate(SERVICE_RO
             "price": Decimal(_price),
             "category": ServiceCategory(_cat),
             "unit": _unit,
-            "image": _photo(PH[_ph]),
+            "image": photos.pick(service_group(_slug, _cat)) or _photo(PH[_ph]),
             "spot": "Online (chat to arrange)" if "(online)" in _desc else _spots[(_i // 2) % len(_spots)],
             "shop_id": _shop,
             "created_at": _at(20 + _i * 0.3),

@@ -9,6 +9,9 @@ class Settings(BaseSettings):
     # Direct Neon connection, used by migrations and seeding. Falls back to the pooled URL.
     database_url_unpooled: str | None = None
 
+    # Only the photo-fetch script needs this; the API and seed do not.
+    unsplash_access_key: str | None = None
+
     @property
     def migration_url(self) -> str:
         return self.database_url_unpooled or self.database_url
