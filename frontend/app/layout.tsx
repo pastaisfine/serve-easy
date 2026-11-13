@@ -25,8 +25,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={cn("antialiased", inter.variable)}>
-      <body>{children}</body>
+    // suppressHydrationWarning: browser extensions (e.g. Locator) inject attributes
+    // into <html>/<body> before React hydrates. It only silences attribute
+    // mismatches on these two elements, not in their children.
+    <html
+      lang="en"
+      className={cn("antialiased", inter.variable)}
+      suppressHydrationWarning
+    >
+      <body suppressHydrationWarning>{children}</body>
     </html>
   )
 }

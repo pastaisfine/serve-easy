@@ -9,11 +9,14 @@ export type ListingKind = "item" | "service"
 export type ItemCategory =
   | "books"
   | "electronics"
-  | "furniture"
   | "clothing"
   | "kitchen"
   | "stationery"
   | "sports"
+  | "snacks"
+  | "daily_essentials"
+  | "hobbies"
+  | "tickets"
   | "other"
 
 /** Must match the backend's `service_category` enum. */
@@ -23,6 +26,11 @@ export type ServiceCategory =
   | "repair"
   | "grooming"
   | "tutoring"
+  | "design"
+  | "media"
+  | "programming"
+  | "errands"
+  | "rentals"
   | "other"
 
 /** A home tile: either a listing category or a shortcut such as cafeterias. */

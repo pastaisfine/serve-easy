@@ -45,11 +45,14 @@ class ListingCondition(enum.StrEnum):
 class ListingCategory(enum.StrEnum):
     BOOKS = "books"
     ELECTRONICS = "electronics"
-    FURNITURE = "furniture"
     CLOTHING = "clothing"
     KITCHEN = "kitchen"
     STATIONERY = "stationery"
     SPORTS = "sports"
+    SNACKS = "snacks"
+    DAILY_ESSENTIALS = "daily_essentials"
+    HOBBIES = "hobbies"
+    TICKETS = "tickets"
     OTHER = "other"
 
 
@@ -78,6 +81,11 @@ class ServiceCategory(enum.StrEnum):
     REPAIR = "repair"
     GROOMING = "grooming"
     TUTORING = "tutoring"
+    DESIGN = "design"
+    MEDIA = "media"
+    PROGRAMMING = "programming"
+    ERRANDS = "errands"
+    RENTALS = "rentals"
     OTHER = "other"
 
 

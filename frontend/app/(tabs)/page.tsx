@@ -38,7 +38,7 @@ export default async function HomePage() {
 
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 pt-6 md:gap-14 md:px-8 md:pt-10">
         <Section id="categories" title="Categories" seeAllHref="/search">
-          <Rail className="lg:mx-0 lg:grid lg:grid-cols-6 lg:overflow-visible lg:px-0">
+          <Rail className="lg:mx-0 lg:grid lg:grid-cols-5 lg:overflow-visible lg:px-0">
             {homeCategories.map((category, index) => (
               <CategoryCard
                 key={category.key}

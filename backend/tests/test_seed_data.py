@@ -104,9 +104,9 @@ def test_no_message_is_sent_to_self_and_prices_are_positive():
 
 def test_demo_set_is_the_agreed_size():
     counts = data.summary()
-    assert 10 <= counts["users"] <= 20
-    assert 20 <= counts["product_listings"] <= 30
-    assert 5 <= counts["services"] <= 10
+    assert 10 <= counts["users"] <= 60
+    assert 200 <= counts["product_listings"] <= 260
+    assert 200 <= counts["services"] <= 260
     sellers = {i["seller_id"] for i in data.FOOD_ITEMS}
     assert 3 <= len(sellers) <= 4
 
@@ -146,3 +146,22 @@ def test_student_like_users_have_a_faculty():
 def test_listings_and_services_use_frontend_allowed_image_hosts():
     for row in data.LISTINGS + data.SERVICES:
         assert row["image"].startswith("https://images.unsplash.com/"), row["image"]
+
+
+def test_every_category_except_other_has_seed_rows():
+    from app.models.base import ListingCategory, ServiceCategory
+
+    used_items = {r["category"] for r in data.LISTINGS}
+    used_services = {r["category"] for r in data.SERVICES}
+    for cat in ListingCategory:
+        if cat is not ListingCategory.OTHER:
+            assert cat in used_items, f"no listing for {cat}"
+    for cat in ServiceCategory:
+        if cat is not ServiceCategory.OTHER:
+            assert cat in used_services, f"no service for {cat}"
+
+
+def test_furniture_category_is_gone():
+    from app.models.base import ListingCategory
+
+    assert "furniture" not in {c.value for c in ListingCategory}
