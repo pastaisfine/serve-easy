@@ -198,9 +198,69 @@
   ]
  },
  "drafting": {
-  "query": "technical drawing compass ruler",
-  "rejected": [],
-  "photos": []
+  "query": "drawing compass",
+  "photos": [
+   {
+    "path": "photo-1764948620481-5792cc389def",
+    "photographer": "Andrey Soldatov",
+    "link": "https://unsplash.com/photos/close-up-of-a-compass-drawing-a-circle-on-paper-fiSiafJp1yg",
+    "alt": "Close-up of a compass drawing a circle on paper"
+   },
+   {
+    "path": "photo-1764948620396-45f5b5fdd73e",
+    "photographer": "Andrey Soldatov",
+    "link": "https://unsplash.com/photos/a-drafting-compass-drawing-a-circle-on-paper-h8lDLj6TdeA",
+    "alt": "A drafting compass drawing a circle on paper"
+   },
+   {
+    "path": "photo-1764042082382-d68eaeaa53f9",
+    "photographer": "Ruth Bourke",
+    "link": "https://unsplash.com/photos/old-map-with-a-compass-and-handwritten-text-DuhuUDhNxS4",
+    "alt": "Old map with a compass and handwritten text"
+   },
+   {
+    "path": "photo-1780241623887-ee0ca9c087e6",
+    "photographer": "Hitesh Savaliya",
+    "link": "https://unsplash.com/photos/hands-drawing-circles-with-a-compass-on-a-notebook-STY96UM6RQQ",
+    "alt": "Hands drawing circles with a compass on a notebook"
+   },
+   {
+    "path": "photo-1764948620467-2b08f6843dd6",
+    "photographer": "Andrey Soldatov",
+    "link": "https://unsplash.com/photos/close-up-of-a-vintage-drawing-compass-on-white-paper-aAoIy--0ZCk",
+    "alt": "Close-up of a vintage drawing compass on white paper"
+   },
+   {
+    "path": "photo-1567333860476-cd5fff1d92f8",
+    "photographer": "Maryna Kazmirova",
+    "link": "https://unsplash.com/photos/pen-beside-notebook-U3_zGUS0CmM",
+    "alt": "pen beside notebook"
+   },
+   {
+    "path": "photo-1780241626204-639914b2218e",
+    "photographer": "Hitesh Savaliya",
+    "link": "https://unsplash.com/photos/hand-drawing-circles-triangles-hearts-and-squares-on-white-paper-MEySHxui-g8",
+    "alt": "Hand drawing circles, triangles, hearts, and squares on white paper"
+   },
+   {
+    "path": "photo-1779293109155-2cda395601d1",
+    "photographer": "Smithsonian",
+    "link": "https://unsplash.com/photos/antique-world-map-with-two-hemispheres-and-decorative-elements-q5NugQind8M",
+    "alt": "Antique world map with two hemispheres and decorative elements"
+   },
+   {
+    "path": "photo-1503789101408-444b37749472",
+    "photographer": "Matt Artz",
+    "link": "https://unsplash.com/photos/two-gray-graphing-compasses-mn9urGl7vIA",
+    "alt": "two gray graphing compasses"
+   },
+   {
+    "path": "photo-1624275169218-8cdb7d966a26",
+    "photographer": "Derrick Treadwell",
+    "link": "https://unsplash.com/photos/silver-steel-hand-tool-on-white-paper-vR8wZ3TzpvM",
+    "alt": "silver steel hand tool on white paper"
+   }
+  ]
  },
  "usb_drive": {
   "query": "usb flash drive",
@@ -1768,54 +1828,6 @@
    }
   ]
  },
- "cookware": {
-  "query": "rice cooker kitchen",
-  "rejected": [],
-  "photos": [
-   {
-    "path": "photo-1761766917170-42c4cecfee0b",
-    "photographer": "Tai Ngo",
-    "link": "https://unsplash.com/photos/a-cat-walks-through-a-dimly-lit-modern-kitchen-h_y0ZRpnlIc",
-    "alt": "A cat walks through a dimly lit modern kitchen"
-   },
-   {
-    "path": "photo-1768350715358-2633a7e7bd61",
-    "photographer": "Arln Memo",
-    "link": "https://unsplash.com/photos/kitchen-counter-with-food-and-rice-cooker-iOy9Da-JOFc",
-    "alt": "Kitchen counter with food and rice cooker"
-   },
-   {
-    "path": "photo-1779170396908-b361760c56e0",
-    "photographer": "Florencia Gonzalez Bazzano",
-    "link": "https://unsplash.com/photos/a-retro-kitchen-with-a-dining-table-and-sink-LPIRGZS3pZ0",
-    "alt": "A retro kitchen with a dining table and sink"
-   },
-   {
-    "path": "photo-1765696300140-68751b72ba94",
-    "photographer": "ZENG YILI",
-    "link": "https://unsplash.com/photos/retro-kitchen-with-checkered-tablecloth-and-vintage-chair-X5wleZmLu64",
-    "alt": "Retro kitchen with checkered tablecloth and vintage chair"
-   },
-   {
-    "path": "photo-1790955333340-fa97760a6f5a",
-    "photographer": "Jamie Trinh",
-    "link": "https://unsplash.com/photos/wooden-cabinet-and-kitchen-appliances-WeYaEyShm94",
-    "alt": "A wooden cabinet and kitchen appliances in a room with a tiled floor"
-   },
-   {
-    "path": "photo-1765696300114-160d3dd6c30e",
-    "photographer": "ZENG YILI",
-    "link": "https://unsplash.com/photos/dimly-lit-vintage-kitchen-with-a-chair-and-sink-UbZfxQ17gz8",
-    "alt": "Dimly lit vintage kitchen with a chair and sink"
-   },
-   {
-    "path": "photo-1769169471811-635943dfe43f",
-    "photographer": "Soyoung HAN",
-    "link": "https://unsplash.com/photos/sunlight-streams-through-a-window-onto-a-traditional-kitchen-hearth-PLyHWU4QCZU",
-    "alt": "Sunlight streams through a window onto a traditional kitchen hearth"
-   }
-  ]
- },
  "lunchbox": {
   "query": "lunch box",
   "rejected": [],
@@ -2011,72 +2023,6 @@
     "photographer": "Allison Saeng",
     "link": "https://unsplash.com/photos/two-tennis-rackets-laying-on-a-tennis-court-k20AdZ9rBAg",
     "alt": "two tennis rackets laying on a tennis court"
-   }
-  ]
- },
- "ball": {
-  "query": "basketball football",
-  "rejected": [],
-  "photos": [
-   {
-    "path": "photo-1627627256672-027a4613d028",
-    "photographer": "Kylie Osullivan",
-    "link": "https://unsplash.com/photos/brown-and-black-basketball-ball-BfaBLVCBTI8",
-    "alt": "brown and black basketball ball"
-   },
-   {
-    "path": "photo-1595795279832-13f0df36fbb9",
-    "photographer": "Ruslan Ruslan",
-    "link": "https://unsplash.com/photos/brown-basketball-on-gray-concrete-floor-AhAMJgq5QPM",
-    "alt": "brown basketball on gray concrete floor"
-   },
-   {
-    "path": "photo-1602357280104-742c517a1d82",
-    "photographer": "Oleksii S",
-    "link": "https://unsplash.com/photos/basketball-court-with-white-lines-O2kqxbix4Mw",
-    "alt": "An aerial view of a red basketball court with white lines and shadows"
-   },
-   {
-    "path": "photo-1559692048-79a3f837883d",
-    "photographer": "Jeremy Wallace",
-    "link": "https://unsplash.com/photos/brown-spalding-basketball-_XjW3oN8UOE",
-    "alt": "brown Spalding basketball"
-   },
-   {
-    "path": "photo-1584909444596-54e09e7555fb",
-    "photographer": "Akshay Gill",
-    "link": "https://unsplash.com/photos/black-and-brown-round-light-qk03WPpOS-Q",
-    "alt": "black and brown round light"
-   },
-   {
-    "path": "photo-1650566924908-db62de4863af",
-    "photographer": "Syed F Hashemi",
-    "link": "https://unsplash.com/photos/a-close-up-of-a-basketball-on-a-white-background-IQ4NmBWvqx0",
-    "alt": "a close up of a basketball on a white background"
-   },
-   {
-    "path": "photo-1585072064782-205b7be47bc3",
-    "photographer": "LOGAN WEAVER | @LGNWVR",
-    "link": "https://unsplash.com/photos/men-playing-basketball-in-court-Iil35il081Y",
-    "alt": "men playing basketball in court"
-   },
-   {
-    "path": "photo-1763775468707-573c7cd6b0da",
-    "photographer": "Alfonso Scarpa",
-    "link": "https://unsplash.com/photos/player-with-foot-on-a-soccer-ball-indoors-O8p7DUgZ1KA",
-    "alt": "Player with foot on a soccer ball indoors"
-   },
-   {
-    "path": "photo-1642189523635-912d71d9cf12",
-    "photographer": "Anushka Srivastav",
-    "link": "https://unsplash.com/photos/a-football-sitting-on-top-of-a-lush-green-field-Ww1Wh1Vt9l0",
-    "alt": "a football sitting on top of a lush green field"
-   },
-   {
-    "path": "photo-1684411531348-3aad121da52d",
-    "photographer": "Roger Granquist",
-    "link": "https://unsplash.com/photos/a-close-up-of-a-basketball-on-a-table-iMdEWNj5_Bw",
-    "alt": "a close up of a basketball on a table"
    }
   ]
  },
@@ -3133,6 +3079,2048 @@
     "photographer": "Sergej *****",
     "link": "https://unsplash.com/photos/vintage-adler-sewing-machine-with-a-large-handwheel-N1Si7d_EMlw",
     "alt": "Vintage adler sewing machine with a large handwheel"
+   }
+  ]
+ },
+ "laptop_repair": {
+  "query": "laptop repair",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1721332154191-ba5f1534266e",
+    "photographer": "Samsung Memory",
+    "link": "https://unsplash.com/photos/a-person-is-working-on-a-piece-of-electronics-fxKvHGDICcQ",
+    "alt": "A person is working on a piece of electronics"
+   },
+   {
+    "path": "photo-1721333089073-215a56fd710c",
+    "photographer": "Samsung Memory",
+    "link": "https://unsplash.com/photos/a-person-working-on-a-laptop-with-a-screwdriver-6RcDLyy0s1I",
+    "alt": "A person working on a laptop with a screwdriver"
+   },
+   {
+    "path": "photo-1658240527554-9cf987b4de49",
+    "photographer": "Revendo",
+    "link": "https://unsplash.com/photos/a-person-holding-a-laptop-7x0dGJqbfgk",
+    "alt": "a person holding a laptop"
+   },
+   {
+    "path": "photo-1620283085439-39620a1e21c4",
+    "photographer": "Artiom Vallat",
+    "link": "https://unsplash.com/photos/green-and-black-computer-motherboard-4I3FI807rXI",
+    "alt": "green and black computer motherboard"
+   },
+   {
+    "path": "photo-1654119895136-6aad918f412c",
+    "photographer": "Mike Meyers",
+    "link": "https://unsplash.com/photos/an-open-laptop-computer-sitting-on-top-of-a-table-WPQF4r0JUcg",
+    "alt": "an open laptop computer sitting on top of a table"
+   },
+   {
+    "path": "photo-1620368523635-df9d83338fc1",
+    "photographer": "Artiom Vallat",
+    "link": "https://unsplash.com/photos/green-and-black-computer-hard-disk-drive-1GntEP783rI",
+    "alt": "green and black computer hard disk drive"
+   },
+   {
+    "path": "photo-1709102884400-b50ca1a12bc3",
+    "photographer": "Albert Vinas",
+    "link": "https://unsplash.com/photos/a-person-using-a-cell-phone-to-repair-a-laptop-F3t-AzyTbyU",
+    "alt": "a person using a cell phone to repair a laptop"
+   },
+   {
+    "path": "photo-1602763288580-927cfda37a72",
+    "photographer": "Clint Patterson",
+    "link": "https://unsplash.com/photos/macbook-pro-on-brown-wooden-table-yGPxCYPS8H4",
+    "alt": "macbook pro on brown wooden table"
+   },
+   {
+    "path": "photo-1705494833979-9377fbdee229",
+    "photographer": "Andrey Matveev",
+    "link": "https://unsplash.com/photos/the-motherboard-of-a-laptop-is-being-dismantled-V_ESJ2MM2Us",
+    "alt": "the motherboard of a laptop is being dismantled"
+   },
+   {
+    "path": "photo-1544281679-70f2022b5ced",
+    "photographer": "Nikolai Chernichenko",
+    "link": "https://unsplash.com/photos/black-and-gray-laptop-computer-TeZvyJ0N-S0",
+    "alt": "black and gray laptop computer"
+   }
+  ]
+ },
+ "phone_repair": {
+  "query": "phone screen repair",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1611396000732-f8c9a933424f",
+    "photographer": "insung yoon",
+    "link": "https://unsplash.com/photos/black-and-white-electronic-devices-dRUqU4RpeOE",
+    "alt": "black and white electronic devices"
+   },
+   {
+    "path": "photo-1639776738932-956082f0b704",
+    "photographer": "Vitalijus",
+    "link": "https://unsplash.com/photos/a-person-in-blue-gloves-holding-a-cell-phone-y2QUqmEzjzA",
+    "alt": "a person in blue gloves holding a cell phone"
+   },
+   {
+    "path": "photo-1588515603140-81bd9f7d1db0",
+    "photographer": "Joel Rohland",
+    "link": "https://unsplash.com/photos/black-and-gold-hard-disk-drive-MCL2xxjZJvs",
+    "alt": "black and gold hard disk drive"
+   },
+   {
+    "path": "photo-1746005514011-ea00280f3b6e",
+    "photographer": "Fotografia Lui Vlad",
+    "link": "https://unsplash.com/photos/iphone-components-are-disassembled-on-a-blue-mat-8MCqpmAtBs0",
+    "alt": "iPhone components are disassembled on a blue mat"
+   },
+   {
+    "path": "photo-1566728595333-75a1d7cae961",
+    "photographer": "PR MEDIA",
+    "link": "https://unsplash.com/photos/a-couple-of-people-that-are-looking-at-a-cell-phone-iuU2aZdzp_M",
+    "alt": "a couple of people that are looking at a cell phone"
+   },
+   {
+    "path": "photo-1617299516258-eb06985065ff",
+    "photographer": "Nicolas Messifet",
+    "link": "https://unsplash.com/photos/black-smartphone-on-brown-wooden-table-_fTihc8wRTw",
+    "alt": "black smartphone on brown wooden table"
+   },
+   {
+    "path": "photo-1539331586018-346b53b2aaa4",
+    "photographer": "max bushuev",
+    "link": "https://unsplash.com/photos/person-fixing-phone-U46ib4fUniY",
+    "alt": "person fixing phone"
+   },
+   {
+    "path": "photo-1735875530804-d661ca2001da",
+    "photographer": "Yoga Sukma 🇮🇩",
+    "link": "https://unsplash.com/photos/a-person-using-a-mouse-on-a-mouse-pad-J_tkqH61vHA",
+    "alt": "A person using a mouse on a mouse pad"
+   },
+   {
+    "path": "photo-1746005718004-1f992c399428",
+    "photographer": "Fotografia Lui Vlad",
+    "link": "https://unsplash.com/photos/a-disassembled-iphone-and-repair-tools-on-a-mat-A-EtdVkNSCA",
+    "alt": "A disassembled iPhone and repair tools on a mat"
+   },
+   {
+    "path": "photo-1588515603068-adb330f26e92",
+    "photographer": "Joel Rohland",
+    "link": "https://unsplash.com/photos/black-and-silver-click-pen-beside-black-and-silver-smartphone-C1r9pODhfQ4",
+    "alt": "black and silver click pen beside black and silver smartphone"
+   }
+  ]
+ },
+ "bike_repair": {
+  "query": "bicycle repair",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1675798227643-da319f8ee8f7",
+    "photographer": "Bohdan Kadun",
+    "link": "https://unsplash.com/photos/a-close-up-of-a-person-working-on-a-bike-d284XSho6gU",
+    "alt": "a close up of a person working on a bike"
+   },
+   {
+    "path": "photo-1562615193-cbeef074a501",
+    "photographer": "Tom Conway",
+    "link": "https://unsplash.com/photos/black-mountain-bike-gear-set-A7Qi_0oqOqA",
+    "alt": "black mountain bike gear set"
+   },
+   {
+    "path": "photo-1676531356064-0a527118baf4",
+    "photographer": "Anton Savinov",
+    "link": "https://unsplash.com/photos/a-man-working-on-a-bike-in-a-garage-o6wceYJw2Tw",
+    "alt": "a man working on a bike in a garage"
+   },
+   {
+    "path": "photo-1676531443468-0e2b5a57e48f",
+    "photographer": "Anton Savinov",
+    "link": "https://unsplash.com/photos/a-man-working-on-a-bike-in-a-garage--cxC8iFx6V4",
+    "alt": "a man working on a bike in a garage"
+   },
+   {
+    "path": "photo-1675798225739-d8919b7a23f7",
+    "photographer": "Bohdan Kadun",
+    "link": "https://unsplash.com/photos/a-man-working-on-a-bicycle-in-a-garage-WIsOienEXBM",
+    "alt": "a man working on a bicycle in a garage"
+   },
+   {
+    "path": "photo-1671790464448-8c4198cb7529",
+    "photographer": "Anton Savinov",
+    "link": "https://unsplash.com/photos/a-bunch-of-tools-that-are-on-a-rack-aQxOYwG_GyI",
+    "alt": "a bunch of tools that are on a rack"
+   },
+   {
+    "path": "photo-1671790639553-43973054c51e",
+    "photographer": "Anton Savinov",
+    "link": "https://unsplash.com/photos/a-close-up-of-a-person-holding-a-bike-PfWzxTA-uV8",
+    "alt": "a close up of a person holding a bike"
+   },
+   {
+    "path": "photo-1607109120350-b0adef8aa4db",
+    "photographer": "Taylor Smith",
+    "link": "https://unsplash.com/photos/person-in-black-jacket-holding-black-and-red-bicycle-K6v29UYxZ2w",
+    "alt": "person in black jacket holding black and red bicycle"
+   },
+   {
+    "path": "photo-1684166472907-e17eec7e9475",
+    "photographer": "Glenn Carstens-Peters",
+    "link": "https://unsplash.com/photos/a-close-up-of-a-bikes-gears-and-chain-EFWf6XZAntg",
+    "alt": "a close up of a bike's gears and chain"
+   },
+   {
+    "path": "photo-1671543565338-8b22a87b8359",
+    "photographer": "Anton Savinov",
+    "link": "https://unsplash.com/photos/a-bunch-of-tools-hanging-on-a-wall-CL7shAl6888",
+    "alt": "a bunch of tools hanging on a wall"
+   }
+  ]
+ },
+ "solder_repair": {
+  "query": "soldering electronics repair",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1563770660941-20978e870e26",
+    "photographer": "Blaz Erzetic",
+    "link": "https://unsplash.com/photos/black-circuit-board-g5f0BJq-FRs",
+    "alt": "black circuit board"
+   },
+   {
+    "path": "photo-1581092918056-0c4c3acd3789",
+    "photographer": "ThisisEngineering",
+    "link": "https://unsplash.com/photos/person-holding-green-and-black-circuit-board-32PpagSzeGs",
+    "alt": "person holding green and black circuit board"
+   },
+   {
+    "path": "photo-1521798604188-0d6595d6d6ae",
+    "photographer": "Mariana B.",
+    "link": "https://unsplash.com/photos/person-using-soldering-iron-MCKz5KGAmdQ",
+    "alt": "person using soldering iron"
+   },
+   {
+    "path": "photo-1727377255383-fb304fb08262",
+    "photographer": "Svitlanka Dlinnaya",
+    "link": "https://unsplash.com/photos/a-person-is-working-on-some-electrical-equipment-Ou6MDRwsFOY",
+    "alt": "A person is working on some electrical equipment"
+   },
+   {
+    "path": "photo-1593616307659-07f02b400e14",
+    "photographer": "Vishnu Mohanan",
+    "link": "https://unsplash.com/photos/black-and-silver-audio-jack-YYQSNidk0sE",
+    "alt": "black and silver audio jack"
+   },
+   {
+    "path": "photo-1593619797213-5533e27e8694",
+    "photographer": "Vishnu Mohanan",
+    "link": "https://unsplash.com/photos/gray-and-black-screw-on-white-surface-kdsTJ4qLfb0",
+    "alt": "gray and black screw on white surface"
+   },
+   {
+    "path": "photo-1603114595741-e60bf9486e04",
+    "photographer": "Kumpan Electric",
+    "link": "https://unsplash.com/photos/man-in-orange-t-shirt-holding-black-smartphone-G1Xk2C87Rb8",
+    "alt": "man in orange t-shirt holding black smartphone"
+   },
+   {
+    "path": "photo-1676630444903-163fe485c5d1",
+    "photographer": "Bermix Studio",
+    "link": "https://unsplash.com/photos/a-man-wearing-a-blindfold-working-on-a-circuit-board-y9RGeKyVpM8",
+    "alt": "a man wearing a blindfold working on a circuit board"
+   },
+   {
+    "path": "photo-1782703495492-e649d483c14c",
+    "photographer": "Akshat Sharma",
+    "link": "https://unsplash.com/photos/a-circuit-board-held-by-clamps-on-a-dark-background-S5KwkmFeX_E",
+    "alt": "A circuit board held by clamps on a dark background"
+   },
+   {
+    "path": "photo-1777153184385-cff867582a1c",
+    "photographer": "Stacey Zinoveva",
+    "link": "https://unsplash.com/photos/man-working-on-electronics-at-a-cluttered-desk-vaz_CQSvTMw",
+    "alt": "Man working on electronics at a cluttered desk"
+   }
+  ]
+ },
+ "repair_misc": {
+  "query": "watch repair",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1731446451263-fc3881d4973d",
+    "photographer": "Ruben Caldera",
+    "link": "https://unsplash.com/photos/a-close-up-of-a-pocket-watch-on-a-table-hAHzIx8EBdM",
+    "alt": "A close up of a pocket watch on a table"
+   },
+   {
+    "path": "photo-1633451238042-85d93d267866",
+    "photographer": "Lukas Tennie",
+    "link": "https://unsplash.com/photos/a-close-up-of-a-watch-face-with-the-gears-missing-3dyDozzCORw",
+    "alt": "a close up of a watch face with the gears missing"
+   },
+   {
+    "path": "photo-1649803091689-0e65c4e9581f",
+    "photographer": "Matteo Vella",
+    "link": "https://unsplash.com/photos/a-man-is-holding-a-watch-in-his-hand-fToJybgJ0NQ",
+    "alt": "a man is holding a watch in his hand"
+   },
+   {
+    "path": "photo-1591352254932-6d56d9fe295b",
+    "photographer": "Omar Al-Ghosson",
+    "link": "https://unsplash.com/photos/person-holding-silver-and-black-round-analog-watch-N53-pozDwVE",
+    "alt": "person holding silver and black round analog watch"
+   },
+   {
+    "path": "photo-1548171838-1fd4cb4ab854",
+    "photographer": "Bence Balla-Schottner",
+    "link": "https://unsplash.com/photos/round-silver-colored-chronograph-watch-9JORz4CuUcI",
+    "alt": "round silver-colored chronograph watch"
+   },
+   {
+    "path": "photo-1764429601437-85ad5745f0b7",
+    "photographer": "Joey Zhou",
+    "link": "https://unsplash.com/photos/close-up-of-intricate-watch-movement-gears-and-gears-a_EEUE5lcNI",
+    "alt": "Close-up of intricate watch movement gears and gears"
+   },
+   {
+    "path": "photo-1570570026471-86415ad50a9b",
+    "photographer": "Denis Sebastian Tamas",
+    "link": "https://unsplash.com/photos/gold-colored-mechanical-watch-HxigkhjLF6Y",
+    "alt": "gold-colored mechanical watch"
+   },
+   {
+    "path": "photo-1664437235473-65aaf8912d20",
+    "photographer": "Patrick Amofah",
+    "link": "https://unsplash.com/photos/a-man-wearing-glasses-_DdHMAl3y3I",
+    "alt": "a man wearing glasses"
+   },
+   {
+    "path": "photo-1542147864-027e5d1330c9",
+    "photographer": "Randy Fath",
+    "link": "https://unsplash.com/photos/two-round-pocket-watches-R5_1N6ZgCOo",
+    "alt": "two round pocket watches"
+   },
+   {
+    "path": "photo-1646724684583-764bb3f47c1f",
+    "photographer": "Олександр К",
+    "link": "https://unsplash.com/photos/a-close-up-view-of-a-watch-face-JBZvYieOmCQ",
+    "alt": "a close up view of a watch face"
+   }
+  ]
+ },
+ "haircut": {
+  "query": "barber haircut",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1647140655214-e4a2d914971f",
+    "photographer": "Nate Johnston",
+    "link": "https://unsplash.com/photos/a-man-cutting-another-mans-hair-with-a-pair-of-scissors-tgPrIYnW3g4",
+    "alt": "a man cutting another mans hair with a pair of scissors"
+   },
+   {
+    "path": "photo-1605497788044-5a32c7078486",
+    "photographer": "delfina pan",
+    "link": "https://unsplash.com/photos/barber-blow-drying-hair-in-salon-wJoB8D3hnzc",
+    "alt": "A barber in a denim apron blow-drying a man's hair in a salon"
+   },
+   {
+    "path": "photo-1503951914875-452162b0f3f1",
+    "photographer": "Allef Vinicius",
+    "link": "https://unsplash.com/photos/man-sitting-on-barbers-chair-IvQeAVeJULw",
+    "alt": "man sitting on barber's chair"
+   },
+   {
+    "path": "photo-1599351431202-1e0f0137899a",
+    "photographer": "Agustin Fernandez",
+    "link": "https://unsplash.com/photos/barber-trimming-hair-with-straight-razor-1Pmp9uxK8X8",
+    "alt": "A tattooed barber using a straight razor to trim a man's hair"
+   },
+   {
+    "path": "photo-1657105052497-f996284ffff8",
+    "photographer": "Gulom Nazarov",
+    "link": "https://unsplash.com/photos/barber-trimming-hair-with-thinning-shears-DrG4V5skbMY",
+    "alt": "A barber using thinning shears and a comb to trim a man's hair"
+   },
+   {
+    "path": "photo-1517832606299-7ae9b720a186",
+    "photographer": "Nathon Oski",
+    "link": "https://unsplash.com/photos/grayscale-photography-of-person-holding-scissor-clipping-mans-beard-fE42nRlBcG8",
+    "alt": "grayscale photography of person holding scissor clipping man's beard"
+   },
+   {
+    "path": "photo-1635273051937-a0ddef9573b6",
+    "photographer": "Salah Regouane",
+    "link": "https://unsplash.com/photos/a-man-getting-his-hair-cut-by-a-barber-8HkPnJhC5Ic",
+    "alt": "a man getting his hair cut by a barber"
+   },
+   {
+    "path": "photo-1593702275687-f8b402bf1fb5",
+    "photographer": "Michael DeMoya",
+    "link": "https://unsplash.com/photos/man-in-white-dress-shirt-cutting-hair-of-man-Q82AM6BWBPM",
+    "alt": "man in white dress shirt cutting hair of man"
+   },
+   {
+    "path": "photo-1567894340315-735d7c361db0",
+    "photographer": "Obi",
+    "link": "https://unsplash.com/photos/man-cutting-hair-man--sRVfY0f2d8",
+    "alt": "man cutting hair man"
+   },
+   {
+    "path": "photo-1599011176306-4a96f1516d4d",
+    "photographer": "Mr Shave",
+    "link": "https://unsplash.com/photos/barber-trimming-beard-in-salon-4k60yfGy7fU",
+    "alt": "A barber trimming a man's beard with scissors in a salon"
+   }
+  ]
+ },
+ "makeup": {
+  "query": "makeup artist",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1596462502278-27bfdc403348",
+    "photographer": "Shamblen Studios",
+    "link": "https://unsplash.com/photos/pink-and-brown-makeup-brush-set-xwM61TPMlYk",
+    "alt": "pink and brown makeup brush set"
+   },
+   {
+    "path": "photo-1512496015851-a90fb38ba796",
+    "photographer": "Jazmin Quaynor",
+    "link": "https://unsplash.com/photos/close-up-photography-of-assorted-cosmetics-FoeIOgztCXo",
+    "alt": "close-up photography of assorted cosmetics"
+   },
+   {
+    "path": "photo-1709477542149-f4e0e21d590b",
+    "photographer": "LOLA AZIZADA",
+    "link": "https://unsplash.com/photos/a-woman-getting-her-make-up-done-with-a-brush-I3y-aJ4DWng",
+    "alt": "a woman getting her make up done with a brush"
+   },
+   {
+    "path": "photo-1594465919760-441fe5908ab0",
+    "photographer": "Amir Seilsepour",
+    "link": "https://unsplash.com/photos/woman-with-red-lipstick-and-gold-hoop-earrings-_hAaFD1ucfk",
+    "alt": "woman with red lipstick and gold hoop earrings"
+   },
+   {
+    "path": "photo-1620464003286-a5b0d79f32c2",
+    "photographer": "Edz Norton",
+    "link": "https://unsplash.com/photos/black-and-brown-makeup-brush-set-PEttXYw9hi8",
+    "alt": "black and brown makeup brush set"
+   },
+   {
+    "path": "photo-1516975080664-ed2fc6a32937",
+    "photographer": "Rosa Rafael",
+    "link": "https://unsplash.com/photos/assorted-make-up-brushes-closed-up-photography-pxax5WuM7eY",
+    "alt": "assorted make-up brushes closed up photography"
+   },
+   {
+    "path": "photo-1596704017254-9b121068fb31",
+    "photographer": "Laura Chouette",
+    "link": "https://unsplash.com/photos/a-person-holding-a-makeup-palette-and-a-pencil-yxcCgzSB_iI",
+    "alt": "a person holding a makeup palette and a pencil"
+   },
+   {
+    "path": "photo-1709477542170-f11ee7d471a0",
+    "photographer": "LOLA AZIZADA",
+    "link": "https://unsplash.com/photos/a-woman-is-putting-makeup-on-her-face-Bv8pYo9RJno",
+    "alt": "a woman is putting makeup on her face"
+   },
+   {
+    "path": "photo-1551723454-7565a1f5b161",
+    "photographer": "Romina Farías",
+    "link": "https://unsplash.com/photos/turn-on-light-white-wooden-vanity-mirror-ShAHFTy-HKQ",
+    "alt": "turn-on light white wooden vanity mirror"
+   },
+   {
+    "path": "photo-1583784561105-a674080f391e",
+    "photographer": "MaxeyLash",
+    "link": "https://unsplash.com/photos/assorted-color-make-up-brushes-wsCwj455vh0",
+    "alt": "assorted color make up brushes"
+   }
+  ]
+ },
+ "massage": {
+  "query": "shoulder massage",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1745327883508-b6cd32e5dde5",
+    "photographer": "Jakub Klucký",
+    "link": "https://unsplash.com/photos/massage-therapist-giving-a-back-massage-7yeqemd-p90",
+    "alt": "Massage therapist giving a back massage"
+   },
+   {
+    "path": "photo-1519824145371-296894a0daa9",
+    "photographer": "Toa Heftiba",
+    "link": "https://unsplash.com/photos/person-massaging-the-back-of-a-woman-hBLf2nvp-Yc",
+    "alt": "person massaging the back of a woman"
+   },
+   {
+    "path": "photo-1649751361457-01d3a696c7e6",
+    "photographer": "yury kirillov",
+    "link": "https://unsplash.com/photos/a-man-getting-his-leg-examined-by-a-doctor-pbUWW-CBoqY",
+    "alt": "a man getting his leg examined by a doctor"
+   },
+   {
+    "path": "photo-1741522509407-41cfe73b0b75",
+    "photographer": "Massage a Domicile",
+    "link": "https://unsplash.com/photos/a-massage-therapist-provides-a-back-massage-3aGV2ViCzrM",
+    "alt": "A massage therapist provides a back massage"
+   },
+   {
+    "path": "photo-1645005512968-0c1fe99f0093",
+    "photographer": "Sincerely Media",
+    "link": "https://unsplash.com/photos/person-massaging-shoulder-in-white-shirt-wGFibXDQlBI",
+    "alt": "A person massaging the shoulder of another person wearing a white patterned shirt"
+   },
+   {
+    "path": "photo-1706353399656-210cca727a33",
+    "photographer": "Marc Zeman",
+    "link": "https://unsplash.com/photos/a-woman-getting-a-back-massage-from-a-man-uLWW09LLG04",
+    "alt": "a woman getting a back massage from a man"
+   },
+   {
+    "path": "photo-1700522924565-9fad1c05469e",
+    "photographer": "Mat Kilkeary",
+    "link": "https://unsplash.com/photos/a-woman-getting-a-back-massage-in-a-spa-9BjH8jl7Uj0",
+    "alt": "a woman getting a back massage in a spa"
+   },
+   {
+    "path": "photo-1701916672756-615f56fb0d4e",
+    "photographer": "Taylor Heery",
+    "link": "https://unsplash.com/photos/a-person-laying-on-a-bed-with-their-hands-on-their-back-qpKTD44vZr0",
+    "alt": "a person laying on a bed with their hands on their back"
+   },
+   {
+    "path": "photo-1617952986600-802f965dcdbc",
+    "photographer": "Bas Peperzak",
+    "link": "https://unsplash.com/photos/persons-feet-on-blue-towel-J1trUf0Lj3Q",
+    "alt": "persons feet on blue towel"
+   },
+   {
+    "path": "photo-1699523229199-fce5aa6b0ec3",
+    "photographer": "Edward Muntinga",
+    "link": "https://unsplash.com/photos/a-person-is-touching-another-persons-hand-on-a-bed-YidaiQHHmlM",
+    "alt": "a person is touching another person's hand on a bed"
+   }
+  ]
+ },
+ "tutor_math": {
+  "query": "math tutoring whiteboard",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1635372722656-389f87a941b7",
+    "photographer": "Thomas T",
+    "link": "https://unsplash.com/photos/a-blackboard-with-a-lot-of-writing-on-it-OPpCbAAKWv8",
+    "alt": "a blackboard with a lot of writing on it"
+   },
+   {
+    "path": "photo-1596496181871-9681eacf9764",
+    "photographer": "Jeswin Thomas",
+    "link": "https://unsplash.com/photos/woman-in-white-and-red-polka-dot-long-sleeve-shirt-2Q3Ivd-HsaM",
+    "alt": "woman in white and red polka dot long sleeve shirt"
+   },
+   {
+    "path": "photo-1581089778245-3ce67677f718",
+    "photographer": "ThisisEngineering",
+    "link": "https://unsplash.com/photos/woman-in-black-long-sleeve-shirt-GzDrm7SYQ0g",
+    "alt": "woman in black long sleeve shirt"
+   },
+   {
+    "path": "photo-1596495577886-d920f1fb7238",
+    "photographer": "Jeswin Thomas",
+    "link": "https://unsplash.com/photos/person-writing-on-white-paper-hecib2an4T4",
+    "alt": "person writing on white paper"
+   },
+   {
+    "path": "photo-1676276374803-36e48196d5ac",
+    "photographer": "Walls.io",
+    "link": "https://unsplash.com/photos/a-white-board-with-a-bunch-of-stickers-on-it-C5GeaRZp2D4",
+    "alt": "a white board with a bunch of stickers on it"
+   },
+   {
+    "path": "photo-1580894723150-0ff6e9b907ea",
+    "photographer": "ThisisEngineering",
+    "link": "https://unsplash.com/photos/woman-in-black-shirt-holding-white-smartphone-DbLlKd8u2Rw",
+    "alt": "woman in black shirt holding white smartphone"
+   },
+   {
+    "path": "photo-1453733190371-0a9bedd82893",
+    "photographer": "Roman Mager",
+    "link": "https://unsplash.com/photos/written-equations-on-brown-wooden-board-5mZ_M06Fc9g",
+    "alt": "written equations on brown wooden board"
+   },
+   {
+    "path": "photo-1609155035300-15e1ffa95f12",
+    "photographer": "Luka Savcic",
+    "link": "https://unsplash.com/photos/silver-and-white-round-analog-watch-beside-white-printer-paper-evixqxe715k",
+    "alt": "silver and white round analog watch beside white printer paper"
+   },
+   {
+    "path": "photo-1630983358494-96012d838b84",
+    "photographer": "Greg Rosenke",
+    "link": "https://unsplash.com/photos/woman-in-black-framed-eyeglasses-holding-pen-DJWvzY4pkGU",
+    "alt": "woman in black framed eyeglasses holding pen"
+   },
+   {
+    "path": "photo-1690192168579-0f79e522a270",
+    "photographer": "Walls.io",
+    "link": "https://unsplash.com/photos/a-white-board-with-writing-on-it-in-a-room-0l-KfVEhpfE",
+    "alt": "a white board with writing on it in a room"
+   }
+  ]
+ },
+ "tutor_science": {
+  "query": "chemistry lab students",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1707944746058-4da338d0f827",
+    "photographer": "National Institute of Allergy and Infectious Diseases",
+    "link": "https://unsplash.com/photos/a-group-of-people-in-lab-coats-working-in-a-lab-U0zO9rI47WA",
+    "alt": "a group of people in lab coats working in a lab"
+   },
+   {
+    "path": "photo-1707944745899-104a4b12d945",
+    "photographer": "National Institute of Allergy and Infectious Diseases",
+    "link": "https://unsplash.com/photos/a-group-of-people-working-in-a-lab-tEFl8Wqd5f0",
+    "alt": "a group of people working in a lab"
+   },
+   {
+    "path": "photo-1630959299280-874fe62c7d83",
+    "photographer": "National Cancer Institute",
+    "link": "https://unsplash.com/photos/grayscale-photo-of-man-holding-microphone-9dxalrR0xFI",
+    "alt": "grayscale photo of man holding microphone"
+   },
+   {
+    "path": "photo-1707944746042-e4c81c191812",
+    "photographer": "National Institute of Allergy and Infectious Diseases",
+    "link": "https://unsplash.com/photos/a-group-of-people-in-a-lab-looking-at-something-fbWHQ1URgV4",
+    "alt": "a group of people in a lab looking at something"
+   },
+   {
+    "path": "photo-1707944745891-922795a805dd",
+    "photographer": "National Institute of Allergy and Infectious Diseases",
+    "link": "https://unsplash.com/photos/two-women-in-lab-coats-working-in-a-lab-1OPTlh-GH98",
+    "alt": "two women in lab coats working in a lab"
+   },
+   {
+    "path": "photo-1605781573960-d12a0d37b2d4",
+    "photographer": "Trnava University",
+    "link": "https://unsplash.com/photos/white-wooden-table-with-chairs-mCpSF-KnlKY",
+    "alt": "white wooden table with chairs"
+   },
+   {
+    "path": "photo-1762994577543-1aa11f21310c",
+    "photographer": "Fajar Herlambang STUDIO",
+    "link": "https://unsplash.com/photos/three-women-in-hijabs-smiling-in-a-room-PfKHs3-WW6w",
+    "alt": "Three women in hijabs smiling in a room"
+   },
+   {
+    "path": "photo-1602052294200-a8b75e03adfe",
+    "photographer": "Trnava University",
+    "link": "https://unsplash.com/photos/white-and-blue-concrete-building-LKxwdQeZWD4",
+    "alt": "white and blue concrete building"
+   },
+   {
+    "path": "photo-1727519457936-1b24c507d4b5",
+    "photographer": "The Oregon State University Collections and Archives",
+    "link": "https://unsplash.com/photos/two-men-in-a-laboratory-with-plants-_rk7FgX3ne8",
+    "alt": "Two men in a laboratory with plants"
+   },
+   {
+    "path": "photo-1766297248084-b32bacb4a1e4",
+    "photographer": "Chidera Faustina Okeke",
+    "link": "https://unsplash.com/photos/young-woman-using-a-microscope-in-a-science-lab-SjzZV4JOge8",
+    "alt": "Young woman using a microscope in a science lab"
+   }
+  ]
+ },
+ "tutor_eng": {
+  "query": "engineering students blueprint",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1581092160562-40aa08e78837",
+    "photographer": "ThisisEngineering",
+    "link": "https://unsplash.com/photos/engineer-measuring-technical-drawings-on-desk-WDCE0T4khsE",
+    "alt": "A person using a caliper to measure technical engineering drawings on a desk"
+   },
+   {
+    "path": "photo-1581094488379-6a10d04c0f04",
+    "photographer": "ThisisEngineering",
+    "link": "https://unsplash.com/photos/people-in-uniforms-pointing-at-map-xYCBw1uIP_M",
+    "alt": "Two people in blue uniforms pointing at a printed map on a table"
+   },
+   {
+    "path": "photo-1581093806997-124204d9fa9d",
+    "photographer": "ThisisEngineering",
+    "link": "https://unsplash.com/photos/black-and-red-click-pen-on-white-printer-paper-M_NvKwSOkug",
+    "alt": "black and red click pen on white printer paper"
+   },
+   {
+    "path": "photo-1532619675605-1ede6c2ed2b0",
+    "photographer": "Kaleidico",
+    "link": "https://unsplash.com/photos/man-wearing-gray-polo-shirt-beside-dry-erase-board-3V8xo5Gbusk",
+    "alt": "man wearing gray polo shirt beside dry-erase board"
+   },
+   {
+    "path": "photo-1720243946311-25bb7194a53e",
+    "photographer": "Lucas Liang",
+    "link": "https://unsplash.com/photos/a-large-engine-sitting-on-top-of-a-wooden-table--pHpyYz8KJI",
+    "alt": "A large engine sitting on top of a wooden table"
+   },
+   {
+    "path": "photo-1745571479662-54a2ad1c747f",
+    "photographer": "Maxim Tolchinskiy",
+    "link": "https://unsplash.com/photos/someone-is-working-on-a-circuit-board-Ila_9WOmPHA",
+    "alt": "Someone is working on a circuit board"
+   },
+   {
+    "path": "photo-1581092459682-ccfffd6ddc37",
+    "photographer": "ThisisEngineering",
+    "link": "https://unsplash.com/photos/boy-in-orange-long-sleeve-shirt-writing-on-white-paper-zIL_CiC-bT0",
+    "alt": "boy in orange long sleeve shirt writing on white paper"
+   },
+   {
+    "path": "photo-1742415106160-594d07f6cc23",
+    "photographer": "Community Archives of Belleville and Hastings County",
+    "link": "https://unsplash.com/photos/blueprint-for-tudor-theatre-and-community-hall-building-ySygK1uWZac",
+    "alt": "Blueprint for tudor theatre and community hall building"
+   },
+   {
+    "path": "photo-1608303588026-884930af2559",
+    "photographer": "Pedro Miranda",
+    "link": "https://unsplash.com/photos/people-reviewing-architectural-blueprints-on-desk-3QzMBrvCeyQ",
+    "alt": "people reviewing architectural blueprints on desk"
+   },
+   {
+    "path": "photo-1713557112617-e12d67bddc3a",
+    "photographer": "Lukas Hron",
+    "link": "https://unsplash.com/photos/an-electrical-device-laying-on-top-of-a-blueprint-Gz5eVQzkNrs",
+    "alt": "an electrical device laying on top of a blueprint"
+   }
+  ]
+ },
+ "tutor_code": {
+  "query": "coding laptop programming",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1515879218367-8466d910aaa4",
+    "photographer": "Chris Ried",
+    "link": "https://unsplash.com/photos/a-computer-screen-with-a-bunch-of-code-on-it-ieic5Tq8YMk",
+    "alt": "a computer screen with a bunch of code on it"
+   },
+   {
+    "path": "photo-1614741118887-7a4ee193a5fa",
+    "photographer": "Safar Safarov",
+    "link": "https://unsplash.com/photos/computer-monitor-and-laptop-programming-workspace-koOdUvfGr4c",
+    "alt": "A computer monitor and laptop displaying Swift code and a programming tutorial"
+   },
+   {
+    "path": "photo-1607799279861-4dd421887fb3",
+    "photographer": "Mohammad Rahmani",
+    "link": "https://unsplash.com/photos/laptop-screen-displaying-colorful-code-8qEB0fTe9Vw",
+    "alt": "laptop screen displaying colorful code"
+   },
+   {
+    "path": "photo-1587620962725-abab7fe55159",
+    "photographer": "James Harrison",
+    "link": "https://unsplash.com/photos/black-laptop-computer-turned-on-on-table-vpOeXr5wmR4",
+    "alt": "black laptop computer turned on on table"
+   },
+   {
+    "path": "photo-1628258334105-2a0b3d6efee1",
+    "photographer": "AltumCode",
+    "link": "https://unsplash.com/photos/macbook-pro-on-black-wooden-table-PNbDkQ2DDgM",
+    "alt": "macbook pro on black wooden table"
+   },
+   {
+    "path": "photo-1571171637578-41bc2dd41cd2",
+    "photographer": "Fotis Fotopoulos",
+    "link": "https://unsplash.com/photos/black-computer-keyboard-DuHKoV44prg",
+    "alt": "black computer keyboard"
+   },
+   {
+    "path": "photo-1555066931-4365d14bab8c",
+    "photographer": "Arnold Francisca",
+    "link": "https://unsplash.com/photos/turned-on-macbook-pro-wit-programming-codes-display-f77Bh3inUpE",
+    "alt": "turned-on MacBook Pro wit programming codes display"
+   },
+   {
+    "path": "photo-1484417894907-623942c8ee29",
+    "photographer": "Emile Perron",
+    "link": "https://unsplash.com/photos/macbook-pro-showing-programming-language-xrVDYZRGdw4",
+    "alt": "MacBook Pro showing programming language"
+   },
+   {
+    "path": "photo-1608306448197-e83633f1261c",
+    "photographer": "Mohammad Rahmani",
+    "link": "https://unsplash.com/photos/black-laptop-computer-turned-on-displaying-blue-screen-N5bT5RctFZ8",
+    "alt": "black laptop computer turned on displaying blue screen"
+   },
+   {
+    "path": "photo-1523800503107-5bc3ba2a6f81",
+    "photographer": "Oskar Yildiz",
+    "link": "https://unsplash.com/photos/turned-on-gray-laptop-computer-cOkpTiJMGzA",
+    "alt": "turned on gray laptop computer"
+   }
+  ]
+ },
+ "tutor_lang": {
+  "query": "language class learning",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1577896851231-70ef18881754",
+    "photographer": "National Cancer Institute",
+    "link": "https://unsplash.com/photos/woman-standing-in-front-of-children-N_aihp118p8",
+    "alt": "woman standing in front of children"
+   },
+   {
+    "path": "photo-1758270704763-22072a90d3b6",
+    "photographer": "Vitaly Gariev",
+    "link": "https://unsplash.com/photos/students-talking-and-laughing-in-a-lecture-hall-TB5HpfJf7mA",
+    "alt": "Students talking and laughing in a lecture hall"
+   },
+   {
+    "path": "photo-1758691736722-cda1858056e0",
+    "photographer": "Vitaly Gariev",
+    "link": "https://unsplash.com/photos/woman-presenting-to-a-group-in-a-modern-office-ddW9WMz77F0",
+    "alt": "Woman presenting to a group in a modern office"
+   },
+   {
+    "path": "photo-1784037442045-6e8329332c2c",
+    "photographer": "Compagnons",
+    "link": "https://unsplash.com/photos/woman-in-striped-shirt-talking-to-man-in-a-crowd-Zj1Xo8O11GM",
+    "alt": "Woman in striped shirt talking to man in a crowd"
+   },
+   {
+    "path": "photo-1759143102544-790af882ff45",
+    "photographer": "Sushanta Rokka",
+    "link": "https://unsplash.com/photos/two-schoolgirls-in-uniform-talking-to-each-other-aizNGa9MFik",
+    "alt": "Two schoolgirls in uniform talking to each other"
+   },
+   {
+    "path": "photo-1759984782076-2909625b0aa8",
+    "photographer": "Julio Lopez",
+    "link": "https://unsplash.com/photos/woman-wearing-headphones-talks-at-laptop-by-window-j0dCClyasFk",
+    "alt": "Woman wearing headphones talks at laptop by window"
+   },
+   {
+    "path": "photo-1758270704787-615782711641",
+    "photographer": "Vitaly Gariev",
+    "link": "https://unsplash.com/photos/students-talking-and-studying-in-a-lecture-hall-wAgfqXpYqug",
+    "alt": "Students talking and studying in a lecture hall"
+   },
+   {
+    "path": "photo-1560523159-fbe43c0b465f",
+    "photographer": "Product School",
+    "link": "https://unsplash.com/photos/people-listening-to-a-person-in-a-stage-YrJ99TBRQvI",
+    "alt": "people listening to a person in a stage"
+   },
+   {
+    "path": "photo-1758691737182-d42aefd6dee8",
+    "photographer": "Vitaly Gariev",
+    "link": "https://unsplash.com/photos/business-people-attending-a-presentation-in-a-modern-office-w4j16upQBqE",
+    "alt": "Business people attending a presentation in a modern office"
+   },
+   {
+    "path": "photo-1758270705696-ec9caffc73dd",
+    "photographer": "Vitaly Gariev",
+    "link": "https://unsplash.com/photos/teacher-interacting-with-students-in-a-classroom-setting-c6QLJhezaYs",
+    "alt": "Teacher interacting with students in a classroom setting"
+   }
+  ]
+ },
+ "tutor_writing": {
+  "query": "student writing essay",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1434030216411-0b793f4b4173",
+    "photographer": "Unseen Studio",
+    "link": "https://unsplash.com/photos/person-writing-on-brown-wooden-table-near-white-ceramic-mug-s9CC2SKySJM",
+    "alt": "person writing on brown wooden table near white ceramic mug"
+   },
+   {
+    "path": "photo-1517971129774-8a2b38fa128e",
+    "photographer": "Hannah Olinger",
+    "link": "https://unsplash.com/photos/woman-sitting-in-front-of-black-table-writing-on-white-book-near-window-NXiIVnzBwZ8",
+    "alt": "woman sitting in front of black table writing on white book near window"
+   },
+   {
+    "path": "photo-1522881451255-f59ad836fdfb",
+    "photographer": "Quilia",
+    "link": "https://unsplash.com/photos/person-writing-on-white-paper-Ak5c5VTch5E",
+    "alt": "person writing on white paper"
+   },
+   {
+    "path": "photo-1507537297725-24a1c029d3ca",
+    "photographer": "LinkedIn Sales Solutions",
+    "link": "https://unsplash.com/photos/man-writing-on-white-paper-EI50ZDA-l8Y",
+    "alt": "man writing on white paper"
+   },
+   {
+    "path": "photo-1514369118554-e20d93546b30",
+    "photographer": "Kyle Gregory Devaras",
+    "link": "https://unsplash.com/photos/woman-writing-on-book-6RTM8EsD1T8",
+    "alt": "woman writing on book"
+   },
+   {
+    "path": "photo-1538045698727-ac45d4365100",
+    "photographer": "lilartsy",
+    "link": "https://unsplash.com/photos/selective-focus-photography-of-pen-jw3xbuelpKM",
+    "alt": "selective focus photography of pen"
+   },
+   {
+    "path": "photo-1726831662518-c48d983f9b86",
+    "photographer": "Ojus Jaiswal",
+    "link": "https://unsplash.com/photos/a-person-writing-on-a-piece-of-paper-s7rQVpRYWtY",
+    "alt": "A person writing on a piece of paper"
+   },
+   {
+    "path": "photo-1549228581-cdbdb7430548",
+    "photographer": "Nils Stahl",
+    "link": "https://unsplash.com/photos/shallow-focus-photo-of-person-writing-neUbjUnjXNk",
+    "alt": "shallow focus photo of person writing"
+   },
+   {
+    "path": "photo-1731963094554-c5c981ccdefd",
+    "photographer": "nedimshoots",
+    "link": "https://unsplash.com/photos/a-person-writing-on-a-notebook-with-a-pen-6CQy1skIbRs",
+    "alt": "A person writing on a notebook with a pen"
+   },
+   {
+    "path": "photo-1582137490248-c53207ec5602",
+    "photographer": "Kelly Sikkema",
+    "link": "https://unsplash.com/photos/person-writing-on-white-paper-xcvXS6wDCAY",
+    "alt": "person writing on white paper"
+   }
+  ]
+ },
+ "design_graphic": {
+  "query": "graphic design",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1626785774573-4b799315345d",
+    "photographer": "Emily Bernal",
+    "link": "https://unsplash.com/photos/silver-imac-and-apple-keyboard-v9vII5gV8Lw",
+    "alt": "silver imac and apple keyboard"
+   },
+   {
+    "path": "photo-1561070791-2526d30994b5",
+    "photographer": "Balázs Kétyi",
+    "link": "https://unsplash.com/photos/color-code-book-LPWl2pEVGKc",
+    "alt": "color code book"
+   },
+   {
+    "path": "photo-1611532736597-de2d4265fba3",
+    "photographer": "Kelly Sikkema",
+    "link": "https://unsplash.com/photos/tablet-with-sketch-and-orange-book-IkHwu5xLXxs",
+    "alt": "A tablet with a letter A sketch, stylus, headphones, and orange book on wood"
+   },
+   {
+    "path": "photo-1626785774625-ddcddc3445e9",
+    "photographer": "Emily Bernal",
+    "link": "https://unsplash.com/photos/workspace-with-computer-monitor-and-tablet-BM3U_D2lygo",
+    "alt": "A computer monitor and tablet displaying creative software icons in a dimly lit workspace"
+   },
+   {
+    "path": "photo-1587440871875-191322ee64b0",
+    "photographer": "UX Indonesia",
+    "link": "https://unsplash.com/photos/person-writing-on-white-paper-qC2n6RQU4Vw",
+    "alt": "person writing on white paper"
+   },
+   {
+    "path": "photo-1613909207039-6b173b755cc1",
+    "photographer": "Faizur Rehman",
+    "link": "https://unsplash.com/photos/man-in-black-shirt-sitting-in-front-of-computer-pHPzdEHN6Os",
+    "alt": "man in black shirt sitting in front of computer"
+   },
+   {
+    "path": "photo-1572044162444-ad60f128bdea",
+    "photographer": "Theme Photos",
+    "link": "https://unsplash.com/photos/designer-using-tablet-and-laptop-workspace-CGpifH3FjOA",
+    "alt": "A person using a digital drawing tablet and laptop with color swatches and markers"
+   },
+   {
+    "path": "photo-1658863025658-4a259cc68fc9",
+    "photographer": "2H Media",
+    "link": "https://unsplash.com/photos/design-books-and-paper-brochures-NmSPbe0bDtc",
+    "alt": "Four design books and paper sample brochures arranged on a white surface"
+   },
+   {
+    "path": "photo-1690228254548-31ef53e40cd1",
+    "photographer": "Faizur Rehman",
+    "link": "https://unsplash.com/photos/a-computer-monitor-sitting-on-top-of-a-wooden-desk-d7h4kZXmHhk",
+    "alt": "a computer monitor sitting on top of a wooden desk"
+   },
+   {
+    "path": "photo-1558655146-d09347e92766",
+    "photographer": "Balázs Kétyi",
+    "link": "https://unsplash.com/photos/computer-monitor-displaying-design-system-_x335IZXxfc",
+    "alt": "A computer monitor displaying a design system interface with plants on a desk"
+   }
+  ]
+ },
+ "photography": {
+  "query": "photographer camera",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1495745966610-2a67f2297e5e",
+    "photographer": "Nicolas Ladino Silva",
+    "link": "https://unsplash.com/photos/selective-focus-of-woman-behind-pink-flowers-holding-red-samsung-bridge-camera-about-to-take-photo-of-flower-o2DVsV2PnHE",
+    "alt": "selective focus of woman behind pink flowers holding red Samsung bridge camera about to take photo of flower"
+   },
+   {
+    "path": "photo-1542038784456-1ea8e935640e",
+    "photographer": "Reinhart Julian",
+    "link": "https://unsplash.com/photos/black-dslr-camera-floating-over-mans-hand-at-the-woods-WxM465oM4j4",
+    "alt": "black DSLR camera floating over man's hand at the woods"
+   },
+   {
+    "path": "photo-1497316730643-415fac54a2af",
+    "photographer": "Michael Henry",
+    "link": "https://unsplash.com/photos/silhouette-photo-of-man-holding-camera-5OyGRn_r9Y4",
+    "alt": "silhouette photo of man holding camera"
+   },
+   {
+    "path": "photo-1502920917128-1aa500764cbd",
+    "photographer": "Andrew Hutchings",
+    "link": "https://unsplash.com/photos/black-canon-eos-rebel-series-dslr-camera-W2Dta_Yiwfw",
+    "alt": "black Canon EOS Rebel-series DSLR camera"
+   },
+   {
+    "path": "photo-1590486803833-1c5dc8ddd4c8",
+    "photographer": "BAILEY MAHON",
+    "link": "https://unsplash.com/photos/person-holding-black-dslr-camera-2b6K4uy0Hbc",
+    "alt": "person holding black dslr camera"
+   },
+   {
+    "path": "photo-1541516160071-4bb0c5af65ba",
+    "photographer": "Marco Xu",
+    "link": "https://unsplash.com/photos/woman-holding-dslr-camera-ToUPBCO62Lw",
+    "alt": "woman holding DSLR camera"
+   },
+   {
+    "path": "photo-1512790182412-b19e6d62bc39",
+    "photographer": "ShareGrid",
+    "link": "https://unsplash.com/photos/black-dslr-camera-N10auyEVst8",
+    "alt": "black DSLR camera"
+   },
+   {
+    "path": "photo-1502982720700-bfff97f2ecac",
+    "photographer": "William Thomas",
+    "link": "https://unsplash.com/photos/black-canon-dslr-camera-beside-camera-lens-ny6tO4ItOEY",
+    "alt": "black Canon DSLR camera beside camera lens"
+   },
+   {
+    "path": "photo-1580707221190-bd94d9087b7f",
+    "photographer": "Nathan Dumlao",
+    "link": "https://unsplash.com/photos/camera-with-large-zoom-lens-McztPB7Uqx8",
+    "alt": "A hand holding a black camera with a large zoom lens"
+   },
+   {
+    "path": "photo-1513031300226-c8fb12de9ade",
+    "photographer": "Ailbhe Flynn",
+    "link": "https://unsplash.com/photos/person-taking-photo-using-canon-camera-in-shallow-focus-lens-jkZs3Oi9pq0",
+    "alt": "person taking photo using Canon camera in shallow focus lens"
+   }
+  ]
+ },
+ "videography": {
+  "query": "video editing",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1485846234645-a62644f84728",
+    "photographer": "Jakob Owens",
+    "link": "https://unsplash.com/photos/clap-board-roadside-jakob-and-ryan-CiUR8zISX60",
+    "alt": "clap board roadside Jakob and Ryan"
+   },
+   {
+    "path": "photo-1574717024653-61fd2cf4d44d",
+    "photographer": "Peter Stumpf",
+    "link": "https://unsplash.com/photos/video-editing-timeline-on-dark-screen-yk9VXp4W5-Q",
+    "alt": "A video editing timeline with blue and purple clips on a dark screen"
+   },
+   {
+    "path": "photo-1528109966604-5a6a4a964e8d",
+    "photographer": "Matthew Kwong",
+    "link": "https://unsplash.com/photos/person-using-macbook-pro-turned-on-qJgW5ewKCO8",
+    "alt": "person using MacBook pro turned on"
+   },
+   {
+    "path": "photo-1574717025058-2f8737d2e2b7",
+    "photographer": "Peter Stumpf",
+    "link": "https://unsplash.com/photos/black-laptop-computer-FhZEpxtTI_Y",
+    "alt": "black laptop computer"
+   },
+   {
+    "path": "photo-1490810194309-344b3661ba39",
+    "photographer": "Mark Cruz",
+    "link": "https://unsplash.com/photos/person-editing-video-in-dark-workspace-VW2oU66mwbc",
+    "alt": "A person in silhouette wearing headphones editing video on a computer in a dark room"
+   },
+   {
+    "path": "photo-1614963326505-843868e1d83a",
+    "photographer": "Sanjeev Nagaraj",
+    "link": "https://unsplash.com/photos/video-editing-software-on-monitor-u4bvBOOpZB4",
+    "alt": "A computer monitor displaying video editing software with a timeline and preview window"
+   },
+   {
+    "path": "photo-1551302175-952301267d19",
+    "photographer": "Skye Studios",
+    "link": "https://unsplash.com/photos/video-editing-timeline-with-digital-clips-PzkeY0i98io",
+    "alt": "A digital video editing timeline with blue and purple clips on a black background"
+   },
+   {
+    "path": "photo-1609619385002-f40f1df9b7eb",
+    "photographer": "Nejc Soklič",
+    "link": "https://unsplash.com/photos/green-and-black-audio-mixer-2jTu7H9l6JA",
+    "alt": "green and black audio mixer"
+   },
+   {
+    "path": "photo-1605826832916-d0ea9d6fe71e",
+    "photographer": "Ryan Snaadt",
+    "link": "https://unsplash.com/photos/man-in-red-t-shirt-sitting-in-front-of-computer-prBQ83SzZtU",
+    "alt": "man in red t-shirt sitting in front of computer"
+   },
+   {
+    "path": "photo-1579109652910-99b9be06aaec",
+    "photographer": "Jakob Owens",
+    "link": "https://unsplash.com/photos/silver-imac-turned-on-EWaoo-i7qIs",
+    "alt": "silver iMac turned on"
+   }
+  ]
+ },
+ "podcast": {
+  "query": "podcast microphone",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1511671782779-c97d3d27a1d4",
+    "photographer": "israel palacio",
+    "link": "https://unsplash.com/photos/bokeh-photography-of-condenser-microphone-Y20JJ_ddy9M",
+    "alt": "bokeh photography of condenser microphone"
+   },
+   {
+    "path": "photo-1485579149621-3123dd979885",
+    "photographer": "Matt Botsford",
+    "link": "https://unsplash.com/photos/vintage-microphone-with-purple-background-OKLqGsCT8qs",
+    "alt": "A vintage silver microphone with blue accents against a soft purple background"
+   },
+   {
+    "path": "photo-1589903308904-1010c2294adc",
+    "photographer": "Will Francis - AI & Marketing",
+    "link": "https://unsplash.com/photos/black-and-silver-headphones-on-black-and-silver-microphone-ZDNyhmgkZlQ",
+    "alt": "black and silver headphones on black and silver microphone"
+   },
+   {
+    "path": "photo-1478737270239-2f02b77fc618",
+    "photographer": "Jonathan Velasquez",
+    "link": "https://unsplash.com/photos/macro-photography-of-silver-and-black-studio-microphone-condenser-c1ZN57GfDB0",
+    "alt": "macro photography of silver and black studio microphone condenser"
+   },
+   {
+    "path": "photo-1660631228116-b3643559f611",
+    "photographer": "Klim Musalimov",
+    "link": "https://unsplash.com/photos/microphone-on-boom-arm-for-podcasting-fxHq67K11-E",
+    "alt": "A black condenser microphone in a shock mount on an adjustable boom arm"
+   },
+   {
+    "path": "photo-1590602847861-f357a9332bbc",
+    "photographer": "Jukka Aalho",
+    "link": "https://unsplash.com/photos/black-and-silver-microphone-with-stand-OaPksPcVp50",
+    "alt": "black and silver microphone with stand"
+   },
+   {
+    "path": "photo-1619490287893-862fd1808407",
+    "photographer": "Chris Lynch",
+    "link": "https://unsplash.com/photos/black-and-silver-microphone-on-brown-wall-Qruwi3Ur3Ak",
+    "alt": "black and silver microphone on brown wall"
+   },
+   {
+    "path": "photo-1531651008558-ed1740375b39",
+    "photographer": "Leo Wieling",
+    "link": "https://unsplash.com/photos/grayscale-photo-of-condenser-microphone-beside-pop-filter-bG8U3kaZltE",
+    "alt": "grayscale photo of condenser microphone beside pop filter"
+   },
+   {
+    "path": "photo-1615458318132-1f151a3d18f4",
+    "photographer": "Hc Digital",
+    "link": "https://unsplash.com/photos/black-and-silver-audio-mixer-_1J2AioiNC0",
+    "alt": "black and silver audio mixer"
+   },
+   {
+    "path": "photo-1668605335684-c97ce92cbd76",
+    "photographer": "Flipsnack",
+    "link": "https://unsplash.com/photos/a-person-with-headphones-on-using-a-laptop-cQKceh3huwY",
+    "alt": "a person with headphones on using a laptop"
+   }
+  ]
+ },
+ "web_dev": {
+  "query": "web design laptop",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1525547719571-a2d4ac8945e2",
+    "photographer": "Andras Vas",
+    "link": "https://unsplash.com/photos/macbook-pro-turned-on-Bd7gNnWJBkU",
+    "alt": "MacBook Pro turned on"
+   },
+   {
+    "path": "photo-1498050108023-c5249f4df085",
+    "photographer": "Christopher Gower",
+    "link": "https://unsplash.com/photos/a-macbook-with-lines-of-code-on-its-screen-on-a-busy-desk-m_HRfLhgABo",
+    "alt": "A MacBook with lines of code on its screen on a busy desk"
+   },
+   {
+    "path": "photo-1522199755839-a2bacb67c546",
+    "photographer": "Anete Lūsiņa",
+    "link": "https://unsplash.com/photos/turned-on-acer-laptop-on-table-near-cup-zwsHjakE_iI",
+    "alt": "turned on Acer laptop on table near cup"
+   },
+   {
+    "path": "photo-1678690832311-bb6e361989ca",
+    "photographer": "Carriza Maiquez",
+    "link": "https://unsplash.com/photos/a-laptop-computer-sitting-on-top-of-a-wooden-desk-RTdvy9izXvw",
+    "alt": "a laptop computer sitting on top of a wooden desk"
+   },
+   {
+    "path": "photo-1507238691740-187a5b1d37b8",
+    "photographer": "Ben Kolde",
+    "link": "https://unsplash.com/photos/white-and-black-laptop-bs2Ba7t69mM",
+    "alt": "white and black laptop"
+   },
+   {
+    "path": "photo-1511385348-a52b4a160dc2",
+    "photographer": "James McKinven",
+    "link": "https://unsplash.com/photos/macbook-pro-tpuAo8gVs58",
+    "alt": "MacBook Pro"
+   },
+   {
+    "path": "photo-1603302576837-37561b2e2302",
+    "photographer": "Joshua Woroniecki",
+    "link": "https://unsplash.com/photos/laptop-with-colorful-glowing-screen-lzh3hPtJz9c",
+    "alt": "A laptop with a vibrant colorful screen glowing on a dark wooden desk"
+   },
+   {
+    "path": "photo-1586880244406-556ebe35f282",
+    "photographer": "Roberto Cortese",
+    "link": "https://unsplash.com/photos/person-using-macbook-pro-on-white-table-ejhjSZKTeeg",
+    "alt": "person using macbook pro on white table"
+   },
+   {
+    "path": "photo-1487014679447-9f8336841d58",
+    "photographer": "Igor Miske",
+    "link": "https://unsplash.com/photos/turned-on-macbook-pro-beside-gray-mug-Px3iBXV-4TU",
+    "alt": "turned on MacBook Pro beside gray mug"
+   },
+   {
+    "path": "photo-1544006659-f0b21884ce1d",
+    "photographer": "Štefan Štefančík",
+    "link": "https://unsplash.com/photos/person-wearing-long-sleeve-top-working-on-laptop-5p_7M5MP2Iw",
+    "alt": "person wearing long-sleeve top working on laptop"
+   }
+  ]
+ },
+ "coding": {
+  "query": "software developer code",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1542831371-29b0f74f9713",
+    "photographer": "Florian Olivo",
+    "link": "https://unsplash.com/photos/lines-of-html-codes-4hbJ-eymZ1o",
+    "alt": "lines of HTML codes"
+   },
+   {
+    "path": "photo-1515879218367-8466d910aaa4",
+    "photographer": "Chris Ried",
+    "link": "https://unsplash.com/photos/a-computer-screen-with-a-bunch-of-code-on-it-ieic5Tq8YMk",
+    "alt": "a computer screen with a bunch of code on it"
+   },
+   {
+    "path": "photo-1461749280684-dccba630e2f6",
+    "photographer": "Ilya Pavlov",
+    "link": "https://unsplash.com/photos/monitor-showing-java-programming-OqtafYT5kTw",
+    "alt": "monitor showing Java programming"
+   },
+   {
+    "path": "photo-1607799279861-4dd421887fb3",
+    "photographer": "Mohammad Rahmani",
+    "link": "https://unsplash.com/photos/laptop-screen-displaying-colorful-code-8qEB0fTe9Vw",
+    "alt": "laptop screen displaying colorful code"
+   },
+   {
+    "path": "photo-1619410283995-43d9134e7656",
+    "photographer": "Juanjo Jaramillo",
+    "link": "https://unsplash.com/photos/code-editor-displaying-react-source-code-mZnx9429i94",
+    "alt": "code editor displaying react source code"
+   },
+   {
+    "path": "photo-1587620962725-abab7fe55159",
+    "photographer": "James Harrison",
+    "link": "https://unsplash.com/photos/black-laptop-computer-turned-on-on-table-vpOeXr5wmR4",
+    "alt": "black laptop computer turned on on table"
+   },
+   {
+    "path": "photo-1614741118887-7a4ee193a5fa",
+    "photographer": "Safar Safarov",
+    "link": "https://unsplash.com/photos/computer-monitor-and-laptop-programming-workspace-koOdUvfGr4c",
+    "alt": "A computer monitor and laptop displaying Swift code and a programming tutorial"
+   },
+   {
+    "path": "photo-1607706189992-eae578626c86",
+    "photographer": "Mohammad Rahmani",
+    "link": "https://unsplash.com/photos/computer-screen-displaying-web-code-oXlXu2qukGE",
+    "alt": "Computer screen displaying HTML code for a web development project"
+   },
+   {
+    "path": "photo-1571171637578-41bc2dd41cd2",
+    "photographer": "Fotis Fotopoulos",
+    "link": "https://unsplash.com/photos/black-computer-keyboard-DuHKoV44prg",
+    "alt": "black computer keyboard"
+   },
+   {
+    "path": "photo-1484417894907-623942c8ee29",
+    "photographer": "Emile Perron",
+    "link": "https://unsplash.com/photos/macbook-pro-showing-programming-language-xrVDYZRGdw4",
+    "alt": "MacBook Pro showing programming language"
+   }
+  ]
+ },
+ "laundry": {
+  "query": "laundry folding clothes",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1582735689369-4fe89db7114c",
+    "photographer": "Annie Spratt",
+    "link": "https://unsplash.com/photos/white-textile-on-blue-plastic-laundry-basket-5TfCI4nj6B4",
+    "alt": "white textile on blue plastic laundry basket"
+   },
+   {
+    "path": "photo-1567113463300-102a7eb3cb26",
+    "photographer": "Sarah Brown",
+    "link": "https://unsplash.com/photos/assorted-color-apparels-oa7pqZmmhuA",
+    "alt": "assorted-color apparels"
+   },
+   {
+    "path": "photo-1635274605638-d44babc08a4f",
+    "photographer": "Dan LeFebvre",
+    "link": "https://unsplash.com/photos/a-stack-of-folded-shirts-sitting-on-top-of-a-blue-table-APUvZYCjPJ0",
+    "alt": "a stack of folded shirts sitting on top of a blue table"
+   },
+   {
+    "path": "photo-1604176354204-9268737828e4",
+    "photographer": "Maude Frédérique Lavoie",
+    "link": "https://unsplash.com/photos/person-holding-stack-of-denim-jeans-EDSTj4kCUcw",
+    "alt": "A person in a white cable-knit sweater holding a stack of folded denim jeans"
+   },
+   {
+    "path": "photo-1582735689283-7b70dbe630ea",
+    "photographer": "Annie Spratt",
+    "link": "https://unsplash.com/photos/white-textile-in-blue-plastic-container-i-FLUApz3Ts",
+    "alt": "white textile in blue plastic container"
+   },
+   {
+    "path": "photo-1630329273801-8f629dba0a72",
+    "photographer": "Towfiqu barbhuiya",
+    "link": "https://unsplash.com/photos/pink-blue-and-white-textiles-998DibZwpIc",
+    "alt": "pink blue and white textiles"
+   },
+   {
+    "path": "photo-1699797467199-6bdf301649e8",
+    "photographer": "Nellie Adamyan",
+    "link": "https://unsplash.com/photos/a-pile-of-folded-towels-sitting-on-top-of-a-bed-wH_avVRSuJM",
+    "alt": "a pile of folded towels sitting on top of a bed"
+   },
+   {
+    "path": "photo-1625093440280-42de742a496d",
+    "photographer": "No Revisions",
+    "link": "https://unsplash.com/photos/woman-in-white-t-shirt-washing-dishes-sdtG9BTcGuY",
+    "alt": "woman in white t-shirt washing dishes"
+   },
+   {
+    "path": "photo-1466837581110-aeaa58fb562f",
+    "photographer": "Jason Briscoe",
+    "link": "https://unsplash.com/photos/low-angle-photography-of-hanging-clothes-outside-house-during-daytime-Eu4_4e8_ltE",
+    "alt": "low-angle photography of hanging clothes outside house during daytime"
+   },
+   {
+    "path": "photo-1586284359445-2e1d8db7f4cd",
+    "photographer": "charlesdeluvio",
+    "link": "https://unsplash.com/photos/gray-and-white-textile-on-white-front-load-washing-machine-ikepn-Ko-b8",
+    "alt": "gray and white textile on white front load washing machine"
+   }
+  ]
+ },
+ "cleaning": {
+  "query": "cleaning room",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1740657254989-42fe9c3b8cce",
+    "photographer": "PuroClean of Fort Worth",
+    "link": "https://unsplash.com/photos/a-person-in-yellow-gloves-and-blue-gloves-cleaning-a-floor--dc38HdQR1M",
+    "alt": "A person in yellow gloves and blue gloves cleaning a floor"
+   },
+   {
+    "path": "photo-1669101602108-fa5ba89507ee",
+    "photographer": "Toon Lambrechts",
+    "link": "https://unsplash.com/photos/person-mopping-clinical-hallway-floor-0FTI9ceTUOc",
+    "alt": "A person in blue scrubs mopping a white floor in a clinical hallway"
+   },
+   {
+    "path": "photo-1580256081112-e49377338b7f",
+    "photographer": "Ashwini Chaudhary(Monty)",
+    "link": "https://unsplash.com/photos/housekeeping-cart-in-hotel-corridor-Iu6parQAO-U",
+    "alt": "A housekeeping cart and vacuum cleaner in a long hotel corridor with patterned carpet"
+   },
+   {
+    "path": "photo-1581578731548-c64695cc6952",
+    "photographer": "CDC",
+    "link": "https://unsplash.com/photos/woman-in-white-long-sleeve-shirt-and-blue-denim-jeans-standing-beside-white-wooden-framed-glass-VRpjDw3WqqI",
+    "alt": "woman in white long sleeve shirt and blue denim jeans standing beside white wooden framed glass"
+   },
+   {
+    "path": "photo-1669101602124-f5b78895d91c",
+    "photographer": "Toon Lambrechts",
+    "link": "https://unsplash.com/photos/person-mopping-floor-in-sterile-room-TpNA_02AzXY",
+    "alt": "A person in protective blue coveralls mopping a white floor in a sterile room"
+   },
+   {
+    "path": "photo-1581578949510-fa7315c4c350",
+    "photographer": "CDC",
+    "link": "https://unsplash.com/photos/man-in-gray-hoodie-and-blue-denim-jeans-standing-on-brown-wooden-parquet-flooring-jjrXvzbqC5E",
+    "alt": "man in gray hoodie and blue denim jeans standing on brown wooden parquet flooring"
+   },
+   {
+    "path": "photo-1758273705627-937374bfa978",
+    "photographer": "Vitaly Gariev",
+    "link": "https://unsplash.com/photos/woman-happily-vacuuming-a-bright-modern-living-room-eP1ZaY1cWJw",
+    "alt": "Woman happily vacuuming a bright, modern living room"
+   },
+   {
+    "path": "photo-1758273238415-01ec03d9ef27",
+    "photographer": "Vitaly Gariev",
+    "link": "https://unsplash.com/photos/a-woman-mops-a-bright-modern-living-room-floor-2NcTLdFHpH8",
+    "alt": "A woman mops a bright, modern living room floor"
+   },
+   {
+    "path": "photo-1758523670739-0d26a3ee976d",
+    "photographer": "Vitaly Gariev",
+    "link": "https://unsplash.com/photos/a-woman-vacuuming-a-bright-modern-living-room-u8knk6Hl8JA",
+    "alt": "A woman vacuuming a bright, modern living room"
+   },
+   {
+    "path": "photo-1758272421751-963195322eaa",
+    "photographer": "Vitaly Gariev",
+    "link": "https://unsplash.com/photos/woman-wearing-yellow-gloves-cleaning-wooden-surface-Y3vDCL7_das",
+    "alt": "Woman wearing yellow gloves cleaning wooden surface"
+   }
+  ]
+ },
+ "delivery": {
+  "query": "grocery shopping delivery",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1628102491629-778571d893a3",
+    "photographer": "Tara Clark",
+    "link": "https://unsplash.com/photos/woman-in-white-coat-holding-green-shopping-cart-Gk8LG7dsHWA",
+    "alt": "woman in white coat holding green shopping cart"
+   },
+   {
+    "path": "photo-1588964895597-cfccd6e2dbf9",
+    "photographer": "Maria Lin Kim",
+    "link": "https://unsplash.com/photos/apples-and-bananas-in-brown-cardboard-box-8RaUEd8zD-U",
+    "alt": "apples and bananas in brown cardboard box"
+   },
+   {
+    "path": "photo-1553531889-56cc480ac5cb",
+    "photographer": "Boxed Water Is Better",
+    "link": "https://unsplash.com/photos/a-woman-carrying-a-grocery-basket-of-vegetables-picks-up-a-boxed-water-box-7H1hDt694s8",
+    "alt": "A woman carrying a grocery basket of vegetables picks up a Boxed Water box"
+   },
+   {
+    "path": "photo-1652262968340-b735524f9ae4",
+    "photographer": "Archer Fu",
+    "link": "https://unsplash.com/photos/a-couple-of-baskets-with-fruits-in-them-wjoIBMRjQ7s",
+    "alt": "a couple of baskets with fruits in them"
+   },
+   {
+    "path": "photo-1693505628207-dbeb3d882c92",
+    "photographer": "Asthetic Slut",
+    "link": "https://unsplash.com/photos/a-shopping-cart-full-of-groceries-in-a-grocery-store-Rbd1_TYgitA",
+    "alt": "a shopping cart full of groceries in a grocery store"
+   },
+   {
+    "path": "photo-1695653422259-8a74ffe90401",
+    "photographer": "Grab",
+    "link": "https://unsplash.com/photos/a-man-handing-a-bag-of-fruit-to-another-man-xBUDLmcyrVQ",
+    "alt": "a man handing a bag of fruit to another man"
+   },
+   {
+    "path": "photo-1628102490959-a5b3c905fb9b",
+    "photographer": "Tara Clark",
+    "link": "https://unsplash.com/photos/person-in-blue-denim-jeans-and-brown-leather-boots-holding-green-plastic-bag-a4Vow2p6AXE",
+    "alt": "person in blue denim jeans and brown leather boots holding green plastic bag"
+   },
+   {
+    "path": "photo-1604742762962-83cbaf1560bc",
+    "photographer": "Liuba Bilyk",
+    "link": "https://unsplash.com/photos/woman-in-white-dress-shirt-holding-red-plastic-basket-with-fruits-kDpv12ozDVY",
+    "alt": "woman in white dress shirt holding red plastic basket with fruits"
+   },
+   {
+    "path": "photo-1695653423034-d15c9f3d1328",
+    "photographer": "Grab",
+    "link": "https://unsplash.com/photos/a-man-holding-a-paper-bag-with-the-word-good-food-on-it-ZbtlHGyz-sk",
+    "alt": "a man holding a paper bag with the word good food on it"
+   },
+   {
+    "path": "photo-1646836390736-ee0af3b6e9c6",
+    "photographer": "Amigo Mobility",
+    "link": "https://unsplash.com/photos/a-woman-sitting-in-a-grocery-cart-with-a-sandwich-in-her-hand-xnWM1LwY75s",
+    "alt": "a woman sitting in a grocery cart with a sandwich in her hand"
+   }
+  ]
+ },
+ "carpool": {
+  "query": "car ride friends",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1585050548266-9a78c83b8b92",
+    "photographer": "Sahil Moosa",
+    "link": "https://unsplash.com/photos/man-in-black-shirt-driving-car-Zl_SX_DRpoI",
+    "alt": "man in black shirt driving car"
+   },
+   {
+    "path": "photo-1616425642460-8496b486ad05",
+    "photographer": "Jack Delulio",
+    "link": "https://unsplash.com/photos/woman-in-white-jacket-and-black-framed-eyeglasses-sitting-beside-woman-in-black-framed-eyeglasses-during-8wkOcDvnjfM",
+    "alt": "woman in white jacket and black framed eyeglasses sitting beside woman in black framed eyeglasses during"
+   },
+   {
+    "path": "photo-1779896412176-45c509bbee35",
+    "photographer": "Sandisk",
+    "link": "https://unsplash.com/photos/two-friends-taking-a-selfie-in-a-car-with-skateboards-JDOC2l8EF1U",
+    "alt": "Two friends taking a selfie in a car with skateboards"
+   },
+   {
+    "path": "photo-1779089746456-01c1ff29be85",
+    "photographer": "Margo Evardson",
+    "link": "https://unsplash.com/photos/people-riding-in-a-blue-convertible-car-with-american-flags-O7uzVG_ZqTo",
+    "alt": "People riding in a blue convertible car with american flags"
+   },
+   {
+    "path": "photo-1782916972793-c82c036b6833",
+    "photographer": "Peter Steiner 🇨🇭 1973",
+    "link": "https://unsplash.com/photos/people-riding-a-blue-roller-coaster-on-an-upward-track-tkaNl9D_b1k",
+    "alt": "People riding a blue roller coaster on an upward track"
+   },
+   {
+    "path": "photo-1784141890427-e7a66adf9923",
+    "photographer": "Nico Yang",
+    "link": "https://unsplash.com/photos/people-riding-a-red-roller-coaster-on-a-sunny-day-7YgLhHm7w4E",
+    "alt": "People riding a red roller coaster on a sunny day"
+   },
+   {
+    "path": "photo-1783547793350-50db4fda727a",
+    "photographer": "Anakin",
+    "link": "https://unsplash.com/photos/roller-coaster-loop-with-riders-and-a-pink-lost-sign-FKfFpXpkOcQ",
+    "alt": "Roller coaster loop with riders and a pink 'lost' sign"
+   },
+   {
+    "path": "photo-1507612869432-28bf856d0818",
+    "photographer": "ian dooley",
+    "link": "https://unsplash.com/photos/two-woman-sitting-on-car-hood-OfbAhwCZRXk",
+    "alt": "two woman sitting on car hood"
+   },
+   {
+    "path": "photo-1570481236389-35664a24178a",
+    "photographer": "Brad Pearson",
+    "link": "https://unsplash.com/photos/womens-gray-jacket-S9ts_A3-khk",
+    "alt": "women's gray jacket"
+   },
+   {
+    "path": "photo-1694199719663-5f6a297bf76b",
+    "photographer": "Ellen Volkova",
+    "link": "https://unsplash.com/photos/two-women-sitting-in-the-back-of-a-white-sports-car-gfI0IE7shh0",
+    "alt": "two women sitting in the back of a white sports car"
+   }
+  ]
+ },
+ "typing": {
+  "query": "typing laptop keyboard hands",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1486312338219-ce68d2c6f44d",
+    "photographer": "Glenn Carstens-Peters",
+    "link": "https://unsplash.com/photos/person-using-macbook-pro-npxXWgQ33ZQ",
+    "alt": "person using MacBook Pro"
+   },
+   {
+    "path": "photo-1499914485622-a88fac536970",
+    "photographer": "Christin Hume",
+    "link": "https://unsplash.com/photos/person-using-macbook-hBuwVLcYTnA",
+    "alt": "person using MacBook"
+   },
+   {
+    "path": "photo-1508780709619-79562169bc64",
+    "photographer": "Kaitlyn Baker",
+    "link": "https://unsplash.com/photos/person-using-laptop-vZJdYl5JVXY",
+    "alt": "person using laptop"
+   },
+   {
+    "path": "photo-1515378791036-0648a3ef77b2",
+    "photographer": "Christin Hume",
+    "link": "https://unsplash.com/photos/person-using-laptop-computer-Hcfwew744z4",
+    "alt": "person using laptop computer"
+   },
+   {
+    "path": "photo-1515378960530-7c0da6231fb1",
+    "photographer": "Christin Hume",
+    "link": "https://unsplash.com/photos/person-sitting-front-of-laptop-mfB1B1s4sMc",
+    "alt": "person sitting front of laptop"
+   },
+   {
+    "path": "photo-1516387938699-a93567ec168e",
+    "photographer": "Burst",
+    "link": "https://unsplash.com/photos/person-typing-on-silver-macbook-kUqqaRjJuw0",
+    "alt": "person typing on silver MacBook"
+   },
+   {
+    "path": "photo-1541560052-5e137f229371",
+    "photographer": "charlesdeluvio",
+    "link": "https://unsplash.com/photos/person-using-macbok-DgoyKNgPiFQ",
+    "alt": "person using MacBok"
+   },
+   {
+    "path": "photo-1544006659-f0b21884ce1d",
+    "photographer": "Štefan Štefančík",
+    "link": "https://unsplash.com/photos/person-wearing-long-sleeve-top-working-on-laptop-5p_7M5MP2Iw",
+    "alt": "person wearing long-sleeve top working on laptop"
+   },
+   {
+    "path": "photo-1487611459768-bd414656ea10",
+    "photographer": "Corinne Kutz",
+    "link": "https://unsplash.com/photos/person-using-laptop-computer-beside-aloe-vera-tMI2_-r5Nfo",
+    "alt": "person using laptop computer beside aloe vera"
+   },
+   {
+    "path": "photo-1546795729-f3a5d42087f5",
+    "photographer": "Etienne Boulanger",
+    "link": "https://unsplash.com/photos/person-seated-at-the-table-using-laptop-aafOjsh-9jU",
+    "alt": "person seated at the table using laptop"
+   }
+  ]
+ },
+ "event_help": {
+  "query": "event emcee microphone",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1511671782779-c97d3d27a1d4",
+    "photographer": "israel palacio",
+    "link": "https://unsplash.com/photos/bokeh-photography-of-condenser-microphone-Y20JJ_ddy9M",
+    "alt": "bokeh photography of condenser microphone"
+   },
+   {
+    "path": "photo-1521424159246-e4a66f267e4b",
+    "photographer": "DESIGNECOLOGIST",
+    "link": "https://unsplash.com/photos/black-and-gray-corded-microphone-hvgd0ygXuQQ",
+    "alt": "black and gray corded microphone"
+   },
+   {
+    "path": "photo-1485579149621-3123dd979885",
+    "photographer": "Matt Botsford",
+    "link": "https://unsplash.com/photos/vintage-microphone-with-purple-background-OKLqGsCT8qs",
+    "alt": "A vintage silver microphone with blue accents against a soft purple background"
+   },
+   {
+    "path": "photo-1527261834078-9b37d35a4a32",
+    "photographer": "Matthias Wagner",
+    "link": "https://unsplash.com/photos/black-and-gray-microphone-on-black-stand-QrqeusbpFMM",
+    "alt": "black and gray microphone on black stand"
+   },
+   {
+    "path": "photo-1475721027785-f74eccf877e2",
+    "photographer": "Kane Reinholdtsen",
+    "link": "https://unsplash.com/photos/silver-corded-microphone-in-shallow-focus-photography-LETdkk7wHQk",
+    "alt": "silver corded microphone in shallow focus photography"
+   },
+   {
+    "path": "photo-1619067321513-bb55a012e9b2",
+    "photographer": "Daniel Robert Dinu",
+    "link": "https://unsplash.com/photos/vintage-microphone-on-blue-background-FsLgfIvBoVA",
+    "alt": "A silver vintage microphone on a stand against a solid blue background"
+   },
+   {
+    "path": "photo-1635520356736-90cb46f73413",
+    "photographer": "Yoel J Gonzalez",
+    "link": "https://unsplash.com/photos/a-black-microphone-with-a-blurry-background-Nf3ko-k2TPI",
+    "alt": "a black microphone with a blurry background"
+   },
+   {
+    "path": "photo-1629327896333-7ecec1515ae5",
+    "photographer": "Matthew Jungling",
+    "link": "https://unsplash.com/photos/black-and-silver-microphone-on-stand-l3abtqeY38E",
+    "alt": "black and silver microphone on stand"
+   },
+   {
+    "path": "photo-1516280440614-37939bbacd81",
+    "photographer": "Bogomil Mihaylov",
+    "link": "https://unsplash.com/photos/a-microphone-that-is-sitting-on-a-stand-ekHSHvgr27k",
+    "alt": "a microphone that is sitting on a stand"
+   },
+   {
+    "path": "photo-1581548708095-7158f2e63857",
+    "photographer": "Robinson Recalde",
+    "link": "https://unsplash.com/photos/grey-microphone-on-brown-wooden-stand-sT0n-Ie8OKo",
+    "alt": "grey microphone on brown wooden stand"
+   }
+  ]
+ },
+ "rental_gear": {
+  "query": "projector speaker camera",
+  "rejected": [],
+  "photos": [
+   {
+    "path": "photo-1683821291931-068148564d8c",
+    "photographer": "Liam Charmer",
+    "link": "https://unsplash.com/photos/a-close-up-of-a-camera-on-a-white-background-6ikVR4ymqb8",
+    "alt": "a close up of a camera on a white background"
+   },
+   {
+    "path": "photo-1554936970-ce06538caf54",
+    "photographer": "Franck V.",
+    "link": "https://unsplash.com/photos/a-projector-sitting-on-top-of-a-white-wall-a8y2NqVoVTQ",
+    "alt": "a projector sitting on top of a white wall"
+   },
+   {
+    "path": "photo-1637656367774-d5e65ace6290",
+    "photographer": "Projector1",
+    "link": "https://unsplash.com/photos/a-small-projector-sitting-on-top-of-a-table-jNeEaYfag9E",
+    "alt": "a small projector sitting on top of a table"
+   },
+   {
+    "path": "photo-1696513338863-e3cf828d237d",
+    "photographer": "Peyman Shojaei",
+    "link": "https://unsplash.com/photos/a-white-table-with-a-bunch-of-books-and-plants-on-top-of-it-X-6BGzUp8mQ",
+    "alt": "a white table with a bunch of books and plants on top of it"
+   },
+   {
+    "path": "photo-1683821292058-d0e3dd0bcda8",
+    "photographer": "Liam Charmer",
+    "link": "https://unsplash.com/photos/a-white-camera-sitting-on-top-of-a-table-e0SceAhczrw",
+    "alt": "a white camera sitting on top of a table"
+   },
+   {
+    "path": "photo-1683821291904-f7c11fad6a3c",
+    "photographer": "Liam Charmer",
+    "link": "https://unsplash.com/photos/a-white-camera-sitting-on-top-of-a-table-HNdl3LbC6e4",
+    "alt": "a white camera sitting on top of a table"
+   },
+   {
+    "path": "photo-1650017069174-341a368606a0",
+    "photographer": "Rahul Chakraborty",
+    "link": "https://unsplash.com/photos/a-small-camera-sitting-on-top-of-a-table-pMBf5l_cGEQ",
+    "alt": "a small camera sitting on top of a table"
+   },
+   {
+    "path": "photo-1706886271523-53f6c5b537ac",
+    "photographer": "wtrsnvc _",
+    "link": "https://unsplash.com/photos/a-close-up-of-a-camera-and-a-cup-3fWFJtE3pzk",
+    "alt": "a close up of a camera and a cup"
+   },
+   {
+    "path": "photo-1692296903016-f3aee37eb620",
+    "photographer": "Maxim Yuryshev",
+    "link": "https://unsplash.com/photos/a-street-light-mounted-to-the-side-of-a-building-u5QodT5Iorw",
+    "alt": "a street light mounted to the side of a building"
+   },
+   {
+    "path": "photo-1717278218272-1e9b7cb80d71",
+    "photographer": "Mohamed B.",
+    "link": "https://unsplash.com/photos/a-tree-with-a-mailbox-attached-to-it-YBPjuzv5YYE",
+    "alt": "a tree with a mailbox attached to it"
+   }
+  ]
+ },
+ "kitchen_appliance": {
+  "query": "small kitchen appliances",
+  "photos": [
+   {
+    "path": "photo-1570222094114-d054a817e56b",
+    "photographer": "Daniel Norris",
+    "link": "https://unsplash.com/photos/black-and-gray-blender-ZN_86cZrSN0",
+    "alt": "black and gray blender"
+   },
+   {
+    "path": "photo-1588854337115-1c67d9247e4d",
+    "photographer": "Lotus Design N Print",
+    "link": "https://unsplash.com/photos/silver-french-door-refrigerator-beside-white-wooden-kitchen-cabinet-VaGdhK-kI1c",
+    "alt": "silver french door refrigerator beside white wooden kitchen cabinet"
+   },
+   {
+    "path": "photo-1593853761096-d0423b545cf9",
+    "photographer": "Julia",
+    "link": "https://unsplash.com/photos/white-wooden-kitchen-cabinet-with-sink-i3NR1cnwqUo",
+    "alt": "white wooden kitchen cabinet with sink"
+   },
+   {
+    "path": "photo-1740803292822-a742c6a4fef0",
+    "photographer": "Zoshua Colah",
+    "link": "https://unsplash.com/photos/a-bunch-of-microwaves-that-are-on-a-shelf-KGDAMKJZ0G8",
+    "alt": "A bunch of microwaves that are on a shelf"
+   },
+   {
+    "path": "photo-1556910633-5099dc3971e8",
+    "photographer": "Dane Deaner",
+    "link": "https://unsplash.com/photos/blue-canister-wkC8EX8y9Mc",
+    "alt": "blue canister"
+   },
+   {
+    "path": "photo-1597418048367-7dd01e4404ee",
+    "photographer": "Evy Prentice",
+    "link": "https://unsplash.com/photos/white-front-load-washing-machine-rJe9rkOvBWY",
+    "alt": "white front load washing machine"
+   },
+   {
+    "path": "photo-1740803292374-1b167c1558b1",
+    "photographer": "Zoshua Colah",
+    "link": "https://unsplash.com/photos/a-room-filled-with-lots-of-different-types-of-microwaves-q2Cri6LS8iI",
+    "alt": "A room filled with lots of different types of microwaves"
+   },
+   {
+    "path": "photo-1503011510-c0e00592713b",
+    "photographer": "Mikael Cho",
+    "link": "https://unsplash.com/photos/black-coffee-maker-on-brown-wooden-kitchen-table-ZMIrSYeDEsc",
+    "alt": "black coffee maker on brown wooden kitchen table"
+   },
+   {
+    "path": "photo-1618506408870-64d8bec48248",
+    "photographer": "Quilia",
+    "link": "https://unsplash.com/photos/stainless-steel-bread-toaster-on-brown-wooden-table-G_GWtt1tiUs",
+    "alt": "stainless steel bread toaster on brown wooden table"
+   },
+   {
+    "path": "photo-1740803292814-13d2e35924c3",
+    "photographer": "Zoshua Colah",
+    "link": "https://unsplash.com/photos/a-bunch-of-toasters-that-are-on-a-shelf-uDYtyG_uHkk",
+    "alt": "A bunch of toasters that are on a shelf"
+   }
+  ]
+ },
+ "basketball": {
+  "query": "basketball",
+  "photos": [
+   {
+    "path": "photo-1546519638-68e109498ffc",
+    "photographer": "Markus Spiske",
+    "link": "https://unsplash.com/photos/ball-under-basketball-ring-BfphcCvhl6E",
+    "alt": "ball under basketball ring"
+   },
+   {
+    "path": "photo-1608245449230-4ac19066d2d0",
+    "photographer": "August Phlieger",
+    "link": "https://unsplash.com/photos/basketball-player-dunking-in-dark-gym-CREqtqgBFcU",
+    "alt": "A basketball player dunking a ball into a hoop in a dark gym"
+   },
+   {
+    "path": "photo-1627627256672-027a4613d028",
+    "photographer": "Kylie Osullivan",
+    "link": "https://unsplash.com/photos/brown-and-black-basketball-ball-BfaBLVCBTI8",
+    "alt": "brown and black basketball ball"
+   },
+   {
+    "path": "photo-1629901925121-8a141c2a42f4",
+    "photographer": "Tom Briskey",
+    "link": "https://unsplash.com/photos/basketball-flying-toward-hoop-in-sky-AddAnDkkovM",
+    "alt": "A person reaching toward a basketball flying toward a hoop against a bright sky"
+   },
+   {
+    "path": "photo-1519861531473-9200262188bf",
+    "photographer": "TJ Dragotta",
+    "link": "https://unsplash.com/photos/spalding-basketball-in-court-Gl0jBJJTDWs",
+    "alt": "Spalding basketball in court"
+   },
+   {
+    "path": "photo-1628779238951-be2c9f2a59f4",
+    "photographer": "Tom Briskey",
+    "link": "https://unsplash.com/photos/brown-basketball-on-basketball-hoop-HM3WZ4B1gvM",
+    "alt": "brown basketball on basketball hoop"
+   },
+   {
+    "path": "photo-1577471488278-16eec37ffcc2",
+    "photographer": "Markus Spiske",
+    "link": "https://unsplash.com/photos/people-playing-basketball-inside-court-oXS1f0uZYV4",
+    "alt": "people playing basketball inside court"
+   },
+   {
+    "path": "photo-1595795279832-13f0df36fbb9",
+    "photographer": "Ruslan Ruslan",
+    "link": "https://unsplash.com/photos/brown-basketball-on-gray-concrete-floor-AhAMJgq5QPM",
+    "alt": "brown basketball on gray concrete floor"
+   },
+   {
+    "path": "photo-1515523110800-9415d13b84a8",
+    "photographer": "Stephen Baker",
+    "link": "https://unsplash.com/photos/basketball-on-ring-QAX5Ylx-lKo",
+    "alt": "basketball on ring"
+   },
+   {
+    "path": "photo-1640576905072-8181534f83ae",
+    "photographer": "Bailey Burton",
+    "link": "https://unsplash.com/photos/a-close-up-of-a-basketball-on-a-court-o5UlVmTwVz8",
+    "alt": "a close up of a basketball on a court"
+   }
+  ]
+ },
+ "football": {
+  "query": "soccer ball",
+  "photos": [
+   {
+    "path": "photo-1579952363873-27f3bade9f55",
+    "photographer": "Connor Coyne",
+    "link": "https://unsplash.com/photos/white-and-blue-soccer-ball-on-green-grass-field-OgqWLzWRSaI",
+    "alt": "white and blue soccer ball on green grass field"
+   },
+   {
+    "path": "photo-1575361204480-aadea25e6e68",
+    "photographer": "Wesley Tingey",
+    "link": "https://unsplash.com/photos/white-and-black-soccer-ball-on-grass-field-dKCKiC0BQtU",
+    "alt": "white and black soccer ball on grass field"
+   },
+   {
+    "path": "photo-1574629810360-7efbbe195018",
+    "photographer": "Emilio Garcia",
+    "link": "https://unsplash.com/photos/man-playing-soccer-game-on-field-AWdCgDDedH0",
+    "alt": "man playing soccer game on field"
+   },
+   {
+    "path": "photo-1660926655155-8b1f8f9079f5",
+    "photographer": "Carlos Felipe Ramírez Mesa",
+    "link": "https://unsplash.com/photos/a-football-ball-on-the-grass-OCH9nlz0BY4",
+    "alt": "a football ball on the grass"
+   },
+   {
+    "path": "photo-1587329310686-91414b8e3cb7",
+    "photographer": "Chaos Soccer Gear",
+    "link": "https://unsplash.com/photos/white-and-black-ball-on-white-metal-frame-Cjfl8r_eYxY",
+    "alt": "white and black ball on white metal frame"
+   },
+   {
+    "path": "photo-1486286701208-1d58e9338013",
+    "photographer": "Peter Glaser",
+    "link": "https://unsplash.com/photos/white-and-gray-adidas-soccerball-on-lawn-grass-qWs_Wa1JrKM",
+    "alt": "white and gray Adidas soccerball on lawn grass"
+   },
+   {
+    "path": "photo-1570498839593-e565b39455fc",
+    "photographer": "jason charters",
+    "link": "https://unsplash.com/photos/blue-and-grey-soccer-ball-on-green-field-under-white-and-blue-sky-during-daytime-IorqsMssQH0",
+    "alt": "blue and grey soccer ball on green field under white and blue sky during daytime"
+   },
+   {
+    "path": "photo-1551958219-acbc608c6377",
+    "photographer": "Vikram TKV",
+    "link": "https://unsplash.com/photos/three-white-and-black-soccer-balls-on-field-JO19K0HDDXI",
+    "alt": "three white-and-black soccer balls on field"
+   },
+   {
+    "path": "photo-1614632537190-23e4146777db",
+    "photographer": "Janosch Jost",
+    "link": "https://unsplash.com/photos/white-and-blue-soccer-ball-on-green-grass-field-vKk7thmr9Mc",
+    "alt": "white and blue soccer ball on green grass field"
+   },
+   {
+    "path": "photo-1660926655800-3d11219f390d",
+    "photographer": "Carlos Felipe Ramírez Mesa",
+    "link": "https://unsplash.com/photos/a-football-ball-on-the-grass-XnNkkw9H9Jc",
+    "alt": "a football ball on the grass"
+   }
+  ]
+ },
+ "tennis": {
+  "query": "tennis racket balls",
+  "photos": [
+   {
+    "path": "photo-1622163642998-1ea32b0bbc67",
+    "photographer": "Hoi Pham",
+    "link": "https://unsplash.com/photos/white-and-blue-tennis-racket-eLZwsPO8cCQ",
+    "alt": "white and blue tennis racket"
+   },
+   {
+    "path": "photo-1632755898125-36cd72575dde",
+    "photographer": "Anastasia Chistik",
+    "link": "https://unsplash.com/photos/a-tennis-racket-and-four-tennis-balls-on-a-court--9Vy4fR_Xo0",
+    "alt": "a tennis racket and four tennis balls on a court"
+   },
+   {
+    "path": "photo-1684443726782-1d5bb1aecbd5",
+    "photographer": "Kateryna Hliznitsova",
+    "link": "https://unsplash.com/photos/a-tennis-racket-and-three-tennis-balls-on-a-court-nYmHWEIh0BM",
+    "alt": "a tennis racket and three tennis balls on a court"
+   },
+   {
+    "path": "photo-1723980839948-95ccbffd3cb4",
+    "photographer": "Denis Zelenykh",
+    "link": "https://unsplash.com/photos/a-tennis-racket-and-two-tennis-balls-on-a-tennis-court-fd9CLvRae9I",
+    "alt": "A tennis racket and two tennis balls on a tennis court"
+   },
+   {
+    "path": "photo-1635873021329-c0af04695c9d",
+    "photographer": "Jorge Salazar",
+    "link": "https://unsplash.com/photos/a-tennis-racket-and-a-tennis-ball-on-a-court-pY_GFZNKrrc",
+    "alt": "a tennis racket and a tennis ball on a court"
+   },
+   {
+    "path": "photo-1560012057-4372e14c5085",
+    "photographer": "Josephine Gasser",
+    "link": "https://unsplash.com/photos/yellow-wilson-tennis-racket-cv83wpGtFtg",
+    "alt": "yellow Wilson tennis racket"
+   },
+   {
+    "path": "photo-1617883861744-13b534e3b928",
+    "photographer": "Nathanaël Desmeules",
+    "link": "https://unsplash.com/photos/black-and-white-tennis-racket-8E1Yplw6Hho",
+    "alt": "black and white tennis racket"
+   },
+   {
+    "path": "photo-1759819599208-0b79a7f3f347",
+    "photographer": "Tahamie Farooqui",
+    "link": "https://unsplash.com/photos/many-tennis-balls-scattered-on-a-court-near-net-LwxVG0VQ3RY",
+    "alt": "Many tennis balls scattered on a court near net"
+   },
+   {
+    "path": "photo-1615731446707-6ad24074bdd5",
+    "photographer": "Alicja Gancarz",
+    "link": "https://unsplash.com/photos/yellow-and-black-tennis-racket-on-blue-textile-wvDELsJ_E20",
+    "alt": "yellow and black tennis racket on blue textile"
+   },
+   {
+    "path": "photo-1684443726772-41e78c5d1e23",
+    "photographer": "Kateryna Hliznitsova",
+    "link": "https://unsplash.com/photos/a-tennis-racket-and-two-tennis-balls-on-a-tennis-court-DNgXjCaKf74",
+    "alt": "a tennis racket and two tennis balls on a tennis court"
    }
   ]
  }

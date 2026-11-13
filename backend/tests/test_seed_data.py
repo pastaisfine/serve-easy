@@ -165,3 +165,18 @@ def test_furniture_category_is_gone():
     from app.models.base import ListingCategory
 
     assert "furniture" not in {c.value for c in ListingCategory}
+
+
+def test_every_photo_group_has_usable_reviewed_photos():
+    from app.seed import photo_groups, photos
+
+    for group in photo_groups.GROUPS:
+        assert photos._usable(group), f"photo group {group!r} has no usable cached photos"
+    for group, bad in photos._rejects.items():
+        assert group in photo_groups.GROUPS, f"rejects for unknown group {group!r}"
+        assert all(0 <= i < photos.REVIEWED for i in bad), f"reject index out of range in {group!r}"
+
+
+def test_every_listing_and_service_photo_is_an_unsplash_url_the_frontend_allows():
+    for row in data.LISTINGS + data.SERVICES:
+        assert row["image"].startswith("https://images.unsplash.com/photo-"), row["image"]

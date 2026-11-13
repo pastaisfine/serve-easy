@@ -1,9 +1,19 @@
 import type {
   Category,
   ItemCategory,
+  ListingCondition,
   ListingKind,
   ServiceCategory,
 } from "@/lib/types"
+
+/** Display names for an item's condition, best first. */
+export const conditionNames: Record<ListingCondition, string> = {
+  new: "Brand new",
+  like_new: "Like new",
+  good: "Good",
+  fair: "Fair",
+  poor: "Well used",
+}
 
 /** Display names, keyed by the backend's category values. */
 export const itemCategoryNames: Record<ItemCategory, string> = {
@@ -83,19 +93,19 @@ export const homeCategories: Category[] = [
   {
     key: "item:snacks",
     name: itemCategoryNames.snacks,
-    image: photo("1509042239860-f550ce710b93"),
+    image: photo("1664854678365-ad59da72356c"),
     href: categoryHref("item", "snacks"),
   },
   {
     key: "item:daily_essentials",
     name: itemCategoryNames.daily_essentials,
-    image: photo("1485955900006-10f4d324d411"),
+    image: photo("1656214296523-2de8d388c115"),
     href: categoryHref("item", "daily_essentials"),
   },
   {
     key: "item:tickets",
     name: itemCategoryNames.tickets,
-    image: photo("1593508512255-86ab42a8e620"),
+    image: photo("1578575436955-ef29da568c6c"),
     href: categoryHref("item", "tickets"),
   },
   {
@@ -119,37 +129,37 @@ export const homeCategories: Category[] = [
   {
     key: "service:repair",
     name: serviceCategoryNames.repair,
-    image: photo("1517336714731-489689fd1ca8"),
+    image: photo("1721333089073-215a56fd710c"),
     href: categoryHref("service", "repair"),
   },
   {
     key: "service:design",
     name: serviceCategoryNames.design,
-    image: photo("1513364776144-60967b0f800f"),
+    image: photo("1626785774573-4b799315345d"),
     href: categoryHref("service", "design"),
   },
   {
     key: "service:media",
     name: serviceCategoryNames.media,
-    image: photo("1526170375885-4d8ecf77b99f"),
+    image: photo("1541516160071-4bb0c5af65ba"),
     href: categoryHref("service", "media"),
   },
   {
     key: "service:programming",
     name: serviceCategoryNames.programming,
-    image: photo("1593642632559-0c6d3fc62b89"),
+    image: photo("1607799279861-4dd421887fb3"),
     href: categoryHref("service", "programming"),
   },
   {
     key: "service:errands",
     name: serviceCategoryNames.errands,
-    image: photo("1556742049-0cfed4f6a45d"),
+    image: photo("1695653422259-8a74ffe90401"),
     href: categoryHref("service", "errands"),
   },
   {
     key: "service:rentals",
     name: serviceCategoryNames.rentals,
-    image: photo("1505740420928-5e560c06d30e"),
+    image: photo("1683821291931-068148564d8c"),
     href: categoryHref("service", "rentals"),
   },
 ]

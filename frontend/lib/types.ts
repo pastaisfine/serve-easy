@@ -5,6 +5,9 @@
 
 export type ListingKind = "item" | "service"
 
+/** Must match the backend's `listing_condition` enum. */
+export type ListingCondition = "new" | "like_new" | "good" | "fair" | "poor"
+
 /** Must match the backend's `listing_category` enum. */
 export type ItemCategory =
   | "books"

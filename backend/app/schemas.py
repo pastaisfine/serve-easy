@@ -1,7 +1,8 @@
 from datetime import datetime
 from decimal import Decimal
+from typing import Annotated
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, BeforeValidator, ConfigDict, Field
 
 from app.models.base import (
     ListingCategory,
@@ -10,10 +11,25 @@ from app.models.base import (
     MealSession,
     ServiceCategory,
 )
+from app.storage import public_url
 
 
 class ORM(BaseModel):
     model_config = ConfigDict(from_attributes=True)
+
+
+# A stored image is either a full URL (seed data) or an object key (uploads).
+# Output always shows a URL.
+ImageUrl = Annotated[str | None, BeforeValidator(public_url)]
+
+# Largest value the numeric(10, 2) price column holds is 99,999,999.99; cap well below it.
+Price = Annotated[Decimal, Field(gt=0, le=Decimal("99999.99"), max_digits=7, decimal_places=2)]
+
+
+class Create(BaseModel):
+    """Base for request bodies: trim strings and reject unknown fields."""
+
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
 
 
 class UserSummary(ORM):
@@ -40,7 +56,7 @@ class ListingOut(ORM):
     price: Decimal
     condition: ListingCondition
     category: ListingCategory
-    image: str | None
+    image: ImageUrl
     spot: str
     status: ListingStatus
     created_at: datetime
@@ -75,7 +91,7 @@ class ServiceOut(ORM):
     price: Decimal
     unit: str | None
     category: ServiceCategory
-    image: str | None
+    image: ImageUrl
     spot: str
     created_at: datetime
     provider: UserSummary
@@ -95,3 +111,46 @@ class ShopOut(ORM):
 class ShopDetailOut(ShopOut):
     listings: list[ListingOut]
     services: list[ServiceOut]
+
+
+# ---------------------------------------------------------------- write models
+
+
+class ListingCreate(Create):
+    title: Annotated[str, Field(min_length=1, max_length=200)]
+    description: Annotated[str, Field(max_length=5000)] = ""
+    price: Price
+    condition: ListingCondition
+    category: ListingCategory
+    # Object key returned by POST /uploads/images. Arbitrary URLs are rejected.
+    image: Annotated[str, Field(min_length=1, max_length=500)] | None = None
+    spot: Annotated[str, Field(min_length=1, max_length=200)]
+    # Must be the caller's own shop.
+    shop_id: str | None = None
+
+
+class ServiceCreate(Create):
+    title: Annotated[str, Field(min_length=1, max_length=200)]
+    description: Annotated[str, Field(max_length=5000)] = ""
+    price: Price
+    unit: Annotated[str, Field(min_length=1, max_length=30)] | None = None  # "hour", "page"
+    category: ServiceCategory
+    image: Annotated[str, Field(min_length=1, max_length=500)] | None = None
+    spot: Annotated[str, Field(min_length=1, max_length=200)]
+    shop_id: str | None = None
+
+
+class MeOut(ORM):
+    """The signed-in user, including the private fields `UserSummary` hides."""
+
+    id: str
+    name: str
+    email: str
+    image: str | None
+    faculty: str | None
+    shop: ShopRef | None
+
+
+class UploadOut(BaseModel):
+    key: str
+    url: str

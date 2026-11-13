@@ -59,3 +59,12 @@ PRD.md
 SKILLS.md
 .agents/
 skills-lock.json
+
+# ==========================================
+# Playwright (local tooling only)
+# ==========================================
+.playwright-mcp/
+frontend/playwright.config.ts
+frontend/e2e/
+frontend/test-results/
+frontend/playwright-report/

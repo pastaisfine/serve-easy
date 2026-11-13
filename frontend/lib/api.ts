@@ -13,7 +13,7 @@ import type {
   Student,
 } from "@/lib/types"
 
-const API_URL = process.env.SERVE_API_URL ?? "http://localhost:8000"
+export const API_URL = process.env.SERVE_API_URL ?? "http://localhost:8000"
 
 /** Used when a listing has no photo. PNG because next/image rejects SVG. */
 const NO_PHOTO = "https://placehold.co/600x600/png?text=No+photo"
@@ -143,8 +143,7 @@ export function fromApiService(service: ApiService): Listing {
     spot: service.spot,
     postedAt: service.created_at,
     shop: service.shop ?? undefined,
-    // There is no service detail page yet; this shares the listing placeholder.
-    href: `/listings/${service.id}`,
+    href: `/services/${service.id}`,
   }
 }
 
@@ -195,4 +194,12 @@ export function getMenu(cafeteriaId: string) {
 
 export function getShop(shopId: string) {
   return get<ApiShopDetail>(`/shops/${encodeURIComponent(shopId)}`)
+}
+
+export function getListing(listingId: string) {
+  return get<ApiListing>(`/listings/${encodeURIComponent(listingId)}`)
+}
+
+export function getService(serviceId: string) {
+  return get<ApiService>(`/services/${encodeURIComponent(serviceId)}`)
 }

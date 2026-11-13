@@ -1,16 +1,38 @@
 import type { Metadata } from "next"
-import { TagIcon } from "lucide-react"
+import { notFound } from "next/navigation"
 
-import { PlaceholderPage } from "@/components/serve/placeholder-page"
+import { ListingDetail } from "@/components/serve/listing-detail"
+import { getListing } from "@/lib/api"
+import { conditionNames, itemCategoryNames } from "@/lib/categories"
 
-export const metadata: Metadata = { title: "Listing" }
+export async function generateMetadata(
+  props: PageProps<"/listings/[id]">
+): Promise<Metadata> {
+  const { id } = await props.params
+  const listing = await getListing(id)
+  return { title: listing?.title ?? "Listing" }
+}
 
-export default function ListingDetailPage() {
+export default async function ListingDetailPage(
+  props: PageProps<"/listings/[id]">
+) {
+  const { id } = await props.params
+  const listing = await getListing(id)
+  if (!listing) notFound()
+
   return (
-    <PlaceholderPage
-      title="Listing"
-      icon={TagIcon}
-      description="Photos, price, the seller's meetup history, and buttons to buy, make an offer or book a slot will live here."
+    <ListingDetail
+      kind="item"
+      title={listing.title}
+      price={Number(listing.price)}
+      image={listing.image}
+      category={itemCategoryNames[listing.category]}
+      condition={conditionNames[listing.condition]}
+      description={listing.description}
+      spot={listing.spot}
+      owner={listing.seller}
+      shop={listing.shop}
+      sold={listing.status === "sold"}
     />
   )
 }

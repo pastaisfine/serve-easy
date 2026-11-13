@@ -18,5 +18,15 @@
  "water_bottle": [4],
  "toiletries": [2],
  "print_poster": [2],
- "sewing": [4]
+ "sewing": [4],
+ "drafting": [2],
+ "kitchen_appliance": [1, 4, 5],
+ "laptop_repair": [4],
+ "solder_repair": [5],
+ "massage": [2, 5],
+ "tutor_math": [4],
+ "tutor_lang": [0, 4],
+ "cleaning": [2],
+ "carpool": [3, 4, 5],
+ "rental_gear": [3]
 }
