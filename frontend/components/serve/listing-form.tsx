@@ -8,8 +8,8 @@ import {
 } from "@/app/(tabs)/create/[kind]/actions"
 import { FormField } from "@/components/serve/form-field"
 import { PhotoPicker } from "@/components/serve/photo-picker"
-import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { LoadingSubmitButton } from "@/components/ui/loading-submit-button"
 import { NativeSelect } from "@/components/ui/native-select"
 import { Textarea } from "@/components/ui/textarea"
 import {
@@ -30,7 +30,7 @@ export function ListingForm({
   shop: ShopRef | null
 }) {
   const isItem = kind === "sell-item"
-  const [state, formAction, pending] = useActionState(
+  const [state, formAction] = useActionState(
     createListingAction.bind(null, kind),
     initial
   )
@@ -186,9 +186,13 @@ export function ListingForm({
         </p>
       )}
 
-      <Button type="submit" disabled={pending} className="h-11 rounded-xl px-6 sm:self-start">
-        {pending ? "Publishing…" : "Publish"}
-      </Button>
+      <LoadingSubmitButton
+        type="submit"
+        className="h-11 rounded-xl px-6 sm:self-start"
+        pendingLabel="Publishing…"
+      >
+        Publish
+      </LoadingSubmitButton>
     </form>
   )
 }

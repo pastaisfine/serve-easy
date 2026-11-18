@@ -1,10 +1,10 @@
-import Image from "next/image"
 import Link from "next/link"
 import { MapPinIcon } from "lucide-react"
 
 import { StudentAvatar } from "@/components/serve/student"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
+import { LoadingImage } from "@/components/ui/loading-image"
 import { Separator } from "@/components/ui/separator"
 import { formatExpiry, formatPrice } from "@/lib/format"
 import type { Offer } from "@/lib/types"
@@ -15,7 +15,7 @@ export function OfferCard({ offer }: { offer: Offer }) {
     <Card className="w-[min(85vw,22rem)] shrink-0 snap-start gap-4 p-4 ring-foreground/5 md:w-auto">
       <div className="flex gap-4">
         <div className="relative size-24 shrink-0 overflow-hidden rounded-xl bg-muted ring-1 ring-foreground/5">
-          <Image
+          <LoadingImage
             src={listing.image}
             alt=""
             fill

@@ -1,6 +1,6 @@
-import Image from "next/image"
 import Link from "next/link"
 
+import { LoadingImage } from "@/components/ui/loading-image"
 import type { Category } from "@/lib/types"
 
 export function CategoryCard({
@@ -16,7 +16,7 @@ export function CategoryCard({
       className="group flex w-40 shrink-0 snap-start flex-col overflow-hidden rounded-2xl bg-card ring-1 ring-foreground/5 transition focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none md:w-auto"
     >
       <div className="relative aspect-[4/3] overflow-hidden bg-muted">
-        <Image
+        <LoadingImage
           src={category.image}
           alt=""
           fill

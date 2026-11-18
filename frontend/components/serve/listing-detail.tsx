@@ -1,10 +1,10 @@
-import Image from "next/image"
 import Link from "next/link"
 import { ImageIcon, MapPinIcon, StoreIcon } from "lucide-react"
 
 import { PageHeader } from "@/components/serve/page-header"
 import { StudentAvatar } from "@/components/serve/student"
 import { Badge } from "@/components/ui/badge"
+import { LoadingImage } from "@/components/ui/loading-image"
 import { formatPrice } from "@/lib/format"
 import type { ShopRef } from "@/lib/types"
 
@@ -45,7 +45,7 @@ export function ListingDetail(props: ListingDetailProps) {
       <div className="grid gap-8 md:grid-cols-2 md:items-start">
         <div className="relative aspect-square overflow-hidden rounded-2xl bg-muted ring-1 ring-foreground/5">
           {props.image ? (
-            <Image
+            <LoadingImage
               src={props.image}
               alt=""
               fill

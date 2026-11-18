@@ -1,10 +1,10 @@
 import type { Metadata } from "next"
-import Image from "next/image"
 import { notFound } from "next/navigation"
 import { ClockIcon, MapPinIcon } from "lucide-react"
 
 import { ListingCard } from "@/components/serve/listing-card"
 import { PageHeader } from "@/components/serve/page-header"
+import { LoadingImage } from "@/components/ui/loading-image"
 import { fromApiListing, fromApiService, getShop } from "@/lib/api"
 
 export async function generateMetadata(
@@ -30,7 +30,7 @@ export default async function ShopPage(props: PageProps<"/shops/[id]">) {
       <div className="flex flex-col gap-6 md:flex-row md:items-start">
         {shop.logo && (
           <div className="relative size-28 shrink-0 overflow-hidden rounded-2xl bg-muted ring-1 ring-foreground/5">
-            <Image
+            <LoadingImage
               src={shop.logo}
               alt={`${shop.name} logo`}
               fill

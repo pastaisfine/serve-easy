@@ -3,7 +3,7 @@ import Link from "next/link"
 
 import { signOutAction } from "@/app/auth/actions"
 import { StudentAvatar } from "@/components/serve/student"
-import { Button } from "@/components/ui/button"
+import { LoadingSubmitButton } from "@/components/ui/loading-submit-button"
 import { auth } from "@/lib/auth/server"
 
 export const metadata: Metadata = { title: "Profile" }
@@ -28,9 +28,13 @@ export default async function ProfilePage() {
             </div>
           </div>
           <form action={signOutAction}>
-            <Button type="submit" variant="outline" className="h-11 rounded-xl px-5">
+            <LoadingSubmitButton
+              variant="outline"
+              className="h-11 rounded-xl px-5"
+              pendingLabel="Signing out…"
+            >
               Sign out
-            </Button>
+            </LoadingSubmitButton>
           </form>
         </div>
       ) : (

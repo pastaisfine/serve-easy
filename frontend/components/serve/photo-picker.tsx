@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 
 import { FormField } from "@/components/serve/form-field"
 import { Input } from "@/components/ui/input"
+import { LoadingRing } from "@/components/ui/loading-ring"
 
 const MAX_BYTES = 4 * 1024 * 1024
 const TYPES = ["image/jpeg", "image/png", "image/webp"]
@@ -21,6 +22,7 @@ export function PhotoPicker({
 }) {
   const [preview, setPreview] = useState<string | null>(null)
   const [localError, setLocalError] = useState<string>()
+  const [imageLoaded, setImageLoaded] = useState(false)
 
   // Blob URLs hold memory until revoked.
   useEffect(() => {
@@ -33,6 +35,7 @@ export function PhotoPicker({
     const input = event.currentTarget
     const file = input.files?.[0]
     setPreview(file ? URL.createObjectURL(file) : null)
+    setImageLoaded(false)
 
     let problem = ""
     if (file && !TYPES.includes(file.type)) {
@@ -64,12 +67,24 @@ export function PhotoPicker({
         />
       </FormField>
       {shown && (
-        // eslint-disable-next-line @next/next/no-img-element -- blob: previews can't go through next/image
-        <img
-          src={shown}
-          alt="Preview of the selected photo"
-          className="aspect-square w-40 rounded-2xl object-cover ring-1 ring-foreground/5"
-        />
+        <div className="relative aspect-square w-40 overflow-hidden rounded-2xl bg-muted ring-1 ring-foreground/5">
+          {/* eslint-disable-next-line @next/next/no-img-element -- blob: previews can't go through next/image */}
+          <img
+            src={shown}
+            alt="Preview of the selected photo"
+            onLoad={() => setImageLoaded(true)}
+            onError={() => setImageLoaded(true)}
+            className="size-full object-cover"
+          />
+          {!imageLoaded && (
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 flex items-center justify-center bg-muted/50"
+            >
+              <LoadingRing className="size-6 text-muted-foreground" />
+            </span>
+          )}
+        </div>
       )}
       {uploaded && !preview && (
         <>

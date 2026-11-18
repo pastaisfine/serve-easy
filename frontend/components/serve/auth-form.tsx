@@ -5,8 +5,8 @@ import Link from "next/link"
 
 import { signInAction, signUpAction } from "@/app/auth/actions"
 import { FormField } from "@/components/serve/form-field"
-import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { LoadingSubmitButton } from "@/components/ui/loading-submit-button"
 
 const copy = {
   "sign-in": {
@@ -37,7 +37,7 @@ export function AuthForm({
   redirectTo: string
 }) {
   const c = copy[mode]
-  const [state, formAction, pending] = useActionState(
+  const [state, formAction] = useActionState(
     mode === "sign-in" ? signInAction : signUpAction,
     {}
   )
@@ -98,9 +98,13 @@ export function AuthForm({
           </p>
         )}
 
-        <Button type="submit" disabled={pending} className="h-11 rounded-xl">
-          {pending ? c.pending : c.submit}
-        </Button>
+        <LoadingSubmitButton
+          type="submit"
+          className="h-11 rounded-xl"
+          pendingLabel={c.pending}
+        >
+          {c.submit}
+        </LoadingSubmitButton>
       </form>
 
       <p className="text-center text-sm text-muted-foreground">

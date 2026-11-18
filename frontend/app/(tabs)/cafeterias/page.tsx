@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
-import Image from "next/image"
 import Link from "next/link"
 
 import { PageHeader } from "@/components/serve/page-header"
+import { LoadingImage } from "@/components/ui/loading-image"
 import { getCafeterias } from "@/lib/api"
 
 export const metadata: Metadata = { title: "Food & drinks" }
@@ -28,7 +28,7 @@ export default async function CafeteriasPage() {
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-muted">
                   {cafeteria.image && (
-                    <Image
+                    <LoadingImage
                       src={cafeteria.image}
                       alt=""
                       fill

@@ -1,6 +1,7 @@
 import Form from "next/form"
 import { SearchIcon } from "lucide-react"
 
+import { SearchPendingIndicator } from "@/components/serve/search-pending-indicator"
 import { Input } from "@/components/ui/input"
 
 export function SearchBar({ defaultValue }: { defaultValue?: string }) {
@@ -21,8 +22,9 @@ export function SearchBar({ defaultValue }: { defaultValue?: string }) {
         type="search"
         defaultValue={defaultValue}
         placeholder="Search textbooks, goods, services"
-        className="h-14 rounded-2xl border-transparent bg-card pl-12 text-base shadow-[0_2px_12px_rgb(0_0_0/0.06)] md:text-base"
+        className="h-14 rounded-2xl border-transparent bg-card pr-12 pl-12 text-base shadow-[0_2px_12px_rgb(0_0_0/0.06)] md:text-base"
       />
+      <SearchPendingIndicator />
     </Form>
   )
 }

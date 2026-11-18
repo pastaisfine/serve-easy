@@ -1,9 +1,9 @@
-import Image from "next/image"
 import Link from "next/link"
 import { MapPinIcon, StoreIcon } from "lucide-react"
 
 import { StudentAvatar } from "@/components/serve/student"
 import { Badge } from "@/components/ui/badge"
+import { LoadingImage } from "@/components/ui/loading-image"
 import { formatPrice } from "@/lib/format"
 import type { Listing } from "@/lib/types"
 
@@ -15,7 +15,7 @@ export function ListingCard({ listing }: { listing: Listing }) {
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-2xl bg-card ring-1 ring-foreground/5 transition focus-within:ring-[3px] focus-within:ring-ring/50 hover:ring-foreground/15">
       <div className="relative aspect-square overflow-hidden bg-muted">
-        <Image
+        <LoadingImage
           src={listing.image}
           alt=""
           fill

@@ -1,9 +1,9 @@
-import Image from "next/image"
 import Link from "next/link"
 import { CalendarClockIcon, MapPinIcon } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Card } from "@/components/ui/card"
+import { LoadingImage } from "@/components/ui/loading-image"
 import { formatPrice } from "@/lib/format"
 import type { Order, OrderStatus } from "@/lib/types"
 import { cn } from "@/lib/utils"
@@ -25,7 +25,7 @@ export function OrderCard({ order }: { order: Order }) {
         className="flex gap-4 p-4 focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none"
       >
         <div className="relative size-24 shrink-0 overflow-hidden rounded-xl bg-muted ring-1 ring-foreground/5">
-          <Image
+          <LoadingImage
             src={listing.image}
             alt=""
             fill
