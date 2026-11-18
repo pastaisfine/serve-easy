@@ -63,7 +63,11 @@ async function authedFetch(path: string, init: RequestInit = {}) {
       fieldErrors[String(issue.loc[issue.loc.length - 1])] =
         describeIssue(issue)
     }
-    throw new ApiError(res.status, "Please fix the highlighted fields", fieldErrors)
+    throw new ApiError(
+      res.status,
+      "Please fix the highlighted fields",
+      fieldErrors
+    )
   }
   throw new ApiError(
     res.status,
@@ -73,11 +77,27 @@ async function authedFetch(path: string, init: RequestInit = {}) {
 
 export interface Me extends ApiUserSummary {
   email: string
+  role: "student" | "food_seller" | "service_provider"
   shop: ShopRef | null
+}
+
+export interface RegistrationProfile {
+  role: "student" | "service_provider"
+  student_id: string | null
 }
 
 export async function getMe(): Promise<Me> {
   return (await authedFetch("/me")).json()
+}
+
+export async function saveRegistrationProfile(
+  profile: RegistrationProfile
+): Promise<void> {
+  await authedFetch("/me/registration", {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(profile),
+  })
 }
 
 /** Uploads a photo. Pass `key` as `image` on create; `url` previews it. */

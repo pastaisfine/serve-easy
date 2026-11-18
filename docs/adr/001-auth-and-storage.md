@@ -17,7 +17,9 @@ Use **Managed Better Auth** and **Neon Object Storage**.
 - Library: `@neon/auth` (Next.js wrapper).
 - Storage: Users and sessions in the `neon_auth` schema on Lakebase Postgres.
 - Branching: Auth state branches with the database. A preview branch has its own auth URL and isolated users.
-- Registration: UTM email not enforced; students, food sellers and service providers share the `users` table with a `role` column.
+- Registration: Students use an `@graduate.utm.my` email, verify its mailbox with an email OTP, and provide a matric number matching `A` + two digits + two letters + four digits. Service providers verify an email by OTP but do not need a matric number. Student and service-provider roles are self-selected; food sellers remain provisioned separately.
+- Profile provisioning: After email verification, the Next.js server saves the selected role and optional matric number to the backend `users` row associated with the Neon Auth user ID.
+- Operations: Email OTP must be enabled on each Neon Auth branch and configured with working email delivery; the application cannot enable the managed-auth plugin itself.
 
 ### Object Storage
 
@@ -51,10 +53,11 @@ Neon Object Storage was selected over:
 
 ## Verification
 
-1. A user signs up with email/password and receives a verification code (shared SMTP).
-2. A new listing photo uploads and appears on the listing detail page anonymously.
-3. A listing with a foreign image key is rejected (ownership check).
-4. A preview branch created from production gets its own storage endpoint.
+1. A student signs up with a matching matric number and `@graduate.utm.my` address, verifies the email OTP, and receives a student role in the backend profile.
+2. A service provider signs up with an email address, verifies the email OTP, and receives a service-provider role without a matric number.
+3. A new listing photo uploads and appears on the listing detail page anonymously.
+4. A listing with a foreign image key is rejected (ownership check).
+5. A preview branch created from production gets its own storage endpoint.
 
 ## Related
 

@@ -1,8 +1,8 @@
 from datetime import datetime
 from decimal import Decimal
-from typing import Annotated
+from typing import Annotated, Literal
 
-from pydantic import BaseModel, BeforeValidator, ConfigDict, Field
+from pydantic import BaseModel, BeforeValidator, ConfigDict, Field, field_validator
 
 from app.models.base import (
     ListingCategory,
@@ -10,6 +10,7 @@ from app.models.base import (
     ListingStatus,
     MealSession,
     ServiceCategory,
+    UserRole,
 )
 from app.storage import public_url
 
@@ -148,7 +149,20 @@ class MeOut(ORM):
     email: str
     image: str | None
     faculty: str | None
+    role: UserRole
     shop: ShopRef | None
+
+
+class RegistrationUpdate(Create):
+    role: Literal["student", "service_provider"]
+    student_id: Annotated[
+        str, Field(min_length=9, max_length=9, pattern=r"^A[0-9]{2}[A-Z]{2}[0-9]{4}$")
+    ] | None = None
+
+    @field_validator("student_id", mode="before")
+    @classmethod
+    def normalize_student_id(cls, value: object) -> object:
+        return value.upper() if isinstance(value, str) else value
 
 
 class UploadOut(BaseModel):

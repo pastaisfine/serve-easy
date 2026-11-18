@@ -1,9 +1,14 @@
 "use client"
 
-import { useActionState } from "react"
+import { useActionState, useState } from "react"
 import Link from "next/link"
 
-import { signInAction, signUpAction } from "@/app/auth/actions"
+import {
+  signInAction,
+  signUpAction,
+  type AuthState,
+  type RegistrationRole,
+} from "@/app/auth/actions"
 import { FormField } from "@/components/serve/form-field"
 import { Input } from "@/components/ui/input"
 import { LoadingSubmitButton } from "@/components/ui/loading-submit-button"
@@ -29,6 +34,54 @@ const copy = {
   },
 } as const
 
+function HiddenRegistrationFields({
+  state,
+  step,
+}: {
+  state: AuthState
+  step: NonNullable<AuthState["step"]>
+}) {
+  return (
+    <>
+      <input type="hidden" name="step" value={step} />
+      <input type="hidden" name="name" value={state.name ?? ""} />
+      <input type="hidden" name="email" value={state.email ?? ""} />
+      <input
+        type="hidden"
+        name="accountType"
+        value={state.accountType ?? "student"}
+      />
+      {step !== "complete-profile" && (
+        <input type="hidden" name="studentId" value={state.studentId ?? ""} />
+      )}
+      <input type="hidden" name="redirectTo" value={state.redirectTo ?? "/"} />
+    </>
+  )
+}
+
+function StudentNumberField({ state }: { state: AuthState }) {
+  return (
+    <FormField
+      label="UTM matric number"
+      hint="Enter your number as shown on your student ID, for example A26KT0123."
+      error={state.fieldErrors?.studentId}
+    >
+      <Input
+        name="studentId"
+        type="text"
+        autoComplete="off"
+        autoCapitalize="characters"
+        required
+        minLength={9}
+        maxLength={9}
+        pattern="[Aa][0-9]{2}[A-Za-z]{2}[0-9]{4}"
+        defaultValue={state.studentId}
+        className="h-11 rounded-xl"
+      />
+    </FormField>
+  )
+}
+
 export function AuthForm({
   mode,
   redirectTo,
@@ -41,10 +94,14 @@ export function AuthForm({
     mode === "sign-in" ? signInAction : signUpAction,
     {}
   )
+  const [selectedRole, setSelectedRole] = useState<RegistrationRole>(
+    state.accountType ?? "student"
+  )
   const switchHref =
     redirectTo === "/"
       ? c.switchPath
       : `${c.switchPath}?redirectTo=${encodeURIComponent(redirectTo)}`
+  const signUpStep = mode === "sign-up" ? state.step : undefined
 
   return (
     <div className="flex flex-col gap-6 rounded-2xl bg-card p-6 ring-1 ring-foreground/5 md:p-8">
@@ -54,10 +111,54 @@ export function AuthForm({
       </div>
 
       <form action={formAction} className="flex flex-col gap-4">
-        <input type="hidden" name="redirectTo" value={redirectTo} />
+        {mode === "sign-in" && (
+          <input type="hidden" name="redirectTo" value={redirectTo} />
+        )}
 
-        {mode === "sign-up" && (
-          <FormField label="Full name">
+        {mode === "sign-up" && !signUpStep && (
+          <>
+            <input type="hidden" name="redirectTo" value={redirectTo} />
+            <fieldset className="flex flex-col gap-2">
+              <legend className="mb-1 text-sm font-medium">
+                How will you use Serve?
+              </legend>
+              <label className="flex min-h-11 items-center gap-3 rounded-xl bg-background px-3">
+                <input
+                  type="radio"
+                  name="accountType"
+                  value="student"
+                  checked={selectedRole === "student"}
+                  onChange={() => setSelectedRole("student")}
+                  className="accent-primary"
+                />
+                <span className="text-sm">Student</span>
+              </label>
+              <label className="flex min-h-11 items-center gap-3 rounded-xl bg-background px-3">
+                <input
+                  type="radio"
+                  name="accountType"
+                  value="service_provider"
+                  checked={selectedRole === "service_provider"}
+                  onChange={() => setSelectedRole("service_provider")}
+                  className="accent-primary"
+                />
+                <span className="text-sm">Service provider</span>
+              </label>
+              {state.fieldErrors?.accountType && (
+                <p className="text-sm text-destructive">
+                  {state.fieldErrors.accountType}
+                </p>
+              )}
+            </fieldset>
+          </>
+        )}
+
+        {mode === "sign-up" && signUpStep && (
+          <HiddenRegistrationFields state={state} step={signUpStep} />
+        )}
+
+        {mode === "sign-up" && !signUpStep && (
+          <FormField label="Full name" error={state.fieldErrors?.name}>
             <Input
               name="name"
               type="text"
@@ -68,29 +169,126 @@ export function AuthForm({
             />
           </FormField>
         )}
-        <FormField label="Email">
-          <Input
-            name="email"
-            type="email"
-            autoComplete="email"
-            required
-            defaultValue={state.email}
-            className="h-11 rounded-xl"
-          />
-        </FormField>
-        <FormField
-          label="Password"
-          hint={mode === "sign-up" ? "At least 8 characters." : undefined}
-        >
-          <Input
-            name="password"
-            type="password"
-            autoComplete={mode === "sign-in" ? "current-password" : "new-password"}
-            required
-            minLength={mode === "sign-up" ? 8 : undefined}
-            className="h-11 rounded-xl"
-          />
-        </FormField>
+
+        {mode === "sign-in" && (
+          <FormField label="Email">
+            <Input
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              defaultValue={state.email}
+              className="h-11 rounded-xl"
+            />
+          </FormField>
+        )}
+
+        {mode === "sign-up" && !signUpStep && (
+          <FormField
+            label="Email"
+            hint={
+              selectedRole === "student"
+                ? "Students must use their @graduate.utm.my address."
+                : "Use an email address you can access."
+            }
+            error={state.fieldErrors?.email}
+          >
+            <Input
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              defaultValue={state.email}
+              className="h-11 rounded-xl"
+            />
+          </FormField>
+        )}
+
+        {mode === "sign-up" && !signUpStep && selectedRole === "student" && (
+          <StudentNumberField state={state} />
+        )}
+
+        {mode === "sign-in" && (
+          <FormField label="Password">
+            <Input
+              name="password"
+              type="password"
+              autoComplete="current-password"
+              required
+              className="h-11 rounded-xl"
+            />
+          </FormField>
+        )}
+
+        {mode === "sign-up" && !signUpStep && (
+          <FormField
+            label="Password"
+            hint="At least 8 characters."
+            error={state.fieldErrors?.password}
+          >
+            <Input
+              name="password"
+              type="password"
+              autoComplete="new-password"
+              required
+              minLength={8}
+              className="h-11 rounded-xl"
+            />
+          </FormField>
+        )}
+
+        {signUpStep === "verify-email" && (
+          <>
+            <p className="text-sm text-muted-foreground">
+              {state.message ?? `Enter the code sent to ${state.email}.`}
+            </p>
+            <FormField
+              label="6-digit verification code"
+              error={state.fieldErrors?.verificationCode}
+            >
+              <Input
+                name="verificationCode"
+                type="text"
+                inputMode="numeric"
+                autoComplete="one-time-code"
+                required
+                maxLength={6}
+                pattern="[0-9]{6}"
+                className="h-11 rounded-xl"
+              />
+            </FormField>
+          </>
+        )}
+
+        {signUpStep === "complete-sign-in" && (
+          <>
+            <p className="text-sm text-muted-foreground">
+              {state.message ?? "Sign in to finish setting up your account."}
+            </p>
+            <FormField label="Password">
+              <Input
+                name="password"
+                type="password"
+                autoComplete="current-password"
+                required
+                className="h-11 rounded-xl"
+              />
+            </FormField>
+          </>
+        )}
+
+        {signUpStep === "complete-profile" && (
+          <>
+            <p className="text-sm text-muted-foreground">
+              Finish setting up your{" "}
+              {state.accountType === "student" ? "student" : "service provider"}{" "}
+              account.
+            </p>
+            {state.accountType === "student" && (
+              <StudentNumberField state={state} />
+            )}
+          </>
+        )}
 
         {state.error && (
           <p role="alert" className="text-sm text-destructive">
@@ -98,13 +296,48 @@ export function AuthForm({
           </p>
         )}
 
-        <LoadingSubmitButton
-          type="submit"
-          className="h-11 rounded-xl"
-          pendingLabel={c.pending}
-        >
-          {c.submit}
-        </LoadingSubmitButton>
+        {mode === "sign-up" && signUpStep === "verify-email" ? (
+          <>
+            <LoadingSubmitButton
+              type="submit"
+              className="h-11 rounded-xl"
+              pendingLabel="Verifying…"
+            >
+              Verify email
+            </LoadingSubmitButton>
+            <button
+              type="submit"
+              name="intent"
+              value="resend"
+              formNoValidate
+              className="text-sm font-medium underline-offset-2 hover:underline"
+            >
+              Resend code
+            </button>
+          </>
+        ) : (
+          <LoadingSubmitButton
+            type="submit"
+            className="h-11 rounded-xl"
+            pendingLabel={
+              mode === "sign-in"
+                ? c.pending
+                : signUpStep === "complete-sign-in"
+                  ? "Signing in…"
+                  : signUpStep === "complete-profile"
+                    ? "Finishing setup…"
+                    : c.pending
+            }
+          >
+            {mode === "sign-in"
+              ? c.submit
+              : signUpStep === "complete-sign-in"
+                ? "Continue"
+                : signUpStep === "complete-profile"
+                  ? "Finish account setup"
+                  : c.submit}
+          </LoadingSubmitButton>
+        )}
       </form>
 
       <p className="text-center text-sm text-muted-foreground">
