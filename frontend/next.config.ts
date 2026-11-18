@@ -6,6 +6,7 @@ const storageHost = process.env.STORAGE_PUBLIC_HOST
 
 const nextConfig: NextConfig = {
   experimental: {
+    agentUpgrade: "security",
     // Listing forms post the photo with the fields. The backend caps photos at
     // 4 MB; the rest is room for multipart overhead.
     serverActions: { bodySizeLimit: "5mb" },
