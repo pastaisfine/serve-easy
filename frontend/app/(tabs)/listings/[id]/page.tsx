@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
 import { ListingDetail } from "@/components/serve/listing-detail"
+import { auth } from "@/lib/auth/server"
 import { getListing } from "@/lib/api"
 import { conditionNames, itemCategoryNames } from "@/lib/categories"
 
@@ -19,9 +20,11 @@ export default async function ListingDetailPage(
   const { id } = await props.params
   const listing = await getListing(id)
   if (!listing) notFound()
+  const { data: session } = await auth.getSession()
 
   return (
     <ListingDetail
+      recordId={listing.id}
       kind="item"
       title={listing.title}
       price={Number(listing.price)}
@@ -31,8 +34,12 @@ export default async function ListingDetailPage(
       description={listing.description}
       spot={listing.spot}
       owner={listing.seller}
+      ownerId={listing.seller.id}
+      viewerId={session?.user?.id ?? null}
       shop={listing.shop}
       sold={listing.status === "sold"}
+      reserved={listing.status === "reserved"}
+      isSignedIn={Boolean(session?.user)}
     />
   )
 }

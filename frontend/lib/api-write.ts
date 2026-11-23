@@ -13,11 +13,14 @@ import type {
   ApiFoodItem,
   ApiMealDeliveryBatch,
   ApiMealOrder,
+  ApiProductOrder,
   ApiProviderDeliveryBatch,
+  ApiServiceBooking,
   ApiService,
   ApiUserSummary,
   MealMenuItemPayload,
   MealOrderPayload,
+  RequestStatus,
 } from "@/lib/api"
 import { auth } from "@/lib/auth/server"
 import type { ShopRef } from "@/lib/types"
@@ -148,6 +151,17 @@ export interface NewService {
   shop_id: string | null
 }
 
+export interface ProductOrderPayload {
+  listing_id: string
+  buyer_note?: string
+}
+
+export interface ServiceBookingPayload {
+  service_id: string
+  details: string
+  requested_date: string
+}
+
 function postJson(path: string, payload: unknown) {
   return authedFetch(path, {
     method: "POST",
@@ -162,6 +176,66 @@ export async function createListing(payload: NewListing): Promise<ApiListing> {
 
 export async function createService(payload: NewService): Promise<ApiService> {
   return (await postJson("/services", payload)).json()
+}
+
+export async function createProductOrder(
+  payload: ProductOrderPayload
+): Promise<ApiProductOrder> {
+  return (await postJson("/product-orders", payload)).json()
+}
+
+export async function getProductOrder(orderId: string): Promise<ApiProductOrder> {
+  return (
+    await authedFetch(`/product-orders/${encodeURIComponent(orderId)}`)
+  ).json()
+}
+
+export async function getMyProductOrders(): Promise<ApiProductOrder[]> {
+  return (await authedFetch("/product-orders/mine")).json()
+}
+
+export async function updateProductOrder(
+  orderId: string,
+  status: RequestStatus
+): Promise<ApiProductOrder> {
+  return (
+    await authedFetch(`/product-orders/${encodeURIComponent(orderId)}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status }),
+    })
+  ).json()
+}
+
+export async function createServiceBooking(
+  payload: ServiceBookingPayload
+): Promise<ApiServiceBooking> {
+  return (await postJson("/service-bookings", payload)).json()
+}
+
+export async function getServiceBooking(
+  bookingId: string
+): Promise<ApiServiceBooking> {
+  return (
+    await authedFetch(`/service-bookings/${encodeURIComponent(bookingId)}`)
+  ).json()
+}
+
+export async function getMyServiceBookings(): Promise<ApiServiceBooking[]> {
+  return (await authedFetch("/service-bookings/mine")).json()
+}
+
+export async function updateServiceBooking(
+  bookingId: string,
+  status: RequestStatus
+): Promise<ApiServiceBooking> {
+  return (
+    await authedFetch(`/service-bookings/${encodeURIComponent(bookingId)}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status }),
+    })
+  ).json()
 }
 
 export async function createMealOrders(

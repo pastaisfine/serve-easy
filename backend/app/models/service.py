@@ -46,7 +46,9 @@ class ServiceBooking(Base):
     details: Mapped[str] = mapped_column(Text)
     requested_date: Mapped[date] = mapped_column(Date)
     status: Mapped[BookingStatus] = mapped_column(
-        pg_enum(BookingStatus, "booking_status"), default=BookingStatus.PENDING
+        pg_enum(BookingStatus, "booking_status"),
+        default=BookingStatus.PENDING,
+        server_default=BookingStatus.PENDING.value,
     )
     created_at: Mapped[created_ts]
 

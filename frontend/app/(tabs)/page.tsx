@@ -4,15 +4,22 @@ import { BellIcon } from "lucide-react"
 import { CategoryCard } from "@/components/serve/category-card"
 import { ListingCard } from "@/components/serve/listing-card"
 import { Logo } from "@/components/serve/logo"
-import { OrderCard } from "@/components/serve/order-card"
+import { MarketplaceRequests } from "@/components/serve/marketplace-requests"
 import { SearchBar } from "@/components/serve/search-bar"
 import { Rail, Section } from "@/components/serve/section"
 import { getFreshListings } from "@/lib/api"
+import { getMyProductOrders, getMyServiceBookings } from "@/lib/api-write"
+import { auth } from "@/lib/auth/server"
 import { homeCategories } from "@/lib/categories"
-import { orders } from "@/lib/data"
 
 export default async function HomePage() {
-  const freshListings = await getFreshListings(8)
+  const [{ data: session }, freshListings] = await Promise.all([
+    auth.getSession(),
+    getFreshListings(8),
+  ])
+  const [productOrders, serviceBookings] = session?.user
+    ? await Promise.all([getMyProductOrders(), getMyServiceBookings()])
+    : [[], []]
 
   return (
     <>
@@ -51,13 +58,25 @@ export default async function HomePage() {
 
         {/* "Offers for you" is hidden: offers are not part of the PRD. */}
 
-        {/* Still mock data: real orders need a signed-in user. */}
-        <Section id="orders" title="My active orders" seeAllHref="/orders">
-          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-            {orders.map((order) => (
-              <OrderCard key={order.id} order={order} />
-            ))}
-          </div>
+        <Section id="orders" title="My active requests" seeAllHref="/orders">
+          {session?.user ? (
+            <MarketplaceRequests
+              productOrders={productOrders}
+              serviceBookings={serviceBookings}
+              compact
+              activeOnly
+            />
+          ) : (
+            <p className="rounded-2xl bg-card px-5 py-6 text-sm text-muted-foreground">
+              <Link
+                href="/auth/sign-in?redirectTo=%2Forders"
+                className="font-medium text-foreground underline"
+              >
+                Sign in
+              </Link>{" "}
+              to see your item requests and service bookings.
+            </p>
+          )}
         </Section>
 
         <Section id="fresh" title="Fresh on campus" seeAllHref="/search">

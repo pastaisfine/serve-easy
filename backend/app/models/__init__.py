@@ -9,6 +9,7 @@ from app.models.food import (
 )
 from app.models.marketplace import ProductListing
 from app.models.message import Message
+from app.models.order import ProductOrder
 from app.models.service import Service, ServiceBooking
 from app.models.shop import Shop
 from app.models.user import User
@@ -18,6 +19,7 @@ __all__ = [
     "User",
     "Shop",
     "ProductListing",
+    "ProductOrder",
     "FoodItem",
     "FoodOrder",
     "FoodProvider",

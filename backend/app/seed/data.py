@@ -633,6 +633,7 @@ TABLES: list[tuple[str, list[Row]]] = [
     ("food_provider_staff", []),
     ("shops", SHOPS),
     ("product_listings", LISTINGS),
+    ("product_orders", []),
     ("food_items", FOOD_ITEMS),
     ("food_delivery_batches", []),
     ("services", SERVICES),

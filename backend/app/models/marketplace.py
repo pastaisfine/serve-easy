@@ -1,3 +1,7 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
 from sqlalchemy import ForeignKey, Index, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -13,6 +17,9 @@ from app.models.base import (
 )
 from app.models.shop import Shop
 from app.models.user import User
+
+if TYPE_CHECKING:
+    from app.models.order import ProductOrder
 
 
 class ProductListing(Base):
@@ -40,3 +47,4 @@ class ProductListing(Base):
 
     seller: Mapped[User] = relationship()
     shop: Mapped[Shop | None] = relationship()
+    orders: Mapped[list[ProductOrder]] = relationship(back_populates="listing")

@@ -6,6 +6,7 @@ def test_metadata_contains_all_prd_entities():
         "users",
         "shops",
         "product_listings",
+        "product_orders",
         "food_providers",
         "food_provider_staff",
         "food_items",

@@ -10,6 +10,8 @@ from app.models.base import (
     ListingCondition,
     ListingStatus,
     MealSession,
+    BookingStatus,
+    ProductOrderStatus,
     ServiceCategory,
     UserRole,
 )
@@ -187,6 +189,54 @@ class ServiceOut(ORM):
     created_at: datetime
     provider: UserSummary
     shop: ShopRef | None
+
+
+class ProductOrderCreate(Create):
+    listing_id: str
+    buyer_note: Annotated[str, Field(max_length=1000)] | None = None
+
+
+class ProductOrderStatusUpdate(Create):
+    status: ProductOrderStatus
+
+
+class ProductOrderOut(BaseModel):
+    id: str
+    listing_id: str
+    listing_title: str
+    listing_image: ImageUrl
+    price: Decimal
+    meetup_spot: str
+    buyer_note: str | None
+    status: ProductOrderStatus
+    created_at: datetime
+    role: Literal["buying", "selling"]
+    counterpart: UserSummary
+
+
+class ServiceBookingCreate(Create):
+    service_id: str
+    details: Annotated[str, Field(min_length=1, max_length=5000)]
+    requested_date: date
+
+
+class ServiceBookingStatusUpdate(Create):
+    status: BookingStatus
+
+
+class ServiceBookingOut(BaseModel):
+    id: str
+    service_id: str
+    service_title: str
+    service_price: Decimal
+    service_unit: str | None
+    service_spot: str
+    details: str
+    requested_date: date
+    status: BookingStatus
+    created_at: datetime
+    role: Literal["requesting", "providing"]
+    counterpart: UserSummary
 
 
 class ShopOut(ORM):

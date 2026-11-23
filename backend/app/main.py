@@ -9,7 +9,7 @@ from sqlalchemy.orm import Session
 from app.bot.telegram_bot import start_bot, stop_bot
 from app.config import settings
 from app.db import get_db
-from app.routers import cafeterias, listings, me, meals, services, shops, uploads
+from app.routers import cafeterias, listings, me, meals, requests, services, shops, uploads
 
 logger = logging.getLogger(__name__)
 
@@ -44,6 +44,7 @@ app = FastAPI(title="ServeEasy API", lifespan=lifespan)
 app.include_router(listings.router)
 app.include_router(cafeterias.router)
 app.include_router(meals.router)
+app.include_router(requests.router)
 app.include_router(services.router)
 app.include_router(shops.router)
 app.include_router(me.router)

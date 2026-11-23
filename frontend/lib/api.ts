@@ -37,7 +37,7 @@ export interface ApiListing {
   category: ItemCategory
   image: string | null
   spot: string
-  status: "active" | "sold" | "removed"
+  status: "active" | "reserved" | "sold" | "removed"
   created_at: string
   seller: ApiUserSummary
   shop: ShopRef | null
@@ -55,6 +55,42 @@ export interface ApiService {
   created_at: string
   provider: ApiUserSummary
   shop: ShopRef | null
+}
+
+export type RequestStatus =
+  | "pending"
+  | "accepted"
+  | "declined"
+  | "completed"
+  | "cancelled"
+
+export interface ApiProductOrder {
+  id: string
+  listing_id: string
+  listing_title: string
+  listing_image: string | null
+  price: string
+  meetup_spot: string
+  buyer_note: string | null
+  status: RequestStatus
+  created_at: string
+  role: "buying" | "selling"
+  counterpart: ApiUserSummary
+}
+
+export interface ApiServiceBooking {
+  id: string
+  service_id: string
+  service_title: string
+  service_price: string
+  service_unit: string | null
+  service_spot: string
+  details: string
+  requested_date: string
+  status: RequestStatus
+  created_at: string
+  role: "requesting" | "providing"
+  counterpart: ApiUserSummary
 }
 
 export interface ApiCafeteria {

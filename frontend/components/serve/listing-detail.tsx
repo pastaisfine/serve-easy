@@ -2,6 +2,7 @@ import Link from "next/link"
 import { ImageIcon, MapPinIcon, StoreIcon } from "lucide-react"
 
 import { PageHeader } from "@/components/serve/page-header"
+import { MarketplaceRequestForm } from "@/components/serve/marketplace-request-form"
 import { StudentAvatar } from "@/components/serve/student"
 import { Badge } from "@/components/ui/badge"
 import { LoadingImage } from "@/components/ui/loading-image"
@@ -20,12 +21,18 @@ export interface ListingDetailProps {
   description: string
   spot: string
   owner: { name: string; faculty: string | null }
+  ownerId: string
+  viewerId: string | null
   shop: ShopRef | null
   sold?: boolean
+  reserved?: boolean
+  isSignedIn: boolean
 }
 
-/** Read-only detail view shared by items and services. */
-export function ListingDetail(props: ListingDetailProps) {
+/** Shared detail view and request entry point for items and services. */
+export function ListingDetail(
+  props: ListingDetailProps & { recordId: string }
+) {
   const isService = props.kind === "service"
 
   return (
@@ -39,6 +46,7 @@ export function ListingDetail(props: ListingDetailProps) {
           <Badge variant="secondary">{props.category}</Badge>
           {props.condition && <Badge variant="outline">{props.condition}</Badge>}
           {props.sold && <Badge variant="destructive">Sold</Badge>}
+          {props.reserved && <Badge variant="outline">Request in progress</Badge>}
         </div>
       </PageHeader>
 
@@ -76,6 +84,16 @@ export function ListingDetail(props: ListingDetailProps) {
               </p>
             </section>
           )}
+
+          <MarketplaceRequestForm
+            kind={props.kind}
+            recordId={props.recordId}
+            isSignedIn={props.isSignedIn}
+            isOwner={props.ownerId === props.viewerId}
+            unavailable={
+              props.sold ? "sold" : props.reserved ? "reserved" : undefined
+            }
+          />
 
           <section aria-labelledby="where" className="flex flex-col gap-1.5">
             <h2 id="where" className="text-sm font-medium text-muted-foreground">

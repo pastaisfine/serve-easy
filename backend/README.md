@@ -78,25 +78,39 @@ Notes:
 
 - An upsert overwrites hand edits to seeded rows. Rows you add yourself are left alone.
 - Removing a row from `data.py` does not delete it from the database; use `--reset`.
-- `--reset` touches only the 8 app tables, never `neon_auth` or `alembic_version`.
+- `--reset` touches only the application tables listed in `app/seed/data.py`, never `neon_auth` or
+  `alembic_version`. Empty workflow tables are listed there so reset clears related request data too.
 - The tests call the same seed code, so they need Neon access too.
 
-## API (read-only for now)
+## API
 
 | Endpoint | Description |
 | --- | --- |
 | `GET /health` | checks the database connection |
 | `GET /listings` | active listings, newest first; filters `category`, `condition`, `min_price`, `max_price`, `q` (title search); `limit`, `offset`. Each has a free-text `spot` and an optional `shop` link |
+| `POST /product-orders` | student requests to buy an active listing; stores the price and meetup spot snapshot and reserves the listing |
+| `GET /product-orders/mine` | the signed-in student's purchase requests and the seller's incoming requests |
+| `GET /product-orders/{id}` | one purchase request for its buyer or seller |
+| `PATCH /product-orders/{id}` | seller accepts/declines or completes; buyer cancels a pending/accepted request |
 | `GET /cafeterias` | food sellers |
 | `GET /cafeterias/{id}/menu` | available menu items; optional `meal_session=lunch\|dinner` |
 | `GET /services` | services, newest first; optional `category` (`printing`, `tailoring`, `repair`, `grooming`, `tutoring`, `other`); `limit`, `offset`. Each has `spot`, optional `unit` and `image`, and an optional `shop` link |
+| `POST /service-bookings` | student requests a service for a date with details; starts in `pending` |
+| `GET /service-bookings/mine` | the student's bookings and provider's incoming bookings |
+| `GET /service-bookings/{id}` | one booking for its student or service provider |
+| `PATCH /service-bookings/{id}` | provider accepts/declines or completes; student cancels a pending/accepted booking |
 | `GET /shops` | student enterprise profiles (informational only, no ordering) |
 | `GET /shops/{id}` | a shop's info (name, description, logo, location, hours, owner) plus the listings and services that belong to it |
 
 Money is returned as a decimal string (for example `"8.50"`), not a float.
 Responses only expose a seller's `id`, `name`, `image` and `faculty`; email, phone and student id stay private.
+All order and booking mutations require a verified Neon Auth session. Item requests move through
+`pending`, `accepted`, `declined`, `completed`, or `cancelled`; only one pending/accepted request
+can reserve a listing at a time. Completing a request marks the listing sold; declining or cancelling
+releases it. These marketplace requests do not collect payment.
 
-Item categories: `books`, `electronics`, `furniture`, `clothing`, `kitchen`, `stationery`, `sports`, `other`.
+Item categories: `books`, `electronics`, `clothing`, `kitchen`, `stationery`, `sports`, `snacks`,
+`daily_essentials`, `hobbies`, `tickets`, `other`.
 
 ## Telegram bot
 
@@ -135,12 +149,11 @@ Notes:
 - `--reload` is fine; the bot restarts with the app.
 - A Telegram outage at startup is logged and the API still comes up.
 
-## Authentication (not implemented yet)
+## Authentication
 
-There is no login and no write endpoints. The `users` table has no password column and uses string
-ids with Better Auth-style field names, so auth can be added later. The open decision is whether to
-use Neon Auth (managed Better Auth, already provisioned in the `neon_auth` schema) or self-hosted
-Better Auth in the frontend. Writes (creating listings, orders, bookings, chat) should wait for that.
+The frontend uses Neon Managed Better Auth. Server-side requests forward a short-lived JWT to the
+backend, which verifies it against the configured JWKS URL and maps the auth user ID to `users.id`.
+The backend enforces account roles and ownership for order and booking mutations.
 
 ## Layout
 
@@ -151,7 +164,7 @@ app/
   main.py        FastAPI app (starts the Telegram bot)
   bot/           telegram_bot.py (handlers), queries.py (read-only database access)
   models/        SQLAlchemy models
-  routers/       listings, cafeterias, services
+  routers/       listings, cafeterias, services, marketplace requests
   schemas.py     Pydantic response models
   seed/          data.py (the data), runner.py (upserts), __main__.py (CLI)
 alembic/         migrations

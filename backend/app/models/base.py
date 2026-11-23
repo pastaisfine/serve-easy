@@ -58,6 +58,7 @@ class ListingCategory(enum.StrEnum):
 
 class ListingStatus(enum.StrEnum):
     ACTIVE = "active"
+    RESERVED = "reserved"
     SOLD = "sold"
     REMOVED = "removed"
 
@@ -103,6 +104,14 @@ class BookingStatus(enum.StrEnum):
     CANCELLED = "cancelled"
 
 
+class ProductOrderStatus(enum.StrEnum):
+    PENDING = "pending"
+    ACCEPTED = "accepted"
+    DECLINED = "declined"
+    COMPLETED = "completed"
+    CANCELLED = "cancelled"
+
+
 __all__ = [
     "Base",
     "Mapped",
@@ -120,4 +129,5 @@ __all__ = [
     "DeliveryStatus",
     "ServiceCategory",
     "BookingStatus",
+    "ProductOrderStatus",
 ]
