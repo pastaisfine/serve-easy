@@ -143,6 +143,3 @@ export const orders: Order[] = [
     handoverCode: "1907",
   },
 ]
-
-/** Unread counts shown as badges in the nav. */
-export const unread = { inbox: 2 }

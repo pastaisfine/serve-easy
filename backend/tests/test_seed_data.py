@@ -13,7 +13,12 @@ def test_every_table_is_registered_and_non_empty():
     names = [name for name, _ in data.TABLES]
     assert set(names) == set(Base.metadata.tables)
     assert len(names) == len(set(names))
-    intentionally_empty = {"food_provider_staff", "food_delivery_batches", "product_orders"}
+    intentionally_empty = {
+        "food_provider_staff",
+        "food_delivery_batches",
+        "product_orders",
+        "notifications",
+    }
     assert all(rows or name in intentionally_empty for name, rows in data.TABLES)
 
 

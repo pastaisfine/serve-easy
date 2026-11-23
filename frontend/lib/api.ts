@@ -78,6 +78,18 @@ export interface ApiProductOrder {
   counterpart: ApiUserSummary
 }
 
+export interface ApiNotification {
+  id: string
+  notification_type: string
+  title: string
+  message: string
+  href: string
+  related_type: string
+  related_id: string
+  created_at: string
+  read_at: string | null
+}
+
 export interface ApiServiceBooking {
   id: string
   service_id: string

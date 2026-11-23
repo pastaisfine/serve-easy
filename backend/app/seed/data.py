@@ -641,6 +641,7 @@ TABLES: list[tuple[str, list[Row]]] = [
     ("order_line_items", ORDER_LINE_ITEMS),
     ("service_bookings", SERVICE_BOOKINGS),
     ("messages", MESSAGES),
+    ("notifications", []),
 ]
 
 

@@ -92,6 +92,10 @@ Notes:
 | `GET /product-orders/mine` | the signed-in student's purchase requests and the seller's incoming requests |
 | `GET /product-orders/{id}` | one purchase request for its buyer or seller |
 | `PATCH /product-orders/{id}` | seller accepts/declines or completes; buyer cancels a pending/accepted request |
+| `GET /notifications/mine` | the signed-in user's newest in-app notifications |
+| `GET /notifications/unread-count` | the signed-in user's unread notification count |
+| `PATCH /notifications/{id}/read` | mark one of the signed-in user's notifications as read |
+| `POST /notifications/read-all` | mark all of the signed-in user's notifications as read |
 | `GET /cafeterias` | food sellers |
 | `GET /cafeterias/{id}/menu` | available menu items; optional `meal_session=lunch\|dinner` |
 | `GET /services` | services, newest first; optional `category` (`printing`, `tailoring`, `repair`, `grooming`, `tutoring`, `other`); `limit`, `offset`. Each has `spot`, optional `unit` and `image`, and an optional `shop` link |
@@ -108,6 +112,10 @@ All order and booking mutations require a verified Neon Auth session. Item reque
 `pending`, `accepted`, `declined`, `completed`, or `cancelled`; only one pending/accepted request
 can reserve a listing at a time. Completing a request marks the listing sold; declining or cancelling
 releases it. These marketplace requests do not collect payment.
+
+Product-order events create persistent in-app notifications for the relevant buyer or seller in the
+same database transaction as the order change. This currently covers request submission, acceptance,
+decline, cancellation, and completion; email delivery is not configured.
 
 Item categories: `books`, `electronics`, `clothing`, `kitchen`, `stationery`, `sports`, `snacks`,
 `daily_essentials`, `hobbies`, `tickets`, `other`.
@@ -164,6 +172,7 @@ app/
   main.py        FastAPI app (starts the Telegram bot)
   bot/           telegram_bot.py (handlers), queries.py (read-only database access)
   models/        SQLAlchemy models
+  notifications/ notification creation helpers
   routers/       listings, cafeterias, services, marketplace requests
   schemas.py     Pydantic response models
   seed/          data.py (the data), runner.py (upserts), __main__.py (CLI)

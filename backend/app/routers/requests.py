@@ -16,6 +16,7 @@ from app.models.base import (
     ProductOrderStatus,
     UserRole,
 )
+from app.notifications.service import create_notification
 from app.schemas import (
     ProductOrderCreate,
     ProductOrderOut,
@@ -137,6 +138,28 @@ def create_product_order(
     )
     listing.status = ListingStatus.RESERVED
     db.add(order)
+    db.flush()
+    order_href = f"/orders/item-{order.id}"
+    create_notification(
+        db,
+        user_id=order.buyer_id,
+        notification_type="product_order_pending",
+        title="Request sent",
+        message=f"Your request for {order.listing_title} is pending the seller's response.",
+        href=order_href,
+        related_type="product_order",
+        related_id=order.id,
+    )
+    create_notification(
+        db,
+        user_id=order.seller_id,
+        notification_type="product_order_received",
+        title="New purchase request",
+        message=f"{user.name} wants to buy {order.listing_title}.",
+        href=order_href,
+        related_type="product_order",
+        related_id=order.id,
+    )
     try:
         db.commit()
     except IntegrityError as error:
@@ -221,6 +244,43 @@ def update_product_order(
     if listing is None:
         raise HTTPException(409, "The listing for this order no longer exists")
     order.status = payload.status
+    notification_details = {
+        ProductOrderStatus.ACCEPTED: (
+            order.buyer_id,
+            "product_order_accepted",
+            "Request accepted",
+            f"{order.seller.name} accepted your request for {order.listing_title}.",
+        ),
+        ProductOrderStatus.DECLINED: (
+            order.buyer_id,
+            "product_order_declined",
+            "Request declined",
+            f"{order.seller.name} declined your request for {order.listing_title}.",
+        ),
+        ProductOrderStatus.COMPLETED: (
+            order.buyer_id,
+            "product_order_completed",
+            "Exchange completed",
+            f"Your exchange for {order.listing_title} was marked complete.",
+        ),
+        ProductOrderStatus.CANCELLED: (
+            order.seller_id,
+            "product_order_cancelled",
+            "Request cancelled",
+            f"{order.buyer.name} cancelled the request for {order.listing_title}.",
+        ),
+    }
+    recipient_id, notification_type, title, message = notification_details[payload.status]
+    create_notification(
+        db,
+        user_id=recipient_id,
+        notification_type=notification_type,
+        title=title,
+        message=message,
+        href=f"/orders/item-{order.id}",
+        related_type="product_order",
+        related_id=order.id,
+    )
     if payload.status is ProductOrderStatus.COMPLETED:
         listing.status = ListingStatus.SOLD
     elif payload.status in {ProductOrderStatus.DECLINED, ProductOrderStatus.CANCELLED}:

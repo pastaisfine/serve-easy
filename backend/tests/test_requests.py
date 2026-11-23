@@ -207,6 +207,59 @@ def test_product_order_reserves_listing_until_completion(request_client):
         assert db.get(ProductListing, "listing-1").status is ListingStatus.SOLD
 
 
+def test_product_order_notifications_are_private_and_readable(request_client):
+    client, actors, _ = request_client
+    actors["current"] = actors["student"]
+    created = client.post("/product-orders", json={"listing_id": "listing-1"})
+    assert created.status_code == 201
+    order_id = created.json()["id"]
+
+    buyer_notifications = client.get("/notifications/mine").json()
+    assert [item["notification_type"] for item in buyer_notifications] == [
+        "product_order_pending"
+    ]
+    assert buyer_notifications[0]["href"] == f"/orders/item-{order_id}"
+    assert buyer_notifications[0]["read_at"] is None
+    assert client.get("/notifications/unread-count").json() == {"count": 1}
+
+    actors["current"] = actors["seller"]
+    seller_notifications = client.get("/notifications/mine").json()
+    assert [item["notification_type"] for item in seller_notifications] == [
+        "product_order_received"
+    ]
+    assert client.patch(
+        f"/notifications/{buyer_notifications[0]['id']}/read"
+    ).status_code == 404
+
+    accepted = client.patch(
+        f"/product-orders/{order_id}", json={"status": "accepted"}
+    )
+    assert accepted.status_code == 200
+    actors["current"] = actors["student"]
+    assert client.get("/notifications/unread-count").json() == {"count": 2}
+    accepted_notification = client.patch(
+        f"/notifications/{buyer_notifications[0]['id']}/read"
+    )
+    assert accepted_notification.status_code == 200
+    assert accepted_notification.json()["read_at"] is not None
+    assert client.get("/notifications/unread-count").json() == {"count": 1}
+
+    assert client.post("/notifications/read-all").status_code == 204
+    assert client.get("/notifications/unread-count").json() == {"count": 0}
+    assert client.post("/notifications/read-all").status_code == 204
+    actors["current"] = actors["seller"]
+    assert client.get("/notifications/unread-count").json() == {"count": 1}
+    completed = client.patch(
+        f"/product-orders/{order_id}", json={"status": "completed"}
+    )
+    assert completed.status_code == 200
+    actors["current"] = actors["student"]
+    assert {
+        item["notification_type"] for item in client.get("/notifications/mine").json()
+    } == {"product_order_pending", "product_order_accepted", "product_order_completed"}
+    assert client.get("/notifications/unread-count").json() == {"count": 1}
+
+
 def test_declined_product_order_releases_listing_for_another_buyer(request_client):
     client, actors, _ = request_client
     actors["current"] = actors["student"]
@@ -220,6 +273,12 @@ def test_declined_product_order_releases_listing_for_another_buyer(request_clien
     )
     assert declined.status_code == 200
 
+    actors["current"] = actors["student"]
+    first_notifications = client.get("/notifications/mine").json()
+    assert {item["notification_type"] for item in first_notifications} == {
+        "product_order_pending",
+        "product_order_declined",
+    }
     actors["current"] = actors["another_student"]
     second = client.post("/product-orders", json={"listing_id": "listing-1"})
     assert second.status_code == 201
@@ -241,6 +300,10 @@ def test_only_listing_seller_can_accept_and_buyer_can_cancel(request_client):
     )
     assert cancelled.status_code == 200
     assert cancelled.json()["status"] == "cancelled"
+    actors["current"] = actors["seller"]
+    assert {
+        item["notification_type"] for item in client.get("/notifications/mine").json()
+    } == {"product_order_received", "product_order_cancelled"}
     with factory() as db:
         assert db.get(ProductListing, "listing-1").status is ListingStatus.ACTIVE
 

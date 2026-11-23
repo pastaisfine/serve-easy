@@ -1,16 +1,27 @@
 import type { Metadata } from "next"
-import { MailIcon } from "lucide-react"
+import { redirect } from "next/navigation"
 
-import { PlaceholderPage } from "@/components/serve/placeholder-page"
+import { Inbox } from "@/components/serve/inbox"
+import { getMyNotifications } from "@/lib/api-write"
+import { auth } from "@/lib/auth/server"
+import { formatExpiry } from "@/lib/format"
 
 export const metadata: Metadata = { title: "Inbox" }
 
-export default function InboxPage() {
+export default async function InboxPage() {
+  const { data: session, error } = await auth.getSession()
+  if (error) throw new Error(error.message || "Could not verify your session.")
+  if (!session?.user) {
+    redirect("/auth/sign-in?redirectTo=%2Finbox")
+  }
+
+  const notifications = await getMyNotifications()
   return (
-    <PlaceholderPage
-      title="Inbox"
-      icon={MailIcon}
-      description="Chats with buyers and sellers, offers and counter-offers, and meetup planning will live here."
+    <Inbox
+      notifications={notifications.map((notification) => ({
+        ...notification,
+        createdAtLabel: formatExpiry(notification.created_at),
+      }))}
     />
   )
 }

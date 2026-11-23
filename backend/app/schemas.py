@@ -239,6 +239,22 @@ class ServiceBookingOut(BaseModel):
     counterpart: UserSummary
 
 
+class NotificationOut(ORM):
+    id: str
+    notification_type: str
+    title: str
+    message: str
+    href: str
+    related_type: str
+    related_id: str
+    created_at: datetime
+    read_at: datetime | None
+
+
+class NotificationUnreadCount(BaseModel):
+    count: int
+
+
 class ShopOut(ORM):
     id: str
     name: str

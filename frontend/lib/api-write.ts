@@ -13,6 +13,7 @@ import type {
   ApiFoodItem,
   ApiMealDeliveryBatch,
   ApiMealOrder,
+  ApiNotification,
   ApiProductOrder,
   ApiProviderDeliveryBatch,
   ApiServiceBooking,
@@ -192,6 +193,32 @@ export async function getProductOrder(orderId: string): Promise<ApiProductOrder>
 
 export async function getMyProductOrders(): Promise<ApiProductOrder[]> {
   return (await authedFetch("/product-orders/mine")).json()
+}
+
+export async function getMyNotifications(): Promise<ApiNotification[]> {
+  return (await authedFetch("/notifications/mine")).json()
+}
+
+export async function getUnreadNotificationCount(): Promise<number> {
+  const result: { count: number } = await (
+    await authedFetch("/notifications/unread-count")
+  ).json()
+  return result.count
+}
+
+export async function markNotificationRead(
+  notificationId: string
+): Promise<ApiNotification> {
+  return (
+    await authedFetch(
+      `/notifications/${encodeURIComponent(notificationId)}/read`,
+      { method: "PATCH" }
+    )
+  ).json()
+}
+
+export async function markAllNotificationsRead(): Promise<void> {
+  await authedFetch("/notifications/read-all", { method: "POST" })
 }
 
 export async function updateProductOrder(
