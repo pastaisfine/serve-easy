@@ -23,6 +23,7 @@ class User(Base):
     image: Mapped[str | None] = mapped_column(String(500))
     student_id: Mapped[str | None] = mapped_column(String(32), unique=True)
     role: Mapped[UserRole] = mapped_column(pg_enum(UserRole, "user_role"), default=UserRole.STUDENT)
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True, server_default="true")
     phone: Mapped[str | None] = mapped_column(String(32))
     faculty: Mapped[str | None] = mapped_column(String(120))
     created_at: Mapped[created_ts]

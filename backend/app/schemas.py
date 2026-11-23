@@ -1,10 +1,11 @@
-from datetime import datetime
+from datetime import date, datetime
 from decimal import Decimal
 from typing import Annotated, Literal
 
 from pydantic import BaseModel, BeforeValidator, ConfigDict, Field, field_validator
 
 from app.models.base import (
+    DeliveryStatus,
     ListingCategory,
     ListingCondition,
     ListingStatus,
@@ -77,12 +78,101 @@ class FoodItemOut(ORM):
     price: Decimal
     meal_session: MealSession
     available: bool
-    image: str | None
+    image: ImageUrl
+    is_demo: bool
 
 
 class MenuOut(BaseModel):
     cafeteria: CafeteriaOut
     items: list[FoodItemOut]
+
+
+class MealOrderLineCreate(Create):
+    item_id: str
+    quantity: Annotated[int, Field(ge=1, le=20)]
+
+
+class MealOrderCreate(Create):
+    meal_session: MealSession
+    pickup_location: Annotated[str, Field(min_length=1, max_length=120)]
+    items: Annotated[list[MealOrderLineCreate], Field(min_length=1, max_length=100)]
+
+
+class MealMenuItemCreate(Create):
+    name: Annotated[str, Field(min_length=1, max_length=150)]
+    price: Price
+    meal_session: MealSession
+    image: Annotated[str, Field(min_length=1, max_length=500)] | None = None
+
+
+class MealMenuItemUpdate(Create):
+    name: Annotated[str, Field(min_length=1, max_length=150)] | None = None
+    price: Price | None = None
+    meal_session: MealSession | None = None
+    available: bool | None = None
+    image: Annotated[str, Field(min_length=1, max_length=500)] | None = None
+
+
+class MealProviderOut(ORM):
+    id: str
+    name: str
+    image: ImageUrl
+
+
+class MealDeliveryBatchOut(ORM):
+    id: str
+    provider_id: str
+    meal_session: MealSession
+    delivery_date: date
+    pickup_location: str
+    status: DeliveryStatus
+    proof_image: ImageUrl
+    delivered_at: datetime | None
+    provider: MealProviderOut
+
+
+class MealOrderLineOut(BaseModel):
+    item_id: str
+    name: str
+    quantity: int
+    unit_price: Decimal
+
+
+class MealOrderOut(ORM):
+    id: str
+    total: Decimal
+    status: str
+    created_at: datetime
+    provider: MealProviderOut
+    meal_session: MealSession
+    pickup_location: str
+    delivery_batch: MealDeliveryBatchOut
+    lines: list[MealOrderLineOut]
+
+
+class MealOrderList(BaseModel):
+    orders: list[MealOrderOut]
+
+
+class MealBatchOrderLineOut(BaseModel):
+    name: str
+    quantity: int
+
+
+class MealBatchOrderOut(BaseModel):
+    id: str
+    student_name: str
+    total: Decimal
+    lines: list[MealBatchOrderLineOut]
+
+
+class ProviderDeliveryBatchOut(MealDeliveryBatchOut):
+    orders: list[MealBatchOrderOut]
+
+
+class MealDeliveryBatchUpdate(Create):
+    status: DeliveryStatus
+    proof_image: Annotated[str, Field(min_length=1, max_length=500)] | None = None
 
 
 class ServiceOut(ORM):
@@ -154,7 +244,8 @@ class MeOut(ORM):
 
 
 class RegistrationUpdate(Create):
-    role: Literal["student", "service_provider"]
+    role: Literal["student", "service_provider", "food_seller"]
+    food_provider_id: str | None = None
     student_id: Annotated[
         str, Field(min_length=9, max_length=9, pattern=r"^A[0-9]{2}[A-Z]{2}[0-9]{4}$")
     ] | None = None

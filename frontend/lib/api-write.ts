@@ -7,7 +7,18 @@
  * backend verifies it against the auth server's JWKS.
  */
 import { API_URL } from "@/lib/api"
-import type { ApiListing, ApiService, ApiUserSummary } from "@/lib/api"
+import type {
+  ApiListing,
+  ApiCafeteria,
+  ApiFoodItem,
+  ApiMealDeliveryBatch,
+  ApiMealOrder,
+  ApiProviderDeliveryBatch,
+  ApiService,
+  ApiUserSummary,
+  MealMenuItemPayload,
+  MealOrderPayload,
+} from "@/lib/api"
 import { auth } from "@/lib/auth/server"
 import type { ShopRef } from "@/lib/types"
 
@@ -82,8 +93,9 @@ export interface Me extends ApiUserSummary {
 }
 
 export interface RegistrationProfile {
-  role: "student" | "service_provider"
+  role: "student" | "service_provider" | "food_seller"
   student_id: string | null
+  food_provider_id: string | null
 }
 
 export async function getMe(): Promise<Me> {
@@ -102,11 +114,15 @@ export async function saveRegistrationProfile(
 
 /** Uploads a photo. Pass `key` as `image` on create; `url` previews it. */
 export async function uploadImage(
-  file: File
+  file: File,
+  purpose: "listing" | "meal" = "listing"
 ): Promise<{ key: string; url: string }> {
   const body = new FormData()
   body.set("file", file)
-  const res = await authedFetch("/uploads/images", { method: "POST", body })
+  const res = await authedFetch(
+    `/uploads/images?purpose=${purpose}`,
+    { method: "POST", body }
+  )
   return res.json()
 }
 
@@ -146,4 +162,75 @@ export async function createListing(payload: NewListing): Promise<ApiListing> {
 
 export async function createService(payload: NewService): Promise<ApiService> {
   return (await postJson("/services", payload)).json()
+}
+
+export async function createMealOrders(
+  payload: MealOrderPayload
+): Promise<{ orders: ApiMealOrder[] }> {
+  return (await postJson("/meals/orders", payload)).json()
+}
+
+export async function getMyMealOrders(): Promise<{ orders: ApiMealOrder[] }> {
+  return (await authedFetch("/meals/orders/mine")).json()
+}
+
+export async function getMealDeliveryBatches(
+  mealSession: "lunch" | "dinner"
+): Promise<ApiMealDeliveryBatch[]> {
+  const query = new URLSearchParams({ meal_session: mealSession })
+  return (await authedFetch(`/meals/batches?${query}`)).json()
+}
+
+export async function getMyMealProvider(): Promise<ApiCafeteria> {
+  return authedFetch("/meals/provider").then((response) => response.json())
+}
+
+export async function getMyMealMenu(): Promise<ApiFoodItem[]> {
+  return authedFetch("/meals/provider/menu").then((response) => response.json())
+}
+
+export async function getProviderMealOrders(params: {
+  meal_session?: "lunch" | "dinner"
+  delivery_date?: string
+} = {}): Promise<ApiProviderDeliveryBatch[]> {
+  const query = new URLSearchParams()
+  if (params.meal_session) query.set("meal_session", params.meal_session)
+  if (params.delivery_date) query.set("delivery_date", params.delivery_date)
+  const suffix = query.size ? `?${query}` : ""
+  return (await authedFetch(`/meals/provider/orders${suffix}`)).json()
+}
+
+export async function createMealMenuItem(
+  payload: MealMenuItemPayload
+): Promise<ApiFoodItem> {
+  return (await postJson("/meals/provider/menu", payload)).json()
+}
+
+export async function updateMealMenuItem(
+  itemId: string,
+  payload: Partial<MealMenuItemPayload> & { available?: boolean }
+): Promise<void> {
+  await authedFetch(`/meals/provider/menu/${encodeURIComponent(itemId)}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  })
+}
+
+export async function updateMealDeliveryBatch(
+  batchId: string,
+  payload: {
+    status: "preparing" | "on_the_way" | "delivered"
+    proof_image?: string
+  }
+): Promise<ApiProviderDeliveryBatch> {
+  const response = await authedFetch(
+    `/meals/provider/batches/${encodeURIComponent(batchId)}`,
+    {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    }
+  )
+  return response.json()
 }

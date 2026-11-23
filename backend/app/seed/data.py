@@ -334,6 +334,45 @@ def _food(slug, seller, name, price, session, *, available=True) -> None:
     _ITEM_BY_SLUG[slug] = row
 
 
+FOOD_PROVIDERS: list[Row] = [
+    {
+        "id": uid("meal-provider", "jojoe-kopitiam"),
+        "name": "JojoeKopitiam",
+        "image": _photo(_FOOD_PHOTO),
+        "is_active": True,
+    },
+    {
+        "id": uid("meal-provider", "fen-jie"),
+        "name": "芬姐",
+        "image": _photo(_FOOD_PHOTO),
+        "is_active": True,
+    },
+    {
+        "id": uid("meal-provider", "ji-bao"),
+        "name": "吉宝",
+        "image": _photo(_FOOD_PHOTO),
+        "is_active": True,
+    },
+]
+_MEAL_PROVIDER_ID = {provider["name"]: provider["id"] for provider in FOOD_PROVIDERS}
+
+
+def _sample_food(slug, provider_name, name, price, session) -> None:
+    FOOD_ITEMS.append(
+        {
+            "id": uid("food", slug),
+            "seller_id": None,
+            "provider_id": _MEAL_PROVIDER_ID[provider_name],
+            "name": name,
+            "price": Decimal(price),
+            "meal_session": session,
+            "available": True,
+            "image": None,
+            "is_demo": True,
+        }
+    )
+
+
 # Kak Min: Malay rice dishes
 _food("km-nasi-ayam", kakmin, "Nasi Ayam Penyet", "8.50", L)
 _food("km-nasi-lemak", kakmin, "Nasi Lemak Ayam Goreng", "7.50", L)
@@ -361,6 +400,25 @@ _food("wc-spaghetti", westerncorner, "Spaghetti Bolognese", "9.90", L)
 _food("wc-fish-chips", westerncorner, "Fish and Chips", "12.50", D)
 _food("wc-burger", westerncorner, "Beef Burger Set", "10.50", D)
 _food("wc-lemon-tea", westerncorner, "Iced Lemon Tea", "3.00", D)
+
+# ------------------------------------------------------- prototype meal menus
+_sample_food("jojoe-l-nasi-lemak", "JojoeKopitiam", "Nasi Lemak Ayam", "8.00", L)
+_sample_food("jojoe-l-chicken-rice", "JojoeKopitiam", "Hainanese Chicken Rice", "8.50", L)
+_sample_food("jojoe-l-mee-goreng", "JojoeKopitiam", "Mee Goreng Mamak", "7.00", L)
+_sample_food("jojoe-d-ayam-penyet", "JojoeKopitiam", "Nasi Ayam Penyet", "9.00", D)
+_sample_food("jojoe-d-char-kuey-teow", "JojoeKopitiam", "Char Kuey Teow", "8.50", D)
+
+_sample_food("fenjie-l-curry-chicken", "芬姐", "Curry Chicken Rice", "8.50", L)
+_sample_food("fenjie-l-nasi-campur", "芬姐", "Nasi Campur", "9.00", L)
+_sample_food("fenjie-l-mee-hoon", "芬姐", "Fried Mee Hoon", "7.50", L)
+_sample_food("fenjie-d-asam-pedas", "芬姐", "Asam Pedas Set", "10.00", D)
+_sample_food("fenjie-d-curry-noodles", "芬姐", "Curry Noodles", "8.50", D)
+
+_sample_food("jibao-l-chicken-chop", "吉宝", "Chicken Chop Rice", "12.00", L)
+_sample_food("jibao-l-spaghetti", "吉宝", "Spaghetti Bolognese", "10.00", L)
+_sample_food("jibao-l-egg-mayo", "吉宝", "Egg Mayo Sandwich", "6.00", L)
+_sample_food("jibao-d-burger", "吉宝", "Beef Burger Set", "11.00", D)
+_sample_food("jibao-d-carbonara", "吉宝", "Chicken Carbonara", "12.00", D)
 
 # ------------------------------------------------------------------- food orders
 FOOD_ORDERS: list[Row] = []
@@ -571,9 +629,12 @@ _thread(
 # Parents first, so the seed runner can insert in this order without violating FKs.
 TABLES: list[tuple[str, list[Row]]] = [
     ("users", USERS),
+    ("food_providers", FOOD_PROVIDERS),
+    ("food_provider_staff", []),
     ("shops", SHOPS),
     ("product_listings", LISTINGS),
     ("food_items", FOOD_ITEMS),
+    ("food_delivery_batches", []),
     ("services", SERVICES),
     ("food_orders", FOOD_ORDERS),
     ("order_line_items", ORDER_LINE_ITEMS),

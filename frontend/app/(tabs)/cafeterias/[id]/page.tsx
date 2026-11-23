@@ -33,7 +33,7 @@ export default async function CafeteriaMenuPage(
         backLabel="All cafeterias"
       >
         <p className="text-base text-muted-foreground">
-          Ordering opens here soon. For now, this is the menu.
+          Add items from multiple providers to one order from the Meals page.
         </p>
       </PageHeader>
 

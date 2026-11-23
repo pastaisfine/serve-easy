@@ -7,6 +7,7 @@ import {
   HouseIcon,
   MailIcon,
   CircleUserRoundIcon,
+  UtensilsIcon,
   type LucideIcon,
 } from "lucide-react"
 
@@ -22,6 +23,9 @@ interface Tab {
 }
 
 function isActive(pathname: string, href: string) {
+  if (href === "/cafeterias") {
+    return pathname.startsWith("/cafeterias") || pathname.startsWith("/meals")
+  }
   return href === "/" ? pathname === "/" : pathname.startsWith(href)
 }
 
@@ -54,6 +58,7 @@ export function AppNav({ inboxCount }: { inboxCount: number }) {
 
   const left: Tab[] = [
     { href: "/", label: "Home", icon: HouseIcon },
+    { href: "/cafeterias", label: "Meals", icon: UtensilsIcon },
     { href: "/inbox", label: "Inbox", icon: MailIcon, badge: inboxCount },
   ]
   const right: Tab[] = [

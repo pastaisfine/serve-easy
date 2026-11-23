@@ -1,5 +1,12 @@
 from app.models.base import Base
-from app.models.food import FoodItem, FoodOrder, OrderLineItem
+from app.models.food import (
+    FoodDeliveryBatch,
+    FoodItem,
+    FoodOrder,
+    FoodProvider,
+    FoodProviderStaff,
+    OrderLineItem,
+)
 from app.models.marketplace import ProductListing
 from app.models.message import Message
 from app.models.service import Service, ServiceBooking
@@ -13,6 +20,9 @@ __all__ = [
     "ProductListing",
     "FoodItem",
     "FoodOrder",
+    "FoodProvider",
+    "FoodProviderStaff",
+    "FoodDeliveryBatch",
     "OrderLineItem",
     "Service",
     "ServiceBooking",

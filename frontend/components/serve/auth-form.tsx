@@ -12,6 +12,8 @@ import {
 import { FormField } from "@/components/serve/form-field"
 import { Input } from "@/components/ui/input"
 import { LoadingSubmitButton } from "@/components/ui/loading-submit-button"
+import { NativeSelect } from "@/components/ui/native-select"
+import type { ApiCafeteria } from "@/lib/api"
 
 const copy = {
   "sign-in": {
@@ -54,6 +56,13 @@ function HiddenRegistrationFields({
       {step !== "complete-profile" && (
         <input type="hidden" name="studentId" value={state.studentId ?? ""} />
       )}
+      {step !== "complete-profile" && (
+        <input
+          type="hidden"
+          name="foodProviderId"
+          value={state.foodProviderId ?? ""}
+        />
+      )}
       <input type="hidden" name="redirectTo" value={state.redirectTo ?? "/"} />
     </>
   )
@@ -85,9 +94,11 @@ function StudentNumberField({ state }: { state: AuthState }) {
 export function AuthForm({
   mode,
   redirectTo,
+  providers = [],
 }: {
   mode: "sign-in" | "sign-up"
   redirectTo: string
+  providers?: ApiCafeteria[]
 }) {
   const c = copy[mode]
   const [state, formAction] = useActionState(
@@ -143,6 +154,17 @@ export function AuthForm({
                   className="accent-primary"
                 />
                 <span className="text-sm">Service provider</span>
+              </label>
+              <label className="flex min-h-11 items-center gap-3 rounded-xl bg-background px-3">
+                <input
+                  type="radio"
+                  name="accountType"
+                  value="food_seller"
+                  checked={selectedRole === "food_seller"}
+                  onChange={() => setSelectedRole("food_seller")}
+                  className="accent-primary"
+                />
+                <span className="text-sm">Food service staff</span>
               </label>
               {state.fieldErrors?.accountType && (
                 <p className="text-sm text-destructive">
@@ -207,6 +229,31 @@ export function AuthForm({
         {mode === "sign-up" && !signUpStep && selectedRole === "student" && (
           <StudentNumberField state={state} />
         )}
+        {mode === "sign-up" &&
+          !signUpStep &&
+          selectedRole === "food_seller" && (
+            <FormField
+              label="Food provider"
+              hint="Choose the provider you represent."
+              error={state.fieldErrors?.foodProviderId}
+            >
+              <NativeSelect
+                name="foodProviderId"
+                required
+                defaultValue={state.foodProviderId ?? ""}
+                className="h-11 rounded-xl"
+              >
+                <option value="" disabled>
+                  Choose a provider
+                </option>
+                {providers.map((provider) => (
+                  <option key={provider.id} value={provider.id}>
+                    {provider.name}
+                  </option>
+                ))}
+              </NativeSelect>
+            </FormField>
+          )}
 
         {mode === "sign-in" && (
           <FormField label="Password">
@@ -281,11 +328,37 @@ export function AuthForm({
           <>
             <p className="text-sm text-muted-foreground">
               Finish setting up your{" "}
-              {state.accountType === "student" ? "student" : "service provider"}{" "}
+              {state.accountType === "student"
+                ? "student"
+                : state.accountType === "food_seller"
+                  ? "food service staff"
+                  : "service provider"}{" "}
               account.
             </p>
             {state.accountType === "student" && (
               <StudentNumberField state={state} />
+            )}
+            {state.accountType === "food_seller" && (
+              <FormField
+                label="Food provider"
+                error={state.fieldErrors?.foodProviderId}
+              >
+                <NativeSelect
+                  name="foodProviderId"
+                  required
+                  defaultValue={state.foodProviderId ?? ""}
+                  className="h-11 rounded-xl"
+                >
+                  <option value="" disabled>
+                    Choose a provider
+                  </option>
+                  {providers.map((provider) => (
+                    <option key={provider.id} value={provider.id}>
+                      {provider.name}
+                    </option>
+                  ))}
+                </NativeSelect>
+              </FormField>
             )}
           </>
         )}

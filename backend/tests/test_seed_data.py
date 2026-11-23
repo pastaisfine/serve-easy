@@ -13,7 +13,8 @@ def test_every_table_is_registered_and_non_empty():
     names = [name for name, _ in data.TABLES]
     assert set(names) == set(Base.metadata.tables)
     assert len(names) == len(set(names))
-    assert all(rows for _, rows in data.TABLES)
+    intentionally_empty = {"food_provider_staff", "food_delivery_batches"}
+    assert all(rows or name in intentionally_empty for name, rows in data.TABLES)
 
 
 def test_ids_are_unique_per_table_and_deterministic():
@@ -46,7 +47,7 @@ def test_foreign_keys_resolve():
         lookup = dict(data.TABLES)
         for row in rows:
             for column, (target_table, target_col) in targets.items():
-                if row[column] is None:
+                if row.get(column) is None:
                     assert table.columns[column].nullable, f"{name}.{column} is required"
                     continue
                 valid = {r[target_col] for r in lookup[target_table]}
@@ -82,7 +83,12 @@ def test_line_items_belong_to_the_orders_seller_and_use_menu_prices():
 def test_roles_match_how_users_are_used():
     role = {u["id"]: u["role"] for u in data.USERS}
     assert all(role[l["seller_id"]] == UserRole.STUDENT for l in data.LISTINGS)
-    assert all(role[i["seller_id"]] == UserRole.FOOD_SELLER for i in data.FOOD_ITEMS)
+    legacy_items = [item for item in data.FOOD_ITEMS if item.get("seller_id")]
+    sample_items = [item for item in data.FOOD_ITEMS if item.get("provider_id")]
+    assert all(role[i["seller_id"]] == UserRole.FOOD_SELLER for i in legacy_items)
+    providers = {provider["id"] for provider in data.FOOD_PROVIDERS}
+    assert all(item["provider_id"] in providers for item in sample_items)
+    assert all(item["is_demo"] for item in sample_items)
     assert all(role[o["seller_id"]] == UserRole.FOOD_SELLER for o in data.FOOD_ORDERS)
     assert all(role[o["buyer_id"]] == UserRole.STUDENT for o in data.FOOD_ORDERS)
     assert all(role[s["provider_id"]] == UserRole.SERVICE_PROVIDER for s in data.SERVICES)
@@ -107,8 +113,22 @@ def test_demo_set_is_the_agreed_size():
     assert 10 <= counts["users"] <= 60
     assert 200 <= counts["product_listings"] <= 260
     assert 200 <= counts["services"] <= 260
-    sellers = {i["seller_id"] for i in data.FOOD_ITEMS}
+    sellers = {i["seller_id"] for i in data.FOOD_ITEMS if i.get("seller_id")}
     assert 3 <= len(sellers) <= 4
+
+
+def test_meal_sample_menu_has_the_three_requested_providers():
+    assert {provider["name"] for provider in data.FOOD_PROVIDERS} == {
+        "JojoeKopitiam",
+        "芬姐",
+        "吉宝",
+    }
+    assert all(
+        item["meal_session"] in {"lunch", "dinner"}
+        and item["price"] > Decimal("0")
+        for item in data.FOOD_ITEMS
+        if item.get("provider_id")
+    )
 
 
 def test_every_listing_and_service_has_a_meetup_spot():

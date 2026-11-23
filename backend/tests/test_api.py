@@ -21,7 +21,7 @@ def client():
     return TestClient(app)
 
 
-KAK_MIN = data.uid("user", "kakmin.kitchen")
+JOJOE_KOPITIAM = data.uid("meal-provider", "jojoe-kopitiam")
 
 
 def _all(client, path):
@@ -72,21 +72,26 @@ def test_listings_pagination_and_validation(client):
     assert client.get("/listings?limit=1000").status_code == 422
 
 
-def test_cafeterias_lists_the_four_food_sellers(client):
+def test_cafeterias_lists_the_three_prototype_providers(client):
     names = [c["name"] for c in client.get("/cafeterias").json()]
-    assert len(names) == 4 and "Kak Min" in names
+    assert set(names) == {"JojoeKopitiam", "芬姐", "吉宝"}
 
 
-def test_menu_shows_available_items_and_filters_by_session(client):
-    menu = client.get(f"/cafeterias/{KAK_MIN}/menu").json()
-    assert menu["cafeteria"]["name"] == "Kak Min"
-    assert len(menu["items"]) == 6
+def test_menu_shows_sample_items_and_filters_by_session(client):
+    menu = client.get(f"/cafeterias/{JOJOE_KOPITIAM}/menu").json()
+    assert menu["cafeteria"]["name"] == "JojoeKopitiam"
+    assert len(menu["items"]) == 5
+    assert all(item["is_demo"] for item in menu["items"])
 
-    dinner = client.get(f"/cafeterias/{KAK_MIN}/menu?meal_session=dinner").json()["items"]
-    assert dinner and {i["meal_session"] for i in dinner} == {"dinner"}
+    dinner = client.get(
+        f"/cafeterias/{JOJOE_KOPITIAM}/menu?meal_session=dinner"
+    ).json()["items"]
+    assert len(dinner) == 2 and {i["meal_session"] for i in dinner} == {"dinner"}
 
-    pak_lah = client.get(f"/cafeterias/{data.uid('user', 'paklah.warung')}/menu").json()
-    assert "Air Bandung" not in [i["name"] for i in pak_lah["items"]]  # unavailable
+    lunch = client.get(
+        f"/cafeterias/{JOJOE_KOPITIAM}/menu?meal_session=lunch"
+    ).json()["items"]
+    assert len(lunch) == 3 and {i["meal_session"] for i in lunch} == {"lunch"}
 
 
 def test_menu_404_for_unknown_or_non_cafeteria(client):

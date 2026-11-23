@@ -75,6 +75,12 @@ class OrderStatus(enum.StrEnum):
     CANCELLED = "cancelled"
 
 
+class DeliveryStatus(enum.StrEnum):
+    PREPARING = "preparing"
+    ON_THE_WAY = "on_the_way"
+    DELIVERED = "delivered"
+
+
 class ServiceCategory(enum.StrEnum):
     PRINTING = "printing"
     TAILORING = "tailoring"
@@ -111,6 +117,7 @@ __all__ = [
     "ListingStatus",
     "MealSession",
     "OrderStatus",
+    "DeliveryStatus",
     "ServiceCategory",
     "BookingStatus",
 ]

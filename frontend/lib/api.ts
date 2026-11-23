@@ -70,11 +70,65 @@ export interface ApiFoodItem {
   meal_session: "lunch" | "dinner"
   available: boolean
   image: string | null
+  is_demo: boolean
 }
 
 export interface ApiMenu {
   cafeteria: ApiCafeteria
   items: ApiFoodItem[]
+}
+
+export interface ApiMealDeliveryBatch {
+  id: string
+  provider_id: string
+  meal_session: "lunch" | "dinner"
+  delivery_date: string
+  pickup_location: string
+  status: "preparing" | "on_the_way" | "delivered"
+  proof_image: string | null
+  delivered_at: string | null
+  provider: ApiCafeteria
+}
+
+export interface ApiMealOrderLine {
+  item_id: string
+  name: string
+  quantity: number
+  unit_price: string
+}
+
+export interface ApiMealOrder {
+  id: string
+  total: string
+  status: string
+  created_at: string
+  provider: ApiCafeteria
+  meal_session: "lunch" | "dinner"
+  pickup_location: string
+  delivery_batch: ApiMealDeliveryBatch
+  lines: ApiMealOrderLine[]
+}
+
+export interface ApiProviderDeliveryBatch extends ApiMealDeliveryBatch {
+  orders: {
+    id: string
+    student_name: string
+    total: string
+    lines: { name: string; quantity: number }[]
+  }[]
+}
+
+export interface MealOrderPayload {
+  meal_session: "lunch" | "dinner"
+  pickup_location: string
+  items: { item_id: string; quantity: number }[]
+}
+
+export interface MealMenuItemPayload {
+  name: string
+  price: string
+  meal_session: "lunch" | "dinner"
+  image?: string | null
 }
 
 export interface ApiShop {
@@ -190,6 +244,10 @@ export function getCafeterias() {
 
 export function getMenu(cafeteriaId: string) {
   return get<ApiMenu>(`/cafeterias/${encodeURIComponent(cafeteriaId)}/menu`)
+}
+
+export async function getMealLocations() {
+  return getList<string>("/meals/locations")
 }
 
 export function getShop(shopId: string) {

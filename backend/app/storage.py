@@ -23,6 +23,7 @@ _SIGNATURES: tuple[tuple[bytes, str, str], ...] = (
 )
 
 KEY_PREFIX = "listings"
+MEAL_KEY_PREFIX = "meals"
 
 
 def detect_image_type(data: bytes) -> tuple[str, str] | None:
@@ -56,13 +57,19 @@ def _client():
     )
 
 
-def key_belongs_to(key: str, user_id: str) -> bool:
-    """Whether `key` is an upload made by `user_id`, so users can't attach someone else's photo."""
-    return key.startswith(f"{KEY_PREFIX}/{user_id}/") and ".." not in key
+def key_belongs_to(key: str, user_id: str, *, namespace: str = KEY_PREFIX) -> bool:
+    """Whether `key` is an upload in this user's namespace."""
+    return (
+        namespace in {KEY_PREFIX, MEAL_KEY_PREFIX}
+        and key.startswith(f"{namespace}/{user_id}/")
+        and ".." not in key
+    )
 
 
-def store_image(user_id: str, data: bytes) -> str:
+def store_image(user_id: str, data: bytes, *, namespace: str = KEY_PREFIX) -> str:
     """Validate and upload an image, returning its object key."""
+    if namespace not in {KEY_PREFIX, MEAL_KEY_PREFIX}:
+        raise ValueError("Unsupported image namespace")
     if not is_storage_configured():
         raise HTTPException(503, "Image storage is not configured")
     if not data:
@@ -74,7 +81,7 @@ def store_image(user_id: str, data: bytes) -> str:
         raise HTTPException(415, "Only JPEG, PNG or WebP images are allowed")
     content_type, ext = detected
 
-    key = f"{KEY_PREFIX}/{user_id}/{uuid.uuid4()}.{ext}"
+    key = f"{namespace}/{user_id}/{uuid.uuid4()}.{ext}"
     _client().put_object(
         Bucket=settings.storage_bucket,
         Key=key,

@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { redirect } from "next/navigation"
 
 import { AuthForm } from "@/components/serve/auth-form"
+import { getCafeterias } from "@/lib/api"
 import { safeRedirect } from "@/lib/auth/redirect"
 import { auth } from "@/lib/auth/server"
 
@@ -14,5 +15,6 @@ export default async function SignUpPage(props: PageProps<"/auth/sign-up">) {
   const { data: session } = await auth.getSession()
   if (session?.user) redirect(target)
 
-  return <AuthForm mode="sign-up" redirectTo={target} />
+  const providers = await getCafeterias()
+  return <AuthForm mode="sign-up" redirectTo={target} providers={providers} />
 }

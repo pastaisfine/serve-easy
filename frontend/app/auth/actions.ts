@@ -6,7 +6,7 @@ import { ApiError, saveRegistrationProfile } from "@/lib/api-write"
 import { safeRedirect } from "@/lib/auth/redirect"
 import { auth } from "@/lib/auth/server"
 
-export type RegistrationRole = "student" | "service_provider"
+export type RegistrationRole = "student" | "service_provider" | "food_seller"
 
 export interface AuthState {
   error?: string
@@ -15,10 +15,16 @@ export interface AuthState {
   email?: string
   accountType?: RegistrationRole
   studentId?: string
+  foodProviderId?: string
   redirectTo?: string
   step?: "verify-email" | "complete-sign-in" | "complete-profile"
   fieldErrors?: Record<string, string>
   message?: string
+}
+
+export type ProfileUser = {
+  name: string
+  email: string
 }
 
 type EmailOtpResult<T> = {
@@ -37,6 +43,16 @@ type NeonEmailOtpClient = {
   }): Promise<EmailOtpResult<{ status: boolean }>>
 }
 
+export async function getProfileUserAction(): Promise<ProfileUser | null> {
+  const { data: session, error } = await auth.getSession()
+  if (error) {
+    throw new Error(error.message || "Could not load profile")
+  }
+
+  const user = session?.user
+  return user ? { name: user.name, email: user.email } : null
+}
+
 // The SDK exposes these managed-auth endpoints at runtime but types the plugin namespace as unknown.
 const emailOtp = auth.emailOtp as NeonEmailOtpClient
 
@@ -50,22 +66,27 @@ function registrationFields(formData: FormData): {
   email: string
   accountType: RegistrationRole | null
   studentId: string
+  foodProviderId: string
   redirectTo: string
 } {
   const accountType = field(formData, "accountType")
   const email = field(formData, "email").trim().toLowerCase()
   const name = field(formData, "name").trim()
   const studentId = field(formData, "studentId").trim().toUpperCase()
+  const foodProviderId = field(formData, "foodProviderId").trim()
   const redirectTo = safeRedirect(field(formData, "redirectTo"))
 
   return {
     name,
     email,
     accountType:
-      accountType === "student" || accountType === "service_provider"
-        ? accountType
-        : null,
+    accountType === "student" ||
+    accountType === "service_provider" ||
+    accountType === "food_seller"
+      ? accountType
+      : null,
     studentId,
+    foodProviderId,
     redirectTo,
   }
 }
@@ -97,10 +118,17 @@ function validateRegistration(
       fieldErrors.email = "Students must use their @graduate.utm.my email."
     }
   } else if (
-    registration.accountType === "service_provider" &&
+    (registration.accountType === "service_provider" ||
+      registration.accountType === "food_seller") &&
     registration.studentId
   ) {
-    fieldErrors.studentId = "Service providers do not need a matric number."
+    fieldErrors.studentId = "Provider accounts do not need a matric number."
+  }
+  if (
+    registration.accountType === "food_seller" &&
+    !registration.foodProviderId
+  ) {
+    fieldErrors.foodProviderId = "Choose the food provider you represent."
   }
 
   return Object.keys(fieldErrors).length > 0
@@ -148,6 +176,10 @@ async function finishRegistration(
       role: registration.accountType,
       student_id:
         registration.accountType === "student" ? registration.studentId : null,
+      food_provider_id:
+        registration.accountType === "food_seller"
+          ? registration.foodProviderId
+          : null,
     })
   } catch (error) {
     if (error instanceof ApiError) {

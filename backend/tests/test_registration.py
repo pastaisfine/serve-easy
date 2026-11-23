@@ -17,12 +17,22 @@ class FakeResult:
 class FakeSession:
     def __init__(self):
         self.committed = False
+        self.added = []
 
     def commit(self):
         self.committed = True
 
     def rollback(self):
         pass
+
+    def execute(self, _statement):
+        pass
+
+    def get(self, _model, provider_id):
+        return SimpleNamespace(id=provider_id, is_active=True)
+
+    def add(self, value):
+        self.added.append(value)
 
     def scalars(self, _statement):
         return FakeResult()
@@ -81,6 +91,28 @@ def test_provider_registration_needs_no_matric_number():
     assert user.role == UserRole.SERVICE_PROVIDER
     assert user.student_id is None
     assert result["role"] == UserRole.SERVICE_PROVIDER
+    assert db.committed
+
+
+def test_food_staff_registration_assigns_the_selected_provider():
+    from app.models import FoodProviderStaff
+
+    user = account(email="provider@example.com")
+    db = FakeSession()
+
+    result = update_registration(
+        RegistrationUpdate(role="food_seller", food_provider_id="provider-1"),
+        user,
+        db,
+    )
+
+    assert user.role == UserRole.FOOD_SELLER
+    assert user.student_id is None
+    assert result["role"] == UserRole.FOOD_SELLER
+    assert len(db.added) == 1
+    assert isinstance(db.added[0], FoodProviderStaff)
+    assert db.added[0].provider_id == "provider-1"
+    assert db.added[0].user_id == user.id
     assert db.committed
 
 

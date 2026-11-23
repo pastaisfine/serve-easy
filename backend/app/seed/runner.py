@@ -20,6 +20,9 @@ def seed(conn: Connection) -> dict[str, int]:
     """
     result: dict[str, int] = {}
     for name, rows in TABLES:
+        if not rows:
+            result[name] = 0
+            continue
         table = Base.metadata.tables[name]
         stmt = insert(table)
         update_cols = {c: stmt.excluded[c] for c in rows[0] if c != "id"}
