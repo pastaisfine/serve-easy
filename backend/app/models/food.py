@@ -31,6 +31,8 @@ class FoodProvider(Base):
     id: Mapped[str_pk]
     name: Mapped[str] = mapped_column(String(120), unique=True)
     image: Mapped[str | None] = mapped_column(String(500))
+    whatsapp: Mapped[str | None] = mapped_column(String(32))
+    telegram_username: Mapped[str | None] = mapped_column(String(32))
     is_active: Mapped[bool] = mapped_column(Boolean, default=True, server_default="true")
     created_at: Mapped[created_ts]
 

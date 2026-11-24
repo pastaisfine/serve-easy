@@ -24,6 +24,7 @@ from app.models import (
 )
 from app.models.base import DeliveryStatus, MealSession, OrderStatus, UserRole
 from app.schemas import (
+    ContactDetailsUpdate,
     FoodItemOut,
     MealDeliveryBatchOut,
     MealDeliveryBatchUpdate,
@@ -80,6 +81,25 @@ def get_my_provider(user: CurrentUser, db: Annotated[Session, Depends(get_db)]):
     provider = db.get(FoodProvider, provider_ids[0])
     if provider is None:
         raise HTTPException(404, "Food provider not found")
+    return provider
+
+
+@router.patch("/provider/contact", response_model=MealProviderOut)
+def update_provider_contact(
+    payload: ContactDetailsUpdate,
+    user: CurrentUser,
+    db: Annotated[Session, Depends(get_db)],
+):
+    """Update public contact details for the staff member's active provider."""
+    provider_ids = _require_provider_staff(user, db)
+    provider = db.get(FoodProvider, provider_ids[0])
+    if provider is None:
+        raise HTTPException(404, "Food provider not found")
+    contact_fields = payload.model_dump(exclude_unset=True)
+    for field, value in contact_fields.items():
+        setattr(provider, field, value)
+    db.commit()
+    db.refresh(provider)
     return provider
 
 

@@ -15,6 +15,5 @@ def test_metadata_contains_all_prd_entities():
         "order_line_items",
         "services",
         "service_bookings",
-        "messages",
         "notifications",
     }

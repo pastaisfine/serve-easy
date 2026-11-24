@@ -8,12 +8,15 @@ import {
   createMealOrders,
   updateMealDeliveryBatch,
   updateMealMenuItem,
+  updateMyMealProviderContacts,
   uploadImage,
 } from "@/lib/api-write"
 import type {
+  ApiCafeteria,
   ApiFoodItem,
   ApiMealOrder,
   ApiProviderDeliveryBatch,
+  ContactDetailsPayload,
   MealMenuItemPayload,
   MealOrderPayload,
 } from "@/lib/api"
@@ -21,6 +24,7 @@ import type {
 type ActionResult<T> = {
   data?: T
   error?: string
+  fieldErrors?: Record<string, string>
   needsSignIn?: boolean
 }
 
@@ -28,6 +32,7 @@ function actionError<T>(error: unknown): ActionResult<T> {
   if (error instanceof ApiError) {
     return {
       error: error.message,
+      fieldErrors: error.fieldErrors,
       needsSignIn: error.status === 401,
     }
   }
@@ -55,6 +60,20 @@ export async function addMealMenuItem(
     revalidatePath("/meals/manage")
     revalidatePath("/cafeterias")
     return { data: item }
+  } catch (error) {
+    return actionError(error)
+  }
+}
+
+export async function saveMealProviderContacts(
+  payload: ContactDetailsPayload
+): Promise<ActionResult<ApiCafeteria>> {
+  try {
+    const provider = await updateMyMealProviderContacts(payload)
+    revalidatePath("/meals/manage")
+    revalidatePath("/cafeterias")
+    revalidatePath("/meals/orders")
+    return { data: provider }
   } catch (error) {
     return actionError(error)
   }

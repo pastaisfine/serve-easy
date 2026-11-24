@@ -79,6 +79,7 @@ def _user(slug, name, role, *, student_id=None, faculty=None, email=None, phone,
             "student_id": student_id,
             "role": role,
             "phone": phone,
+            "telegram_username": None,
             "faculty": faculty,
             "created_at": _at(hours),
             "updated_at": _at(hours),
@@ -339,18 +340,24 @@ FOOD_PROVIDERS: list[Row] = [
         "id": uid("meal-provider", "jojoe-kopitiam"),
         "name": "JojoeKopitiam",
         "image": _photo(_FOOD_PHOTO),
+        "whatsapp": None,
+        "telegram_username": None,
         "is_active": True,
     },
     {
         "id": uid("meal-provider", "fen-jie"),
         "name": "芬姐",
         "image": _photo(_FOOD_PHOTO),
+        "whatsapp": None,
+        "telegram_username": None,
         "is_active": True,
     },
     {
         "id": uid("meal-provider", "ji-bao"),
         "name": "吉宝",
         "image": _photo(_FOOD_PHOTO),
+        "whatsapp": None,
+        "telegram_username": None,
         "is_active": True,
     },
 ]
@@ -533,7 +540,7 @@ for _i, (_slug, _title, _price, _cat, _desc, _unit, _ph) in enumerate(SERVICE_RO
             "category": ServiceCategory(_cat),
             "unit": _unit,
             "image": photos.pick(service_group(_slug, _cat)) or _photo(PH[_ph]),
-            "spot": "Online (chat to arrange)" if "(online)" in _desc else _spots[(_i // 2) % len(_spots)],
+            "spot": "Online (contact the provider)" if "(online)" in _desc else _spots[(_i // 2) % len(_spots)],
             "shop_id": _shop,
             "created_at": _at(20 + _i * 0.3),
         }
@@ -558,7 +565,7 @@ def _booking(slug, student, service_slug, details, days_ahead, status, *, hours)
 
 
 BS = BookingStatus
-_booking("b1", siti, "print-colour", "5 sheets of A3 colour for my studio board. PDF in chat.", 2, BS.ACCEPTED, hours=205)
+_booking("b1", siti, "print-colour", "5 sheets of A3 colour for my studio board. PDF via WhatsApp or Telegram.", 2, BS.ACCEPTED, hours=205)
 _booking("b2", weijie, "repair-laptop", "Laptop gets very hot during compile. Lenovo ThinkPad.", 3, BS.PENDING, hours=212)
 _booking("b3", aisyah, "tailor-alter", "Need a baju kurung hemmed by about 3 cm.", 5, BS.ACCEPTED, hours=210)
 _booking("b4", farhan, "repair-bike", "Brakes feel loose.", -4, BS.COMPLETED, hours=100)
@@ -568,62 +575,6 @@ _booking("b7", haziq, "tutor-calculus", "Need help with multiple integrals befor
 _booking("b8", daniel, "photo-graduation", "Graduation portraits at Dewan Sultan Iskandar.", 12, BS.PENDING, hours=216)
 _booking("b9", priya, "design-poster", "Poster for the Science Club open day.", -2, BS.COMPLETED, hours=120)
 _booking("b10", weijie, "tutor-programming", "Help with a Java OOP assignment.", 2, BS.CANCELLED, hours=213)
-
-# ------------------------------------------------------------------- messages
-MESSAGES: list[Row] = []
-
-
-def _thread(slug, turns, start_hours) -> None:
-    """turns is a list of (sender_id, receiver_id, text); each is 5 minutes after the last."""
-    for n, (sender, receiver, text) in enumerate(turns, start=1):
-        MESSAGES.append(
-            {
-                "id": uid("message", f"{slug}:{n}"),
-                "sender_id": sender,
-                "receiver_id": receiver,
-                "content": text,
-                "created_at": _at(start_hours) + timedelta(minutes=5 * n),
-            }
-        )
-
-
-_thread(
-    "calc-inquiry",
-    [
-        (weijie, aisyah, "Hi, is the Casio FX-570EX still available?"),
-        (aisyah, weijie, "Yes it is! Still RM45."),
-        (weijie, aisyah, "Can do RM40? I can collect at KTR lobby today."),
-        (aisyah, weijie, "RM42 and we have a deal."),
-        (weijie, aisyah, "Deal. See you at 5pm."),
-    ],
-    150,
-)
-_thread(
-    "order-o5",
-    [
-        (priya, kakmin, "Hi Kak Min, I just sent the TNG payment for the sup ayam order."),
-        (kakmin, priya, "Got it, will confirm the order shortly."),
-        (priya, kakmin, "Thank you! Can I pick up at 6.45pm?"),
-    ],
-    217,
-)
-_thread(
-    "booking-b2",
-    [
-        (weijie, jason, "Hi Jason, can you look at my laptop on Friday?"),
-        (jason, weijie, "Sure, bring it to Kolej Tun Dr. Ismail cafe around 3pm."),
-        (weijie, jason, "Perfect, thanks!"),
-    ],
-    213,
-)
-_thread(
-    "powerbank-inquiry",
-    [
-        (haziq, priya, "Hello, does the 10000mAh power bank come with a cable?"),
-        (priya, haziq, "Yes, a USB-C cable is included."),
-    ],
-    160,
-)
 
 # ------------------------------------------------------------------- registry
 # Parents first, so the seed runner can insert in this order without violating FKs.
@@ -640,7 +591,6 @@ TABLES: list[tuple[str, list[Row]]] = [
     ("food_orders", FOOD_ORDERS),
     ("order_line_items", ORDER_LINE_ITEMS),
     ("service_bookings", SERVICE_BOOKINGS),
-    ("messages", MESSAGES),
     ("notifications", []),
 ]
 

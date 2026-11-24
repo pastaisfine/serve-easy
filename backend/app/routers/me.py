@@ -9,7 +9,7 @@ from app.auth import CurrentUser
 from app.db import get_db
 from app.models import FoodProvider, FoodProviderStaff, Shop
 from app.models.base import UserRole
-from app.schemas import MeOut, RegistrationUpdate
+from app.schemas import ContactDetailsUpdate, MeOut, RegistrationUpdate
 
 router = APIRouter(prefix="/me", tags=["me"])
 
@@ -24,6 +24,36 @@ def read_me(user: CurrentUser, db: Annotated[Session, Depends(get_db)]):
         "email": user.email,
         "image": user.image,
         "faculty": user.faculty,
+        "phone": user.phone,
+        "telegram_username": user.telegram_username,
+        "role": user.role,
+        "shop": shop,
+    }
+
+
+@router.patch("/contact", response_model=MeOut)
+def update_contact_details(
+    payload: ContactDetailsUpdate,
+    user: CurrentUser,
+    db: Annotated[Session, Depends(get_db)],
+):
+    """Update the signed-in user's public WhatsApp and Telegram contacts."""
+    contact_fields = payload.model_dump(exclude_unset=True)
+    if "whatsapp" in contact_fields:
+        user.phone = contact_fields["whatsapp"]
+    if "telegram_username" in contact_fields:
+        user.telegram_username = contact_fields["telegram_username"]
+    db.commit()
+    db.refresh(user)
+    shop = db.scalars(select(Shop).where(Shop.owner_id == user.id)).first()
+    return {
+        "id": user.id,
+        "name": user.name,
+        "email": user.email,
+        "image": user.image,
+        "faculty": user.faculty,
+        "phone": user.phone,
+        "telegram_username": user.telegram_username,
         "role": user.role,
         "shop": shop,
     }
@@ -89,6 +119,8 @@ def update_registration(
         "email": user.email,
         "image": user.image,
         "faculty": user.faculty,
+        "phone": user.phone,
+        "telegram_username": user.telegram_username,
         "role": user.role,
         "shop": shop,
     }

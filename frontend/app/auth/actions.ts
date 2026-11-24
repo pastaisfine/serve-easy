@@ -1,10 +1,17 @@
 "use server"
 
 import { redirect } from "next/navigation"
+import { revalidatePath } from "next/cache"
 
-import { ApiError, saveRegistrationProfile } from "@/lib/api-write"
+import {
+  ApiError,
+  getMe,
+  saveRegistrationProfile,
+  updateMyContacts,
+} from "@/lib/api-write"
 import { safeRedirect } from "@/lib/auth/redirect"
 import { auth } from "@/lib/auth/server"
+import type { ContactDetailsPayload } from "@/lib/api"
 
 export type RegistrationRole = "student" | "service_provider" | "food_seller"
 
@@ -25,6 +32,8 @@ export interface AuthState {
 export type ProfileUser = {
   name: string
   email: string
+  whatsapp: string | null
+  telegram_username: string | null
 }
 
 type EmailOtpResult<T> = {
@@ -50,7 +59,41 @@ export async function getProfileUserAction(): Promise<ProfileUser | null> {
   }
 
   const user = session?.user
-  return user ? { name: user.name, email: user.email } : null
+  if (!user) return null
+  const profile = await getMe()
+  return {
+    name: user.name,
+    email: user.email,
+    whatsapp: profile.whatsapp,
+    telegram_username: profile.telegram_username,
+  }
+}
+
+export async function saveProfileContactsAction(
+  contacts: ContactDetailsPayload
+): Promise<{
+  data?: Pick<ProfileUser, "whatsapp" | "telegram_username">
+  error?: string
+  fieldErrors?: Record<string, string>
+}> {
+  try {
+    const updated = await updateMyContacts(contacts)
+    revalidatePath("/profile")
+    return {
+      data: {
+        whatsapp: updated.whatsapp,
+        telegram_username: updated.telegram_username,
+      },
+    }
+  } catch (error) {
+    if (error instanceof ApiError) {
+      return {
+        error: error.message,
+        fieldErrors: error.fieldErrors,
+      }
+    }
+    throw error
+  }
 }
 
 // The SDK exposes these managed-auth endpoints at runtime but types the plugin namespace as unknown.
@@ -80,11 +123,11 @@ function registrationFields(formData: FormData): {
     name,
     email,
     accountType:
-    accountType === "student" ||
-    accountType === "service_provider" ||
-    accountType === "food_seller"
-      ? accountType
-      : null,
+      accountType === "student" ||
+      accountType === "service_provider" ||
+      accountType === "food_seller"
+        ? accountType
+        : null,
     studentId,
     foodProviderId,
     redirectTo,

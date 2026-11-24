@@ -8,7 +8,6 @@ from app.models.food import (
     OrderLineItem,
 )
 from app.models.marketplace import ProductListing
-from app.models.message import Message
 from app.models.notification import Notification
 from app.models.order import ProductOrder
 from app.models.service import Service, ServiceBooking
@@ -29,6 +28,5 @@ __all__ = [
     "OrderLineItem",
     "Service",
     "ServiceBooking",
-    "Message",
     "Notification",
 ]

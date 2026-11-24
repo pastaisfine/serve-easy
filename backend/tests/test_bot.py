@@ -11,6 +11,7 @@ from sqlalchemy import create_engine, text
 from sqlalchemy.exc import DatabaseError
 
 from app.bot import queries
+from app.bot import telegram_bot
 from app.config import settings, to_sqlalchemy_url
 from app.models.base import ListingCategory
 from app.schemas import ListingOut, ServiceOut
@@ -52,9 +53,21 @@ def test_search_listings_hides_private_fields():
         rows = queries.search_listings(session, limit=5)
     assert rows
     for row in rows:
-        assert set(row.seller.model_dump()) == {"id", "name", "image", "faculty"}
+        assert set(row.seller.model_dump()) == {
+            "id",
+            "name",
+            "image",
+            "faculty",
+            "whatsapp",
+            "telegram_username",
+        }
         assert "email" not in row.seller.model_dump()
-        assert "phone" not in row.seller.model_dump()
+        assert "student_id" not in row.seller.model_dump()
+        card = telegram_bot._listing_card(row)
+        if row.seller.whatsapp:
+            assert row.seller.whatsapp not in card
+        if row.seller.telegram_username:
+            assert row.seller.telegram_username not in card
 
 
 def test_search_listings_filters():
@@ -77,6 +90,18 @@ def test_search_services_filters():
 
     found = queries.search_services(session, q="printing", limit=100)
     assert found and all("printing" in row.title.lower() for row in found)
+
+
+def test_bot_service_cards_omit_public_contact_links():
+    with queries.bot_session() as session:
+        rows = queries.search_services(session, limit=5)
+    assert rows
+    for row in rows:
+        card = telegram_bot._service_card(row)
+        if row.provider.whatsapp:
+            assert row.provider.whatsapp not in card
+        if row.provider.telegram_username:
+            assert row.provider.telegram_username not in card
 
 
 def test_menu_only_returns_available_items():

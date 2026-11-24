@@ -5,6 +5,7 @@ import { useState, useTransition } from "react"
 
 import {
   addMealMenuItem,
+  saveMealProviderContacts,
   setMealItemAvailability,
   updateMealBatch,
   uploadMealDeliveryPhoto,
@@ -59,7 +60,11 @@ function DeliveryBatchCard({
         setMessage(upload.error ?? "The delivery photo could not be uploaded.")
         return
       }
-      const result = await updateMealBatch(batch.id, "delivered", upload.data.key)
+      const result = await updateMealBatch(
+        batch.id,
+        "delivered",
+        upload.data.key
+      )
       if (result.error) {
         setMessage(result.error)
         return
@@ -158,9 +163,15 @@ export function ProviderMealWorkspace({
   const router = useRouter()
   const [session, setSession] = useState<MealSession>("lunch")
   const [message, setMessage] = useState("")
+  const [contactMessage, setContactMessage] = useState("")
+  const [contactFieldErrors, setContactFieldErrors] = useState<
+    Record<string, string>
+  >({})
   const [isPending, startTransition] = useTransition()
   const visibleMenu = menu.filter((item) => item.meal_session === session)
-  const visibleBatches = batches.filter((batch) => batch.meal_session === session)
+  const visibleBatches = batches.filter(
+    (batch) => batch.meal_session === session
+  )
 
   function addItem(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -207,13 +218,115 @@ export function ProviderMealWorkspace({
     })
   }
 
+  function saveContacts(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    setContactMessage("")
+    setContactFieldErrors({})
+    const formData = new FormData(event.currentTarget)
+    const whatsapp = String(formData.get("whatsapp") ?? "").trim()
+    const telegramUsername = String(
+      formData.get("telegram_username") ?? ""
+    ).trim()
+    startTransition(async () => {
+      const result = await saveMealProviderContacts({
+        whatsapp: whatsapp || null,
+        telegram_username: telegramUsername || null,
+      })
+      if (result.error) {
+        setContactMessage(result.error)
+        setContactFieldErrors(result.fieldErrors ?? {})
+        return
+      }
+      setContactMessage("Provider contact details saved.")
+      router.refresh()
+    })
+  }
+
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 pt-8 md:px-8 md:pt-12">
-      <PageHeader title="Provider workspace" backHref="/cafeterias" backLabel="Meals">
+      <PageHeader
+        title="Provider workspace"
+        backHref="/cafeterias"
+        backLabel="Meals"
+      >
         <p className="text-sm text-muted-foreground">
           {provider.name} · manage sample menu availability and campus drops.
         </p>
       </PageHeader>
+
+      <form
+        onSubmit={saveContacts}
+        className="flex flex-col gap-4 rounded-2xl bg-card p-5 ring-1 ring-foreground/5"
+      >
+        <div>
+          <h2 className="font-semibold">Public provider contacts</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            These business contacts appear on this provider’s menu and meal
+            pages.
+          </p>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <label
+            htmlFor="provider-whatsapp"
+            className="flex flex-col gap-2 text-sm font-medium"
+          >
+            WhatsApp number
+            <Input
+              id="provider-whatsapp"
+              name="whatsapp"
+              type="tel"
+              autoComplete="tel"
+              defaultValue={provider.whatsapp ?? ""}
+              placeholder="+60 12 345 6789"
+            />
+            <span className="text-xs font-normal text-muted-foreground">
+              Include the country code.
+            </span>
+            {contactFieldErrors.whatsapp && (
+              <span className="text-sm font-normal text-destructive">
+                {contactFieldErrors.whatsapp}
+              </span>
+            )}
+          </label>
+          <label
+            htmlFor="provider-telegram"
+            className="flex flex-col gap-2 text-sm font-medium"
+          >
+            Telegram username
+            <Input
+              id="provider-telegram"
+              name="telegram_username"
+              autoComplete="username"
+              defaultValue={
+                provider.telegram_username
+                  ? `@${provider.telegram_username}`
+                  : ""
+              }
+              placeholder="@username"
+            />
+            {contactFieldErrors.telegram_username && (
+              <span className="text-sm font-normal text-destructive">
+                {contactFieldErrors.telegram_username}
+              </span>
+            )}
+          </label>
+        </div>
+        {contactMessage && (
+          <p
+            role={contactMessage.includes("saved") ? "status" : "alert"}
+            className={
+              contactMessage.includes("saved")
+                ? "text-sm text-muted-foreground"
+                : "text-sm text-destructive"
+            }
+          >
+            {contactMessage}
+          </p>
+        )}
+        <Button type="submit" className="w-fit" disabled={isPending}>
+          {isPending ? "Saving…" : "Save provider contacts"}
+        </Button>
+      </form>
 
       <div className="flex gap-2" aria-label="Meal session">
         {(["lunch", "dinner"] as const).map((value) => (
@@ -229,7 +342,10 @@ export function ProviderMealWorkspace({
         ))}
       </div>
 
-      <section aria-labelledby="provider-menu-heading" className="flex flex-col gap-4">
+      <section
+        aria-labelledby="provider-menu-heading"
+        className="flex flex-col gap-4"
+      >
         <div>
           <h2 id="provider-menu-heading" className="text-xl font-semibold">
             {sessionLabels[session]} menu
@@ -276,7 +392,10 @@ export function ProviderMealWorkspace({
           className="grid gap-3 rounded-2xl bg-card p-4 sm:grid-cols-[1fr_9rem_auto] sm:items-end"
         >
           <div>
-            <label htmlFor="menu-item-name" className="mb-2 block text-sm font-medium">
+            <label
+              htmlFor="menu-item-name"
+              className="mb-2 block text-sm font-medium"
+            >
               Item name
             </label>
             <Input
@@ -289,7 +408,10 @@ export function ProviderMealWorkspace({
             />
           </div>
           <div>
-            <label htmlFor="menu-item-price" className="mb-2 block text-sm font-medium">
+            <label
+              htmlFor="menu-item-price"
+              className="mb-2 block text-sm font-medium"
+            >
               Price (RM)
             </label>
             <Input
@@ -316,13 +438,20 @@ export function ProviderMealWorkspace({
         )}
       </section>
 
-      <section aria-labelledby="provider-deliveries-heading" className="flex flex-col gap-4">
+      <section
+        aria-labelledby="provider-deliveries-heading"
+        className="flex flex-col gap-4"
+      >
         <div>
-          <h2 id="provider-deliveries-heading" className="text-xl font-semibold">
+          <h2
+            id="provider-deliveries-heading"
+            className="text-xl font-semibold"
+          >
             Today’s {sessionLabels[session].toLowerCase()} delivery drops
           </h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Orders are grouped by pickup point. Post a photo when the drop is delivered.
+            Orders are grouped by pickup point. Post a photo when the drop is
+            delivered.
           </p>
         </div>
         {visibleBatches.length > 0 ? (

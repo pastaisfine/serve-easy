@@ -8,6 +8,7 @@ import {
   changeProductOrderStatus,
   changeServiceBookingStatus,
 } from "@/app/(tabs)/orders/actions"
+import { ContactLinks } from "@/components/serve/contact-links"
 import { Button } from "@/components/ui/button"
 import { formatPrice } from "@/lib/format"
 import type {
@@ -29,10 +30,10 @@ function statusName(entry: RequestEntry) {
       : "Waiting for a response"
   }
   return {
-  accepted: "Accepted",
-  declined: "Declined",
-  completed: "Completed",
-  cancelled: "Cancelled",
+    accepted: "Accepted",
+    declined: "Declined",
+    completed: "Completed",
+    cancelled: "Cancelled",
   }[request.status]
 }
 
@@ -93,9 +94,10 @@ function RequestCard({
   function update(status: RequestStatus) {
     setError("")
     startTransition(async () => {
-      const result = entry.kind === "item"
-        ? await changeProductOrderStatus(request.id, status)
-        : await changeServiceBookingStatus(request.id, status)
+      const result =
+        entry.kind === "item"
+          ? await changeProductOrderStatus(request.id, status)
+          : await changeServiceBookingStatus(request.id, status)
       if (result.error) {
         setError(result.error)
         return
@@ -138,6 +140,12 @@ function RequestCard({
               : `Requested ${entry.request.requested_date} · ${entry.request.service_spot}`}
           </span>
         </div>
+        <div className="mt-2">
+          <ContactLinks
+            whatsapp={request.counterpart.whatsapp}
+            telegramUsername={request.counterpart.telegram_username}
+          />
+        </div>
         {!compact && (
           <p className="mt-2 text-sm text-foreground/80">
             {entry.kind === "item"
@@ -172,7 +180,11 @@ function RequestCard({
             key={action.status}
             type="button"
             size="sm"
-            variant={action.status === "declined" || action.status === "cancelled" ? "outline" : "default"}
+            variant={
+              action.status === "declined" || action.status === "cancelled"
+                ? "outline"
+                : "default"
+            }
             disabled={isPending}
             onClick={() => update(action.status)}
           >
@@ -197,11 +209,16 @@ export function MarketplaceRequests({
 }) {
   const entries: RequestEntry[] = [
     ...productOrders.map((request) => ({ kind: "item" as const, request })),
-    ...serviceBookings.map((request) => ({ kind: "service" as const, request })),
+    ...serviceBookings.map((request) => ({
+      kind: "service" as const,
+      request,
+    })),
   ]
     .filter(
       ({ request }) =>
-        !activeOnly || request.status === "pending" || request.status === "accepted"
+        !activeOnly ||
+        request.status === "pending" ||
+        request.status === "accepted"
     )
     .sort(
       (a, b) =>

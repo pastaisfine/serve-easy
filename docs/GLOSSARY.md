@@ -36,6 +36,10 @@ A service-related term: a student's request for a campus service. It has a statu
 
 A screenshot or reference number a student submits to confirm a money transfer (DuitNow/TNG). The seller verifies it before completing an order.
 
+### External contact links
+
+Optional public WhatsApp and Telegram links on item, service, shop, and cafeteria pages. User accounts manage their own contact details; food-provider staff manage the cafeteria's business contacts.
+
 ## Entity types
 
 ### User
@@ -53,10 +57,6 @@ A record for a campus service (printing, tailoring, etc.). Has `unit` (e.g. "hou
 ### ServiceBooking
 
 A request by a student for a service. Provider accepts/declines and updates status.
-
-### Message
-
-A text-only chat between two users. Not a conversation thread, just an ordered list of messages.
 
 ## Actions
 

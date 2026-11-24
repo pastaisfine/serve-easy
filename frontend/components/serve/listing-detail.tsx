@@ -3,6 +3,7 @@ import { ImageIcon, MapPinIcon, StoreIcon } from "lucide-react"
 
 import { PageHeader } from "@/components/serve/page-header"
 import { MarketplaceRequestForm } from "@/components/serve/marketplace-request-form"
+import { ContactLinks } from "@/components/serve/contact-links"
 import { StudentAvatar } from "@/components/serve/student"
 import { Badge } from "@/components/ui/badge"
 import { LoadingImage } from "@/components/ui/loading-image"
@@ -20,7 +21,12 @@ export interface ListingDetailProps {
   condition?: string
   description: string
   spot: string
-  owner: { name: string; faculty: string | null }
+  owner: {
+    name: string
+    faculty: string | null
+    whatsapp: string | null
+    telegram_username: string | null
+  }
   ownerId: string
   viewerId: string | null
   shop: ShopRef | null
@@ -44,9 +50,13 @@ export function ListingDetail(
       >
         <div className="flex flex-wrap items-center gap-2">
           <Badge variant="secondary">{props.category}</Badge>
-          {props.condition && <Badge variant="outline">{props.condition}</Badge>}
+          {props.condition && (
+            <Badge variant="outline">{props.condition}</Badge>
+          )}
           {props.sold && <Badge variant="destructive">Sold</Badge>}
-          {props.reserved && <Badge variant="outline">Request in progress</Badge>}
+          {props.reserved && (
+            <Badge variant="outline">Request in progress</Badge>
+          )}
         </div>
       </PageHeader>
 
@@ -76,7 +86,10 @@ export function ListingDetail(
 
           {props.description && (
             <section aria-labelledby="about" className="flex flex-col gap-1.5">
-              <h2 id="about" className="text-sm font-medium text-muted-foreground">
+              <h2
+                id="about"
+                className="text-sm font-medium text-muted-foreground"
+              >
                 {isService ? "About this service" : "About this item"}
               </h2>
               <p className="text-base whitespace-pre-line text-foreground/80">
@@ -96,7 +109,10 @@ export function ListingDetail(
           />
 
           <section aria-labelledby="where" className="flex flex-col gap-1.5">
-            <h2 id="where" className="text-sm font-medium text-muted-foreground">
+            <h2
+              id="where"
+              className="text-sm font-medium text-muted-foreground"
+            >
               {isService ? "Where it happens" : "Meetup spot"}
             </h2>
             <p className="flex items-start gap-1.5 text-base">
@@ -123,6 +139,10 @@ export function ListingDetail(
                 )}
               </div>
             </div>
+            <ContactLinks
+              whatsapp={props.owner.whatsapp}
+              telegramUsername={props.owner.telegram_username}
+            />
             {props.shop && (
               <Link
                 href={`/shops/${props.shop.id}`}

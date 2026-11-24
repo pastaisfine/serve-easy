@@ -35,8 +35,8 @@ The API keeps its own engine without the flag, so its write routes are unaffecte
 ### What it shows
 
 Every query returns the same Pydantic schemas the HTTP API uses (`ListingOut`, `ServiceOut`,
-`MenuOut`, `ShopOut`). The bot therefore shows the same fields as the app and cannot expose an
-email address, phone number or student id, because those are already missing from the schemas.
+`MenuOut`, `ShopOut`). Public schemas include optional contact links for app pages, but Telegram
+bot rendering deliberately omits those links. Email and student ID are not part of the schemas.
 
 ### Why not call the API
 
@@ -69,4 +69,5 @@ must be kept in step when the filters change.
 1. `SHOW transaction_read_only` returns `on` inside a bot session.
 2. An `UPDATE` from a bot session raises `ReadOnlySqlTransaction`.
 3. Every reply shows only `id`, `name`, `image` and `faculty` for a seller or provider.
-4. `uvicorn app.main:app` starts the bot and `/listings calculator` answers with real listings.
+4. `uvicorn app.main:app` starts the bot and `/listings calculator` answers with real listings
+   without rendering users' contact details.

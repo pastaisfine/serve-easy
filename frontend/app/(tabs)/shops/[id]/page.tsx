@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import { ClockIcon, MapPinIcon } from "lucide-react"
 
 import { ListingCard } from "@/components/serve/listing-card"
+import { ContactLinks } from "@/components/serve/contact-links"
 import { PageHeader } from "@/components/serve/page-header"
 import { LoadingImage } from "@/components/ui/loading-image"
 import { fromApiListing, fromApiService, getShop } from "@/lib/api"
@@ -66,6 +67,10 @@ export default async function ShopPage(props: PageProps<"/shops/[id]">) {
             Run by {shop.owner.name}
             {shop.owner.faculty ? `, ${shop.owner.faculty}` : ""}
           </p>
+          <ContactLinks
+            whatsapp={shop.owner.whatsapp}
+            telegramUsername={shop.owner.telegram_username}
+          />
         </PageHeader>
       </div>
 

@@ -6,7 +6,8 @@ from pydantic import ValidationError
 
 from app.models.base import UserRole
 from app.routers.me import update_registration
-from app.schemas import RegistrationUpdate
+from app.routers.me import update_contact_details
+from app.schemas import ContactDetailsUpdate, RegistrationUpdate, UserSummary
 
 
 class FakeResult:
@@ -23,6 +24,9 @@ class FakeSession:
         self.committed = True
 
     def rollback(self):
+        pass
+
+    def refresh(self, _value):
         pass
 
     def execute(self, _statement):
@@ -48,6 +52,8 @@ def account(*, email="student@graduate.utm.my", verified=True):
         faculty=None,
         role=UserRole.STUDENT,
         student_id=None,
+        phone=None,
+        telegram_username=None,
     )
 
 
@@ -130,3 +136,58 @@ def test_registration_requires_email_verification_for_all_roles():
         )
 
     assert error.value.status_code == 403
+
+
+def test_contact_details_normalize_and_save_optional_contacts():
+    user = account()
+    db = FakeSession()
+    payload = ContactDetailsUpdate(
+        whatsapp="+60 12-345 6789",
+        telegram_username="@serve_user",
+    )
+
+    result = update_contact_details(payload, user, db)
+
+    assert user.phone == "+60 12-345 6789"
+    assert user.telegram_username == "serve_user"
+    assert result["phone"] == user.phone
+    assert result["telegram_username"] == user.telegram_username
+    assert db.committed
+
+
+def test_public_user_summary_uses_public_contact_field_names():
+    summary = UserSummary.model_validate(account())
+    assert summary.whatsapp is None
+    assert summary.telegram_username is None
+    assert "phone" not in summary.model_dump()
+    assert "whatsapp" in summary.model_dump()
+
+
+def test_contact_details_can_be_cleared():
+    user = account()
+    user.phone = "+60123456789"
+    user.telegram_username = "serve_user"
+    db = FakeSession()
+
+    update_contact_details(
+        ContactDetailsUpdate(whatsapp=None, telegram_username=None),
+        user,
+        db,
+    )
+
+    assert user.phone is None
+    assert user.telegram_username is None
+
+
+@pytest.mark.parametrize(
+    "payload",
+    [
+        {"whatsapp": "not a phone"},
+        {"whatsapp": "0123456789"},
+        {"telegram_username": "@12345"},
+        {"telegram_username": "名字名字名字"},
+    ],
+)
+def test_contact_details_reject_invalid_values(payload):
+    with pytest.raises(ValidationError):
+        ContactDetailsUpdate(**payload)

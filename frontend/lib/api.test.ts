@@ -3,7 +3,14 @@ import { afterEach, describe, expect, test, vi } from "vitest"
 import { getFreshListings, searchCatalog } from "@/lib/api"
 import type { ApiListing, ApiService } from "@/lib/api"
 
-const person = { id: "u1", name: "Aisyah", image: null, faculty: null }
+const person = {
+  id: "u1",
+  name: "Aisyah",
+  image: null,
+  faculty: null,
+  whatsapp: null,
+  telegram_username: null,
+}
 
 function apiListing(id: string, createdAt: string): ApiListing {
   return {

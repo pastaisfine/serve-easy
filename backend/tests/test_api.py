@@ -41,7 +41,16 @@ def test_listings_returns_only_active_with_public_seller_fields(client):
     body = _all(client, "/listings")
     assert len(body) == sum(1 for r in data.LISTINGS if r["status"] == "active")
     assert {l["status"] for l in body} == {"active"}
-    assert set(body[0]["seller"]) == {"id", "name", "image", "faculty"}  # no email/phone leaked
+    assert set(body[0]["seller"]) == {
+        "id",
+        "name",
+        "image",
+        "faculty",
+        "whatsapp",
+        "telegram_username",
+    }
+    assert "email" not in body[0]["seller"]
+    assert "student_id" not in body[0]["seller"]
     assert all(l["spot"] for l in body)
 
 
@@ -105,7 +114,14 @@ def test_services(client):
     assert len(everything) == len(data.SERVICES)
     repairs = _all(client, "/services?category=repair")
     assert len(repairs) == sum(1 for r in data.SERVICES if r["category"] == "repair") and {s["category"] for s in repairs} == {"repair"}
-    assert set(everything[0]["provider"]) == {"id", "name", "image", "faculty"}
+    assert set(everything[0]["provider"]) == {
+        "id",
+        "name",
+        "image",
+        "faculty",
+        "whatsapp",
+        "telegram_username",
+    }
     assert all(s["spot"] for s in everything)
 
 
@@ -137,7 +153,14 @@ def test_shops_list_and_the_cube(client):
     assert [s["name"] for s in shops] == ["Amir Print Corner", "Nadia's Stitches", "The Cube"]
     cube = next(s for s in shops if s["name"] == "The Cube")
     assert cube["hours"] == "7:00 PM - 11:30 PM, daily"
-    assert set(cube["owner"]) == {"id", "name", "image", "faculty"}
+    assert set(cube["owner"]) == {
+        "id",
+        "name",
+        "image",
+        "faculty",
+        "whatsapp",
+        "telegram_username",
+    }
 
 
 def test_shop_detail_includes_its_services_and_links_back_from_them(client):

@@ -5,6 +5,7 @@ import { useState, useTransition } from "react"
 
 import { placeMealOrder } from "@/app/(tabs)/meals/actions"
 import { PageHeader } from "@/components/serve/page-header"
+import { ContactLinks } from "@/components/serve/contact-links"
 import { Button } from "@/components/ui/button"
 import { NativeSelect } from "@/components/ui/native-select"
 import type { ApiMenu, MealOrderPayload } from "@/lib/api"
@@ -94,9 +95,9 @@ export function MealOrdering({
       }
       setMessage("Order placed. Each provider has received its own order.")
       setNeedsSignIn(false)
-      setPlacedProviders(
-        [...new Set((result.data ?? []).map((order) => order.provider.name))]
-      )
+      setPlacedProviders([
+        ...new Set((result.data ?? []).map((order) => order.provider.name)),
+      ])
       setQuantities({})
     })
   }
@@ -109,10 +110,16 @@ export function MealOrdering({
           point, then track the shared delivery updates.
         </p>
         <div className="flex flex-wrap gap-x-5 gap-y-2 pt-1 text-sm">
-          <Link className="font-medium underline underline-offset-4" href="/meals/orders">
+          <Link
+            className="font-medium underline underline-offset-4"
+            href="/meals/orders"
+          >
             My meal orders
           </Link>
-          <Link className="font-medium underline underline-offset-4" href="/meals/manage">
+          <Link
+            className="font-medium underline underline-offset-4"
+            href="/meals/manage"
+          >
             Provider workspace
           </Link>
         </div>
@@ -155,12 +162,23 @@ export function MealOrdering({
           {availableMenus.length > 0 ? (
             <div className="flex flex-col gap-8">
               {availableMenus.map((menu) => (
-                <section key={menu.cafeteria.id} aria-label={menu.cafeteria.name}>
+                <section
+                  key={menu.cafeteria.id}
+                  aria-label={menu.cafeteria.name}
+                >
                   <div className="mb-3 flex items-baseline justify-between gap-4">
-                    <h3 className="text-lg font-semibold">{menu.cafeteria.name}</h3>
-                    <span className="text-xs uppercase tracking-wide text-muted-foreground">
+                    <h3 className="text-lg font-semibold">
+                      {menu.cafeteria.name}
+                    </h3>
+                    <span className="text-xs tracking-wide text-muted-foreground uppercase">
                       Sample menu
                     </span>
+                  </div>
+                  <div className="mb-3">
+                    <ContactLinks
+                      whatsapp={menu.cafeteria.whatsapp}
+                      telegramUsername={menu.cafeteria.telegram_username}
+                    />
                   </div>
                   <ul className="divide-y rounded-2xl bg-card px-4">
                     {menu.items.map((item) => (
@@ -216,12 +234,18 @@ export function MealOrdering({
         </section>
 
         <aside className="lg:sticky lg:top-24">
-          <section aria-labelledby="cart-heading" className="rounded-2xl bg-card p-5">
+          <section
+            aria-labelledby="cart-heading"
+            className="rounded-2xl bg-card p-5"
+          >
             <h2 id="cart-heading" className="text-lg font-semibold">
               Your order
             </h2>
             <div className="mt-4">
-              <label htmlFor="meal-location" className="mb-2 block text-sm font-medium">
+              <label
+                htmlFor="meal-location"
+                className="mb-2 block text-sm font-medium"
+              >
                 Pickup point
               </label>
               <NativeSelect
@@ -247,7 +271,8 @@ export function MealOrdering({
                     <span className="min-w-0">
                       <span className="block font-medium">{item.name}</span>
                       <span className="text-muted-foreground">
-                        {provider} · {quantity} × {formatPrice(Number(item.price))}
+                        {provider} · {quantity} ×{" "}
+                        {formatPrice(Number(item.price))}
                       </span>
                     </span>
                     <span className="shrink-0 tabular-nums">

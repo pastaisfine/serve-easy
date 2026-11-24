@@ -56,15 +56,7 @@ export function OfferCard({ offer }: { offer: Offer }) {
         <p>Expires {formatExpiry(offer.expiresAt)}</p>
       </div>
 
-      <div className="mt-auto grid grid-cols-2 gap-3">
-        <Button
-          variant="outline"
-          className="h-11 rounded-xl border-foreground/30 bg-card text-base"
-          nativeButton={false}
-          render={<Link href={`/inbox?offer=${offer.id}`} />}
-        >
-          Open in Chat
-        </Button>
+      <div className="mt-auto">
         <Button
           className="h-11 rounded-xl text-base"
           nativeButton={false}

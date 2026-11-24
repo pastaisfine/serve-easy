@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
 import { PageHeader } from "@/components/serve/page-header"
+import { ContactLinks } from "@/components/serve/contact-links"
 import { getMenu, type ApiFoodItem } from "@/lib/api"
 import { formatPrice } from "@/lib/format"
 
@@ -35,6 +36,10 @@ export default async function CafeteriaMenuPage(
         <p className="text-base text-muted-foreground">
           Add items from multiple providers to one order from the Meals page.
         </p>
+        <ContactLinks
+          whatsapp={menu.cafeteria.whatsapp}
+          telegramUsername={menu.cafeteria.telegram_username}
+        />
       </PageHeader>
 
       {sessions.map(({ key, label }) => (
@@ -48,7 +53,13 @@ export default async function CafeteriaMenuPage(
   )
 }
 
-function MenuSection({ label, items }: { label: string; items: ApiFoodItem[] }) {
+function MenuSection({
+  label,
+  items,
+}: {
+  label: string
+  items: ApiFoodItem[]
+}) {
   const headingId = `menu-${label.toLowerCase()}`
   return (
     <section aria-labelledby={headingId} className="flex flex-col gap-3">

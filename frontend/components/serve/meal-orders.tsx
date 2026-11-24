@@ -1,6 +1,7 @@
 import Link from "next/link"
 
 import { PageHeader } from "@/components/serve/page-header"
+import { ContactLinks } from "@/components/serve/contact-links"
 import { LoadingImage } from "@/components/ui/loading-image"
 import type { ApiMealDeliveryBatch, ApiMealOrder } from "@/lib/api"
 import { formatPrice } from "@/lib/format"
@@ -45,6 +46,10 @@ export function MealOrders({
                     {formatPrice(Number(order.total))}
                   </span>
                 </div>
+                <ContactLinks
+                  whatsapp={order.provider.whatsapp}
+                  telegramUsername={order.provider.telegram_username}
+                />
                 <p className="text-sm text-muted-foreground">
                   {order.meal_session === "lunch" ? "Lunch" : "Dinner"} ·{" "}
                   {order.pickup_location}
@@ -84,7 +89,10 @@ export function MealOrders({
         ) : (
           <p className="rounded-2xl bg-card px-5 py-6 text-sm text-muted-foreground">
             You haven’t placed a meal order today.{" "}
-            <Link href="/cafeterias" className="font-medium text-foreground underline">
+            <Link
+              href="/cafeterias"
+              className="font-medium text-foreground underline"
+            >
               Browse today’s menus
             </Link>
             .
@@ -92,7 +100,10 @@ export function MealOrders({
         )}
       </section>
 
-      <section aria-labelledby="campus-deliveries" className="flex flex-col gap-4">
+      <section
+        aria-labelledby="campus-deliveries"
+        className="flex flex-col gap-4"
+      >
         <div>
           <h2 id="campus-deliveries" className="text-lg font-semibold">
             Campus delivery points
@@ -104,10 +115,7 @@ export function MealOrders({
         {batches.length > 0 ? (
           <ul className="grid gap-x-8 md:grid-cols-2">
             {batches.map((batch) => (
-              <li
-                key={batch.id}
-                className="flex flex-col gap-2 border-b py-4"
-              >
+              <li key={batch.id} className="flex flex-col gap-2 border-b py-4">
                 <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                   <h3 className="font-medium">{batch.pickup_location}</h3>
                   <span className="text-sm font-medium">

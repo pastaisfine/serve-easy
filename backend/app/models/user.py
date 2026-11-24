@@ -25,6 +25,7 @@ class User(Base):
     role: Mapped[UserRole] = mapped_column(pg_enum(UserRole, "user_role"), default=UserRole.STUDENT)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True, server_default="true")
     phone: Mapped[str | None] = mapped_column(String(32))
+    telegram_username: Mapped[str | None] = mapped_column(String(32))
     faculty: Mapped[str | None] = mapped_column(String(120))
     created_at: Mapped[created_ts]
     updated_at: Mapped[datetime] = mapped_column(

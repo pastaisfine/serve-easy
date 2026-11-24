@@ -1,8 +1,9 @@
+import re
 from datetime import date, datetime
 from decimal import Decimal
 from typing import Annotated, Literal
 
-from pydantic import BaseModel, BeforeValidator, ConfigDict, Field, field_validator
+from pydantic import AliasChoices, BaseModel, BeforeValidator, ConfigDict, Field, field_validator
 
 from app.models.base import (
     DeliveryStatus,
@@ -37,12 +38,14 @@ class Create(BaseModel):
 
 
 class UserSummary(ORM):
-    """The public slice of a user. Never exposes email, phone or student id."""
+    """Public user details. Contact links are intentionally visible."""
 
     id: str
     name: str
     image: str | None
     faculty: str | None
+    whatsapp: str | None = Field(validation_alias="phone")
+    telegram_username: str | None
 
 
 class ShopRef(ORM):
@@ -72,6 +75,8 @@ class CafeteriaOut(ORM):
     id: str
     name: str
     image: str | None
+    whatsapp: str | None = Field(validation_alias=AliasChoices("whatsapp", "phone"))
+    telegram_username: str | None
 
 
 class FoodItemOut(ORM):
@@ -119,6 +124,8 @@ class MealProviderOut(ORM):
     id: str
     name: str
     image: ImageUrl
+    whatsapp: str | None
+    telegram_username: str | None
 
 
 class MealDeliveryBatchOut(ORM):
@@ -298,15 +305,54 @@ class ServiceCreate(Create):
 
 
 class MeOut(ORM):
-    """The signed-in user, including the private fields `UserSummary` hides."""
+    """The signed-in user's profile and public contact links."""
 
     id: str
     name: str
     email: str
     image: str | None
     faculty: str | None
+    whatsapp: str | None = Field(validation_alias="phone")
+    telegram_username: str | None
     role: UserRole
     shop: ShopRef | None
+
+
+class ContactDetailsUpdate(Create):
+    whatsapp: Annotated[str, Field(min_length=8, max_length=32)] | None = None
+    telegram_username: Annotated[str, Field(min_length=5, max_length=32)] | None = None
+
+    @field_validator("whatsapp", mode="before")
+    @classmethod
+    def normalize_whatsapp(cls, value: object) -> object:
+        if not isinstance(value, str):
+            return value
+        value = value.strip()
+        if not value:
+            return None
+        digits = re.sub(r"\D", "", value)
+        if not 7 <= len(digits) <= 15 or not re.fullmatch(
+            r"\+[1-9][0-9\s().-]*", value
+        ):
+            raise ValueError("Enter a valid phone number with its country code")
+        return value
+
+    @field_validator("telegram_username", mode="before")
+    @classmethod
+    def normalize_telegram_username(cls, value: object) -> object:
+        if not isinstance(value, str):
+            return value
+        username = value.strip().removeprefix("@")
+        if not username:
+            return None
+        if (
+            not 5 <= len(username) <= 32
+            or not username.isascii()
+            or not username[0].isalpha()
+            or not username.replace("_", "").isalnum()
+        ):
+            raise ValueError("Enter a valid Telegram username")
+        return username
 
 
 class RegistrationUpdate(Create):

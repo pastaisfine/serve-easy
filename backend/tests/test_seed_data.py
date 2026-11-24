@@ -107,8 +107,7 @@ def test_unique_columns_do_not_collide():
     assert len(student_ids) == len(set(student_ids))
 
 
-def test_no_message_is_sent_to_self_and_prices_are_positive():
-    assert all(m["sender_id"] != m["receiver_id"] for m in data.MESSAGES)
+def test_prices_are_positive():
     for rows in (data.LISTINGS, data.FOOD_ITEMS, data.SERVICES):
         assert all(r["price"] > Decimal("0") for r in rows)
 

@@ -26,6 +26,8 @@ export interface ApiUserSummary {
   name: string
   image: string | null
   faculty: string | null
+  whatsapp: string | null
+  telegram_username: string | null
 }
 
 export interface ApiListing {
@@ -58,11 +60,7 @@ export interface ApiService {
 }
 
 export type RequestStatus =
-  | "pending"
-  | "accepted"
-  | "declined"
-  | "completed"
-  | "cancelled"
+  "pending" | "accepted" | "declined" | "completed" | "cancelled"
 
 export interface ApiProductOrder {
   id: string
@@ -109,6 +107,13 @@ export interface ApiCafeteria {
   id: string
   name: string
   image: string | null
+  whatsapp: string | null
+  telegram_username: string | null
+}
+
+export interface ContactDetailsPayload {
+  whatsapp: string | null
+  telegram_username: string | null
 }
 
 export interface ApiFoodItem {

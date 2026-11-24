@@ -19,6 +19,7 @@ import type {
   ApiServiceBooking,
   ApiService,
   ApiUserSummary,
+  ContactDetailsPayload,
   MealMenuItemPayload,
   MealOrderPayload,
   RequestStatus,
@@ -106,6 +107,18 @@ export async function getMe(): Promise<Me> {
   return (await authedFetch("/me")).json()
 }
 
+export async function updateMyContacts(
+  payload: ContactDetailsPayload
+): Promise<Me> {
+  return (
+    await authedFetch("/me/contact", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    })
+  ).json()
+}
+
 export async function saveRegistrationProfile(
   profile: RegistrationProfile
 ): Promise<void> {
@@ -123,10 +136,10 @@ export async function uploadImage(
 ): Promise<{ key: string; url: string }> {
   const body = new FormData()
   body.set("file", file)
-  const res = await authedFetch(
-    `/uploads/images?purpose=${purpose}`,
-    { method: "POST", body }
-  )
+  const res = await authedFetch(`/uploads/images?purpose=${purpose}`, {
+    method: "POST",
+    body,
+  })
   return res.json()
 }
 
@@ -185,7 +198,9 @@ export async function createProductOrder(
   return (await postJson("/product-orders", payload)).json()
 }
 
-export async function getProductOrder(orderId: string): Promise<ApiProductOrder> {
+export async function getProductOrder(
+  orderId: string
+): Promise<ApiProductOrder> {
   return (
     await authedFetch(`/product-orders/${encodeURIComponent(orderId)}`)
   ).json()
@@ -286,14 +301,28 @@ export async function getMyMealProvider(): Promise<ApiCafeteria> {
   return authedFetch("/meals/provider").then((response) => response.json())
 }
 
+export async function updateMyMealProviderContacts(
+  payload: ContactDetailsPayload
+): Promise<ApiCafeteria> {
+  return (
+    await authedFetch("/meals/provider/contact", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    })
+  ).json()
+}
+
 export async function getMyMealMenu(): Promise<ApiFoodItem[]> {
   return authedFetch("/meals/provider/menu").then((response) => response.json())
 }
 
-export async function getProviderMealOrders(params: {
-  meal_session?: "lunch" | "dinner"
-  delivery_date?: string
-} = {}): Promise<ApiProviderDeliveryBatch[]> {
+export async function getProviderMealOrders(
+  params: {
+    meal_session?: "lunch" | "dinner"
+    delivery_date?: string
+  } = {}
+): Promise<ApiProviderDeliveryBatch[]> {
   const query = new URLSearchParams()
   if (params.meal_session) query.set("meal_session", params.meal_session)
   if (params.delivery_date) query.set("delivery_date", params.delivery_date)

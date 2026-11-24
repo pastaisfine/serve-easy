@@ -5,6 +5,7 @@ import type { NextConfig } from "next"
 const storageHost = process.env.STORAGE_PUBLIC_HOST
 
 const nextConfig: NextConfig = {
+  devIndicators: false,
   experimental: {
     agentUpgrade: "security",
     // Listing forms post the photo with the fields. The backend caps photos at
