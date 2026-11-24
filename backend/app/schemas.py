@@ -140,7 +140,7 @@ class MealDeliveryBatchOut(ORM):
     provider: MealProviderOut
 
 
-class MealOrderLineOut(BaseModel):
+class MealOrderLineOut(ORM):
     item_id: str
     name: str
     quantity: int

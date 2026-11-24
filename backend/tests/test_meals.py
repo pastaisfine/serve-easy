@@ -1,4 +1,5 @@
 from datetime import date, datetime, timezone
+from decimal import Decimal
 from types import SimpleNamespace
 from zoneinfo import ZoneInfo
 
@@ -7,8 +8,9 @@ from fastapi import HTTPException
 
 from app.meal_locations import MEAL_PICKUP_LOCATIONS
 from app.models.base import MealSession, UserRole
+from app.models.food import OrderLineItem
 from app.routers.meals import _ensure_ordering_open, update_provider_contact
-from app.schemas import ContactDetailsUpdate, MealProviderOut
+from app.schemas import ContactDetailsUpdate, MealOrderLineOut, MealProviderOut
 
 KUALA_LUMPUR = ZoneInfo("Asia/Kuala_Lumpur")
 
@@ -41,6 +43,24 @@ def test_cutoff_uses_kuala_lumpur_local_time():
         _ensure_ordering_open(MealSession.LUNCH, utc_time)
     assert error.value.status_code == 409
     assert len(MEAL_PICKUP_LOCATIONS) == len(set(MEAL_PICKUP_LOCATIONS))
+
+
+def test_meal_order_line_response_accepts_orm_attributes():
+    line = OrderLineItem(
+        item_id="item-1",
+        item_name="Nasi lemak",
+        quantity=2,
+        unit_price=Decimal("3.50"),
+    )
+
+    result = MealOrderLineOut.model_validate(line)
+
+    assert result.model_dump() == {
+        "item_id": "item-1",
+        "name": "Nasi lemak",
+        "quantity": 2,
+        "unit_price": Decimal("3.50"),
+    }
 
 
 def test_provider_staff_can_update_public_business_contacts():
