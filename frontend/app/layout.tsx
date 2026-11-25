@@ -3,7 +3,6 @@ import { Inter } from "next/font/google"
 
 import "./globals.css"
 import { cn } from "@/lib/utils"
-import { NavigationLoading } from "@/components/navigation-loading"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -34,9 +33,7 @@ export default function RootLayout({
       className={cn("antialiased", inter.variable)}
       suppressHydrationWarning
     >
-      <body suppressHydrationWarning>
-        <NavigationLoading>{children}</NavigationLoading>
-      </body>
+      <body suppressHydrationWarning>{children}</body>
     </html>
   )
 }
