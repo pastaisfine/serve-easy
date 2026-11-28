@@ -18,7 +18,7 @@ from typing import Any, Callable
 
 from telegram import BotCommand, InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.constants import ParseMode
-from telegram.error import TelegramError
+from telegram.error import BadRequest, TelegramError
 from telegram.ext import (
     Application,
     CallbackQueryHandler,
@@ -227,7 +227,14 @@ def _fetch_one(func: Callable, **kwargs):
 async def _deliver(update: Update, text: str, keyboard: InlineKeyboardMarkup, edit: bool) -> None:
     query = update.callback_query
     if edit and query is not None and query.message is not None:
-        await query.edit_message_text(text, parse_mode=ParseMode.HTML, reply_markup=keyboard)
+        try:
+            await query.edit_message_text(
+                text, parse_mode=ParseMode.HTML, reply_markup=keyboard
+            )
+        except BadRequest as exc:
+            if "Message is not modified" not in str(exc):
+                raise
+            logger.debug("Skipped editing an unchanged Telegram message")
         return
     message = update.effective_message
     if message is not None:
